@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode (toggled via .dark on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bull: #26a69a;
+  --color-bear: #ef5350;
+  --color-bg-primary: #131722;
+  --color-bg-secondary: #1e222d;
+  --color-bg-panel: #2a2e39;
+  --color-border: #363a45;
+  --color-text-primary: #d1d4dc;
+  --color-text-secondary: #787b86;
+  --color-accent: #2962ff;
+}

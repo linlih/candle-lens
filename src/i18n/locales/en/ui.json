@@ -1,0 +1,38 @@
+{
+  "appName": "Candle Lens",
+  "tagline": "Master Japanese Candlestick Charting",
+  "nav": {
+    "home": "Home",
+    "chapters": "Chapters"
+  },
+  "chapter": {
+    "scene": "Scene",
+    "of": "of",
+    "prev": "Previous",
+    "next": "Next",
+    "backToHome": "Back to Home"
+  },
+  "home": {
+    "title": "Learn Japanese Candlestick Techniques",
+    "subtitle": "An interactive guide based on Steve Nison's classic work",
+    "startLearning": "Start Learning",
+    "chapters": "Chapters",
+    "scenes": "Scenes",
+    "patterns": "Patterns"
+  },
+  "parts": {
+    "1": "Part 1: Basic Candlestick Lines",
+    "2": "Part 2: Reversal Patterns",
+    "3": "Part 3: Continuation Patterns",
+    "4": "Part 4: Advanced Techniques"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "realChart": {
+    "sectionTitle": "Real Chart Analysis",
+    "tickerLabel": "NVDA",
+    "dataNote": "Real NVIDIA (NVDA) historical data · split-adjusted · source: Yahoo Finance"
+  }
+}

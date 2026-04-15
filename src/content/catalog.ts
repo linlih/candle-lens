@@ -1,0 +1,106 @@
+import type { ChapterMeta } from '@/types/content'
+
+export const catalog: ChapterMeta[] = [
+  // Part 1: Basic Candlestick Lines
+  {
+    id: 'part1-ch01-intro',
+    partNumber: 1,
+    chapterNumber: 1,
+    patternNames: ['Candlestick Basics'],
+    sceneCount: 2,
+  },
+  {
+    id: 'part1-ch02-doji',
+    partNumber: 1,
+    chapterNumber: 2,
+    patternNames: ['Doji', 'Gravestone Doji', 'Dragonfly Doji'],
+    sceneCount: 3,
+  },
+  {
+    id: 'part1-ch03-hammer',
+    partNumber: 1,
+    chapterNumber: 3,
+    patternNames: ['Hammer', 'Hanging Man'],
+    sceneCount: 3,
+  },
+  {
+    id: 'part1-ch04-star',
+    partNumber: 1,
+    chapterNumber: 4,
+    patternNames: ['Shooting Star', 'Inverted Hammer'],
+    sceneCount: 3,
+  },
+  // Part 2: Reversal Patterns
+  {
+    id: 'part2-ch05-engulfing',
+    partNumber: 2,
+    chapterNumber: 5,
+    patternNames: ['Bullish Engulfing', 'Bearish Engulfing'],
+    sceneCount: 3,
+  },
+  {
+    id: 'part2-ch06-cloud',
+    partNumber: 2,
+    chapterNumber: 6,
+    patternNames: ['Dark Cloud Cover', 'Piercing Pattern'],
+    sceneCount: 3,
+  },
+  {
+    id: 'part2-ch07-stars',
+    partNumber: 2,
+    chapterNumber: 7,
+    patternNames: ['Morning Star', 'Evening Star'],
+    sceneCount: 4,
+  },
+  {
+    id: 'part2-ch08-harami',
+    partNumber: 2,
+    chapterNumber: 8,
+    patternNames: ['Bullish Harami', 'Bearish Harami'],
+    sceneCount: 3,
+  },
+  {
+    id: 'part2-ch09-tweezers',
+    partNumber: 2,
+    chapterNumber: 9,
+    patternNames: ['Tweezers Top', 'Tweezers Bottom'],
+    sceneCount: 2,
+  },
+  {
+    id: 'part2-ch10-three',
+    partNumber: 2,
+    chapterNumber: 10,
+    patternNames: ['Three White Soldiers', 'Three Black Crows'],
+    sceneCount: 3,
+  },
+  // Part 3: Continuation Patterns
+  {
+    id: 'part3-ch11-windows',
+    partNumber: 3,
+    chapterNumber: 11,
+    patternNames: ['Windows (Gaps)'],
+    sceneCount: 3,
+  },
+  {
+    id: 'part3-ch12-three-methods',
+    partNumber: 3,
+    chapterNumber: 12,
+    patternNames: ['Rising Three Methods', 'Falling Three Methods'],
+    sceneCount: 3,
+  },
+  // Part 4: Advanced Techniques
+  {
+    id: 'part4-ch13-western',
+    partNumber: 4,
+    chapterNumber: 13,
+    patternNames: ['Combining Western Techniques'],
+    sceneCount: 2,
+  },
+]
+
+export const partLabels: Record<1 | 2 | 3 | 4, { en: string; zh: string }> = {
+  1: { en: 'Part 1: Basic Candlestick Lines', zh: '第一部分：基础蜡烛线' },
+  2: { en: 'Part 2: Reversal Patterns', zh: '第二部分：反转形态' },
+  3: { en: 'Part 3: Continuation Patterns', zh: '第三部分：持续形态' },
+  4: { en: 'Part 4: Advanced Techniques', zh: '第四部分：高级技术' },
+}
