@@ -24,6 +24,15 @@ export default function RealChartSection({ chapterId, locale }: Props) {
 
   const localeContent = data.locale[locale]
 
+  // Apply locale-specific label text overrides (Chinese charts need Chinese annotation labels)
+  const annotations = localeContent.labelText
+    ? data.annotations.map(a =>
+        a.kind === 'label' && a.id in localeContent.labelText!
+          ? { ...a, text: localeContent.labelText![a.id] }
+          : a
+      )
+    : data.annotations
+
   return (
     <div className="mt-8">
       {/* Divider */}
@@ -45,7 +54,7 @@ export default function RealChartSection({ chapterId, locale }: Props) {
       {/* Chart */}
       <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-[#363a45] mb-3">
         <div style={{ height: '320px' }}>
-          <CandleChart candles={data.candles} annotations={data.annotations} />
+          <CandleChart candles={data.candles} annotations={annotations} />
         </div>
       </div>
 
