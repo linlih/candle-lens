@@ -37,6 +37,7 @@ function suppressHmrBackgroundReload(): Plugin {
 }
 
 export default defineConfig({
+  base: '/candle-lens/',
   plugins: [
     react(),
     tailwindcss(),
