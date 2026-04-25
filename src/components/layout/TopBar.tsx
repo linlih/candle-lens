@@ -11,6 +11,7 @@ interface Props {
 
 export default function TopBar({ showSidebarToggle, sidebarOpen, onToggleSidebar }: Props) {
   const { t } = useTranslation()
+  const faviconUrl = `${import.meta.env.BASE_URL}favicon.svg`
 
   return (
     <header className="h-14 flex items-center justify-between px-4 border-b border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#1e222d] shrink-0 z-10 gap-2">
@@ -38,7 +39,7 @@ export default function TopBar({ showSidebarToggle, sidebarOpen, onToggleSidebar
         )}
 
         <Link to="/" className="flex items-center gap-2 group">
-          <img src="/favicon.svg" alt="logo" className="w-7 h-7" />
+          <img src={faviconUrl} alt="logo" className="w-7 h-7" />
           <span className="font-bold text-gray-900 dark:text-[#d1d4dc] text-base tracking-tight group-hover:text-black dark:group-hover:text-white transition-colors hidden sm:inline">
             {t('appName')}
           </span>
