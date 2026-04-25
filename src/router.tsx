@@ -5,6 +5,10 @@ import ChapterView from '@/components/chapter/ChapterView'
 import { CheatSheetPage } from '@/components/cheatsheet/CheatSheetPage'
 import { catalog } from '@/content/catalog'
 
+const basename = import.meta.env.BASE_URL === '/'
+  ? '/'
+  : import.meta.env.BASE_URL.replace(/\/$/, '')
+
 function validateChapterId({ params }: { params: Record<string, string | undefined> }) {
   const id = params.chapterId
   if (!id || !catalog.find((c) => c.id === id)) {
@@ -27,4 +31,4 @@ export const router = createBrowserRouter([
       },
     ],
   },
-])
+], { basename })

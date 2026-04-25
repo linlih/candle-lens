@@ -19,13 +19,14 @@ export default function HomePage() {
   const locale = i18n.language as 'en' | 'zh'
   const grouped = groupByPart(catalog)
   const firstChapter = catalog[0]
+  const faviconUrl = `${import.meta.env.BASE_URL}favicon.svg`
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
       {/* Hero */}
       <div className="mb-10 text-center">
         <div className="flex justify-center mb-4">
-          <img src="/favicon.svg" alt="logo" className="w-16 h-16" />
+          <img src={faviconUrl} alt="logo" className="w-16 h-16" />
         </div>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-[#d1d4dc] mb-3">
           {t('home.title')}
