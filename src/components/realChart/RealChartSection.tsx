@@ -1,15 +1,16 @@
 import { useTranslation } from 'react-i18next'
 import CandleChart from '@/components/chart/CandleChart'
+import { useLocale } from '@/hooks/useLocale'
 import { useRealChartData } from './useRealChartData'
 
 interface Props {
   chapterId: string
-  locale: 'en' | 'zh'
 }
 
-export default function RealChartSection({ chapterId, locale }: Props) {
+export default function RealChartSection({ chapterId }: Props) {
   const { data, loading } = useRealChartData(chapterId)
   const { t } = useTranslation('ui')
+  const { locale } = useLocale()
 
   if (loading) {
     return (

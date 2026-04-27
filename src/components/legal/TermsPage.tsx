@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useLocale } from '@/hooks/useLocale'
 import { usePageTitle } from '@/hooks/usePageTitle'
 
 const content = {
@@ -66,9 +67,9 @@ const content = {
 }
 
 export default function TermsPage() {
-  const { i18n, t } = useTranslation()
-  const lang = i18n.language.startsWith('zh') ? 'zh' : 'en'
-  const c = content[lang]
+  const { t } = useTranslation()
+  const { locale } = useLocale()
+  const c = content[locale]
   usePageTitle(c.title)
 
   return (

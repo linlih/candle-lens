@@ -3,6 +3,7 @@ import { useParams, Navigate, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useChapterContent } from '@/hooks/useChapterContent'
 import { useAppStore } from '@/store/appStore'
+import { useLocale } from '@/hooks/useLocale'
 import CandleChart from '@/components/chart/CandleChart'
 import ExplanationPanel from './ExplanationPanel'
 import SceneControls from './SceneControls'
@@ -13,8 +14,8 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 export default function ChapterView() {
   const { chapterId } = useParams<{ chapterId: string }>()
   const { content, loading, error } = useChapterContent(chapterId ?? '')
-  const locale = useAppStore((s) => s.locale)
   const markComplete = useAppStore((s) => s.markChapterComplete)
+  const { locale } = useLocale()
   const { t } = useTranslation()
   const [sceneIndex, setSceneIndex] = useState(0)
 
@@ -109,7 +110,7 @@ export default function ChapterView() {
       />
 
       {/* Real-world candlestick analysis (NVDA) */}
-      <RealChartSection chapterId={content.id} locale={locale} />
+      <RealChartSection chapterId={content.id} />
     </div>
   )
 }

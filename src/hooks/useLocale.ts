@@ -1,17 +1,16 @@
-import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useAppStore } from '@/store/appStore'
+import { resolveLocale, type Locale } from '@/lib/locale'
 
 export function useLocale() {
-  const locale = useAppStore((s) => s.locale)
-  const setLocale = useAppStore((s) => s.setLocale)
   const { i18n } = useTranslation()
+  const language = i18n.resolvedLanguage ?? i18n.language
+  const locale: Locale = resolveLocale(language)
 
-  useEffect(() => {
-    if (i18n.language !== locale) {
-      i18n.changeLanguage(locale)
+  const setLocale = (nextLocale: Locale) => {
+    if (locale !== nextLocale) {
+      void i18n.changeLanguage(nextLocale)
     }
-  }, [locale, i18n])
+  }
 
   return { locale, setLocale }
 }

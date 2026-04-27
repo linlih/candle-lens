@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { patterns, patternsByPart, type Signal } from '@/content/cheatsheet'
+import type { Signal } from '@/content/cheatsheet'
+import { useLocale } from '@/hooks/useLocale'
 import { PatternCard } from './PatternCard'
+import { useCheatSheetData } from './useCheatSheetData'
 import { usePageTitle } from '@/hooks/usePageTitle'
 
 type FilterSignal = Signal | 'all'
@@ -21,9 +23,10 @@ const partTitles = {
 }
 
 export function CheatSheetPage() {
-  const { i18n, t } = useTranslation('ui')
-  const lang = i18n.language.startsWith('zh') ? 'zh' : 'en'
+  const { t } = useTranslation('ui')
+  const { locale } = useLocale()
   const [filter, setFilter] = useState<FilterSignal>('all')
+  const { patterns, patternsByPart, loading, error } = useCheatSheetData()
   usePageTitle(t('cheatSheet.title'))
 
   const filterButtons: { key: FilterSignal; labelEn: string; labelZh: string }[] = [
@@ -58,7 +61,11 @@ export function CheatSheetPage() {
         {/* Intro */}
         <div className="mb-8">
           <p className="text-slate-400 text-sm max-w-2xl">
-            {lang === 'zh'
+            {loading && locale === 'zh'
+              ? '正在加载形态速查表...'
+              : loading
+                ? 'Loading candlestick patterns...'
+                : locale === 'zh'
               ? `共 ${patterns.length} 种形态 · 快速参考所有蜡烛图形态的定义和示意图`
               : `${patterns.length} patterns · Quick reference for all candlestick pattern definitions and diagrams`}
           </p>
@@ -76,22 +83,39 @@ export function CheatSheetPage() {
                   : 'border-white/20 text-slate-400 hover:text-white hover:border-white/40'
               }`}
             >
-              {lang === 'zh' ? btn.labelZh : btn.labelEn}
+              {locale === 'zh' ? btn.labelZh : btn.labelEn}
             </button>
           ))}
           <span className="text-slate-500 text-sm ml-2">
-            {lang === 'zh' ? `${activeCount} 种` : `${activeCount} patterns`}
+            {loading
+              ? ''
+              : locale === 'zh'
+                ? `${activeCount} 种`
+                : `${activeCount} patterns`}
           </span>
         </div>
 
+        {error && (
+          <div className="rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+            {locale === 'zh' ? '速查表加载失败，请刷新后重试。' : 'Failed to load the cheat sheet. Please refresh and try again.'}
+          </div>
+        )}
+
+        {loading && (
+          <div className="flex items-center gap-2 text-slate-400 text-sm">
+            <div className="w-4 h-4 border-2 border-[#2962ff] border-t-transparent rounded-full animate-spin" />
+            <span>{locale === 'zh' ? '正在加载...' : 'Loading...'}</span>
+          </div>
+        )}
+
         {/* Patterns grouped by part */}
-        {patternsByPart.map(group => {
+        {!loading && !error && patternsByPart.map(group => {
           const filtered = group.patterns.filter(
             p => filter === 'all' || p.signal === filter
           )
           if (filtered.length === 0) return null
 
-          const partTitle = partTitles[lang][group.part as keyof typeof partTitles.en]
+          const partTitle = partTitles[locale][group.part as keyof typeof partTitles.en]
 
           return (
             <section key={group.part} className="mb-12">

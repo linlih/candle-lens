@@ -38,8 +38,35 @@ npm run dev
 # Type check
 npm run typecheck
 
+# Run tests
+npm run test
+
 # Production build
 npm run build
+```
+
+## Deployment Configuration
+
+The app keeps the current GitHub Pages defaults, but you can override them with env vars when deploying elsewhere:
+
+```bash
+VITE_APP_BASE_PATH=/candle-lens/
+VITE_SITE_URL=https://linlih.github.io/candle-lens/
+```
+
+- `VITE_APP_BASE_PATH` controls the Vite `base` path and asset/router basename behavior
+- `VITE_SITE_URL` controls the absolute site URL used in social metadata
+
+Examples:
+
+```bash
+# GitHub Pages project site
+VITE_APP_BASE_PATH=/candle-lens/
+VITE_SITE_URL=https://linlih.github.io/candle-lens/
+
+# Custom domain at site root
+VITE_APP_BASE_PATH=/
+VITE_SITE_URL=https://example.com/
 ```
 
 ## Content Structure
@@ -67,6 +94,18 @@ Each chapter lives in `src/content/chapters/{id}/` with five files:
 ```
 
 Register the chapter in `src/content/catalog.ts` and `src/content/index.ts`.
+
+## Manual Verification Checklist
+
+Before release or deployment, verify:
+
+- Rapidly switch between chapters and confirm content/chart data never flashes from the previous chapter
+- Toggle language on the home page, chapter page, cheat sheet, and legal pages and confirm copy stays consistent
+- Toggle theme and confirm charts plus layout colors update correctly
+- Open a chapter on mobile width and confirm the sidebar opens, closes, and dismisses via backdrop
+- Run `npm run typecheck`
+- Run `npm run test`
+- Run `npm run build`
 
 ## License
 

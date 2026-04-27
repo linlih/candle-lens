@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "rootDir": ".",
+    "outDir": ".test-build",
+    "types": ["node"]
+  },
+  "include": [
+    "src/lib/asyncRequestGuard.ts",
+    "src/lib/deploymentConfig.ts",
+    "src/lib/locale.ts",
+    "tests/**/*.ts"
+  ]
+}

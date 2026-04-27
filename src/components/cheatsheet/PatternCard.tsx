@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
-import { useTranslation } from 'react-i18next'
 import type { PatternDef } from '@/content/cheatsheet'
+import { useLocale } from '@/hooks/useLocale'
 import { MiniChart } from './MiniChart'
 
 interface PatternCardProps {
@@ -30,13 +30,12 @@ const kindLabels = {
 }
 
 export function PatternCard({ pattern }: PatternCardProps) {
-  const { i18n } = useTranslation()
-  const lang = i18n.language.startsWith('zh') ? 'zh' : 'en'
+  const { locale } = useLocale()
 
-  const name = lang === 'zh' ? pattern.nameZh : pattern.nameEn
-  const desc = lang === 'zh' ? pattern.descZh : pattern.descEn
-  const sigLabel = signalLabels[lang][pattern.signal]
-  const kindLabel = kindLabels[lang][pattern.kind]
+  const name = locale === 'zh' ? pattern.nameZh : pattern.nameEn
+  const desc = locale === 'zh' ? pattern.descZh : pattern.descEn
+  const sigLabel = signalLabels[locale][pattern.signal]
+  const kindLabel = kindLabels[locale][pattern.kind]
 
   return (
     <div className="flex flex-col rounded-xl border border-white/10 bg-white/5 overflow-hidden hover:border-white/20 transition-colors">
@@ -60,10 +59,10 @@ export function PatternCard({ pattern }: PatternCardProps) {
         {/* Name */}
         <div>
           <p className="text-sm font-semibold text-white leading-tight">{name}</p>
-          {lang === 'zh' && (
+          {locale === 'zh' && (
             <p className="text-[11px] text-slate-400 mt-0.5">{pattern.nameEn}</p>
           )}
-          {lang === 'en' && pattern.nameZh && (
+          {locale === 'en' && pattern.nameZh && (
             <p className="text-[11px] text-slate-400 mt-0.5">{pattern.nameZh}</p>
           )}
         </div>
@@ -76,7 +75,7 @@ export function PatternCard({ pattern }: PatternCardProps) {
           to={`/chapter/${pattern.chapterId}`}
           className="text-[11px] text-[#2962ff] hover:text-blue-400 transition-colors mt-auto"
         >
-          {lang === 'zh' ? '查看章节 →' : 'Learn more →'}
+          {locale === 'zh' ? '查看章节 →' : 'Learn more →'}
         </Link>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { catalog, partLabels } from '@/content/catalog'
 import ChapterCard from './ChapterCard'
 import type { ChapterMeta } from '@/types/content'
+import { useLocale } from '@/hooks/useLocale'
 import { usePageTitle } from '@/hooks/usePageTitle'
 
 function groupByPart(chapters: ChapterMeta[]) {
@@ -16,8 +17,8 @@ function groupByPart(chapters: ChapterMeta[]) {
 }
 
 export default function HomePage() {
-  const { t, i18n } = useTranslation()
-  const locale = i18n.language as 'en' | 'zh'
+  const { t } = useTranslation()
+  const { locale } = useLocale()
   const grouped = groupByPart(catalog)
   const firstChapter = catalog[0]
   const faviconUrl = `${import.meta.env.BASE_URL}favicon.svg`

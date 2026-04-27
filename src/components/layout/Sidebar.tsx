@@ -1,6 +1,7 @@
 import { NavLink, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { catalog, partLabels } from '@/content/catalog'
+import { useLocale } from '@/hooks/useLocale'
 import { useAppStore } from '@/store/appStore'
 import type { ChapterMeta } from '@/types/content'
 
@@ -19,10 +20,10 @@ interface Props {
 }
 
 export default function Sidebar({ onClose }: Props) {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const { chapterId: activeId } = useParams()
   const completedChapters = useAppStore((s) => s.completedChapters)
-  const locale = i18n.language as 'en' | 'zh'
+  const { locale } = useLocale()
 
   const grouped = groupByPart(catalog)
 

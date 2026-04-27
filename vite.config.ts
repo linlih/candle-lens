@@ -1,7 +1,8 @@
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, loadEnv, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
+import { normalizeBasePath, normalizeSiteUrl } from './src/lib/deploymentConfig'
 
 /**
  * Prevents Vite HMR from reloading the page when the WebSocket disconnects
@@ -36,16 +37,30 @@ function suppressHmrBackgroundReload(): Plugin {
   }
 }
 
-export default defineConfig({
-  base: '/candle-lens/',
-  plugins: [
-    react(),
-    tailwindcss(),
-    suppressHmrBackgroundReload(),
-  ],
-  resolve: {
-    alias: {
-      '@': path.resolve('./src'),
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  const base = normalizeBasePath(env.VITE_APP_BASE_PATH || '/candle-lens/')
+  const siteUrl = normalizeSiteUrl(env.VITE_SITE_URL || 'https://linlih.github.io/candle-lens/')
+
+  return {
+    base,
+    plugins: [
+      react(),
+      tailwindcss(),
+      suppressHmrBackgroundReload(),
+      {
+        name: 'inject-site-meta',
+        transformIndexHtml(html) {
+          return html
+            .replaceAll('__BASE_URL__', base)
+            .replaceAll('__SITE_URL__', siteUrl)
+        },
+      },
+    ],
+    resolve: {
+      alias: {
+        '@': path.resolve('./src'),
+      },
     },
-  },
+  }
 })

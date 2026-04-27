@@ -56,7 +56,7 @@ npm ci --registry=https://registry.npmjs.org --no-audit
 
 The default branch is `main`.
 
-Do not commit directly to `main` for normal feature work. Create a short-lived branch from the latest `main`, make the change there, then merge by pull request.
+Direct commits to `main` are allowed. For larger or riskier changes, prefer creating a short-lived branch from the latest `main`, making the change there, then merging by pull request.
 
 Branch names must follow this format:
 
@@ -138,9 +138,8 @@ Keep commit messages in English unless the change is documentation intended only
 
 Before requesting review:
 
-- Confirm the branch name follows the branch rules above.
+- If using a non-`main` branch, confirm the branch name follows the branch rules above.
 - Confirm commit messages follow Conventional Commits.
 - Run `npm run typecheck`.
 - Run `npm run build`.
 - Mention any skipped checks and why.
-

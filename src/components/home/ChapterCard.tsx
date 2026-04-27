@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useLocale } from '@/hooks/useLocale'
 import { useAppStore } from '@/store/appStore'
 import type { ChapterMeta } from '@/types/content'
 import { partLabels } from '@/content/catalog'
@@ -9,10 +10,10 @@ interface Props {
 }
 
 export default function ChapterCard({ chapter }: Props) {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const completedChapters = useAppStore((s) => s.completedChapters)
   const isCompleted = completedChapters.has(chapter.id)
-  const locale = i18n.language as 'en' | 'zh'
+  const { locale } = useLocale()
   const partLabel = partLabels[chapter.partNumber][locale]
 
   return (

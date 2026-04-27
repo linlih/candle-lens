@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { RealChartData } from '@/types/realChart'
 import { realChartLoaders } from '@/content/realCharts/index'
+import { createLatestRequestRunner } from '@/lib/asyncRequestGuard'
 
 interface State {
   data: RealChartData | null
@@ -29,17 +30,25 @@ export function useRealChartData(chapterId: string): State {
       return
     }
 
-    setState((s) => ({ ...s, loading: true, error: null }))
+    const runner = createLatestRequestRunner<RealChartData>()
+    setState({ data: null, loading: true, error: null })
 
-    loader()
-      .then(({ realChart }) => {
-        cache.set(chapterId, realChart)
-        setState({ data: realChart, loading: false, error: null })
-      })
-      .catch((err: unknown) => {
-        const msg = err instanceof Error ? err.message : String(err)
-        setState({ data: null, loading: false, error: msg })
-      })
+    return runner.run(
+      async () => {
+        const { realChart } = await loader()
+        return realChart
+      },
+      {
+        onSuccess: (realChart) => {
+          cache.set(chapterId, realChart)
+          setState({ data: realChart, loading: false, error: null })
+        },
+        onError: (err: unknown) => {
+          const msg = err instanceof Error ? err.message : String(err)
+          setState({ data: null, loading: false, error: msg })
+        },
+      },
+    )
   }, [chapterId])
 
   return state

@@ -1,11 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
 import AppShell from '@/components/layout/AppShell'
-import HomePage from '@/components/home/HomePage'
-import ChapterView from '@/components/chapter/ChapterView'
-import { CheatSheetPage } from '@/components/cheatsheet/CheatSheetPage'
-import PrivacyPage from '@/components/legal/PrivacyPage'
-import TermsPage from '@/components/legal/TermsPage'
-import NotFoundPage from '@/components/NotFoundPage'
 import { catalog } from '@/content/catalog'
 
 const basename = import.meta.env.BASE_URL === '/'
@@ -25,16 +19,43 @@ export const router = createBrowserRouter([
     path: '/',
     element: <AppShell />,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: 'cheat-sheet', element: <CheatSheetPage /> },
+      {
+        index: true,
+        lazy: async () => ({
+          Component: (await import('@/components/home/HomePage')).default,
+        }),
+      },
+      {
+        path: 'cheat-sheet',
+        lazy: async () => ({
+          Component: (await import('@/components/cheatsheet/CheatSheetPage')).CheatSheetPage,
+        }),
+      },
       {
         path: 'chapter/:chapterId',
-        element: <ChapterView />,
         loader: validateChapterId,
+        lazy: async () => ({
+          Component: (await import('@/components/chapter/ChapterView')).default,
+        }),
       },
-      { path: 'privacy', element: <PrivacyPage /> },
-      { path: 'terms', element: <TermsPage /> },
-      { path: '*', element: <NotFoundPage /> },
+      {
+        path: 'privacy',
+        lazy: async () => ({
+          Component: (await import('@/components/legal/PrivacyPage')).default,
+        }),
+      },
+      {
+        path: 'terms',
+        lazy: async () => ({
+          Component: (await import('@/components/legal/TermsPage')).default,
+        }),
+      },
+      {
+        path: '*',
+        lazy: async () => ({
+          Component: (await import('@/components/NotFoundPage')).default,
+        }),
+      },
     ],
   },
 ], { basename })
