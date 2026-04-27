@@ -29,6 +29,24 @@
       gtag('js', new Date());
       gtag('config', 'G-XXXXXXXXXX');
     </script> -->
+    <script>
+      (function redirectLegacyProjectUrl() {
+        var siteUrl = '__SITE_URL__';
+        var projectHost = '__PROJECT_HOST__';
+        var projectPath = '__PROJECT_PATH__';
+        var pathname = window.location.pathname;
+        var isLegacyProjectUrl =
+          window.location.hostname === projectHost &&
+          (pathname === projectPath || pathname.indexOf(projectPath + '/') === 0);
+
+        if (!isLegacyProjectUrl) return;
+
+        var nextPath = pathname.slice(projectPath.length) || '/';
+        var target = new URL(nextPath + window.location.search + window.location.hash, siteUrl);
+
+        window.location.replace(target.toString());
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

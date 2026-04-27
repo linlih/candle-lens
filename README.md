@@ -47,26 +47,27 @@ npm run build
 
 ## Deployment Configuration
 
-The app keeps the current GitHub Pages defaults, but you can override them with env vars when deploying elsewhere:
+The app defaults to the production custom domain, but you can override the deployment values with env vars:
 
 ```bash
-VITE_APP_BASE_PATH=/candle-lens/
-VITE_SITE_URL=https://linlih.github.io/candle-lens/
+VITE_APP_BASE_PATH=/
+VITE_SITE_URL=https://candle-lens.lightpixels.tech/
+VITE_GITHUB_PROJECT_HOST=linlih.github.io
+VITE_GITHUB_PROJECT_PATH=/candle-lens
 ```
 
 - `VITE_APP_BASE_PATH` controls the Vite `base` path and asset/router basename behavior
 - `VITE_SITE_URL` controls the absolute site URL used in social metadata
+- `VITE_GITHUB_PROJECT_HOST` and `VITE_GITHUB_PROJECT_PATH` are used to redirect the legacy GitHub Pages project URL to the custom domain
 
 Examples:
 
 ```bash
-# GitHub Pages project site
-VITE_APP_BASE_PATH=/candle-lens/
-VITE_SITE_URL=https://linlih.github.io/candle-lens/
-
 # Custom domain at site root
 VITE_APP_BASE_PATH=/
 VITE_SITE_URL=https://example.com/
+VITE_GITHUB_PROJECT_HOST=linlih.github.io
+VITE_GITHUB_PROJECT_PATH=/candle-lens
 ```
 
 ## Content Structure

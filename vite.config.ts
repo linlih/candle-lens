@@ -2,7 +2,11 @@ import { defineConfig, loadEnv, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
-import { normalizeBasePath, normalizeSiteUrl } from './src/lib/deploymentConfig'
+import {
+  normalizeBasePath,
+  normalizeProjectPath,
+  normalizeSiteUrl,
+} from './src/lib/deploymentConfig'
 
 /**
  * Prevents Vite HMR from reloading the page when the WebSocket disconnects
@@ -39,8 +43,10 @@ function suppressHmrBackgroundReload(): Plugin {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const base = normalizeBasePath(env.VITE_APP_BASE_PATH || '/candle-lens/')
-  const siteUrl = normalizeSiteUrl(env.VITE_SITE_URL || 'https://linlih.github.io/candle-lens/')
+  const base = normalizeBasePath(env.VITE_APP_BASE_PATH || '/')
+  const siteUrl = normalizeSiteUrl(env.VITE_SITE_URL || 'https://candle-lens.lightpixels.tech/')
+  const projectPath = normalizeProjectPath(env.VITE_GITHUB_PROJECT_PATH || '/candle-lens')
+  const projectHost = env.VITE_GITHUB_PROJECT_HOST || 'linlih.github.io'
 
   return {
     base,
@@ -54,6 +60,8 @@ export default defineConfig(({ mode }) => {
           return html
             .replaceAll('__BASE_URL__', base)
             .replaceAll('__SITE_URL__', siteUrl)
+            .replaceAll('__PROJECT_HOST__', projectHost)
+            .replaceAll('__PROJECT_PATH__', projectPath)
         },
       },
     ],
