@@ -3,6 +3,9 @@ import AppShell from '@/components/layout/AppShell'
 import HomePage from '@/components/home/HomePage'
 import ChapterView from '@/components/chapter/ChapterView'
 import { CheatSheetPage } from '@/components/cheatsheet/CheatSheetPage'
+import PrivacyPage from '@/components/legal/PrivacyPage'
+import TermsPage from '@/components/legal/TermsPage'
+import NotFoundPage from '@/components/NotFoundPage'
 import { catalog } from '@/content/catalog'
 
 const basename = import.meta.env.BASE_URL === '/'
@@ -29,6 +32,9 @@ export const router = createBrowserRouter([
         element: <ChapterView />,
         loader: validateChapterId,
       },
+      { path: 'privacy', element: <PrivacyPage /> },
+      { path: 'terms', element: <TermsPage /> },
+      { path: '*', element: <NotFoundPage /> },
     ],
   },
 ], { basename })

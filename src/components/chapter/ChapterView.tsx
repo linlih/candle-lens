@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import { useParams, Navigate, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useChapterContent } from '@/hooks/useChapterContent'
 import { useAppStore } from '@/store/appStore'
 import CandleChart from '@/components/chart/CandleChart'
@@ -7,13 +8,18 @@ import ExplanationPanel from './ExplanationPanel'
 import SceneControls from './SceneControls'
 import PatternBadge from './PatternBadge'
 import RealChartSection from '@/components/realChart/RealChartSection'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 export default function ChapterView() {
   const { chapterId } = useParams<{ chapterId: string }>()
   const { content, loading, error } = useChapterContent(chapterId ?? '')
   const locale = useAppStore((s) => s.locale)
   const markComplete = useAppStore((s) => s.markChapterComplete)
+  const { t } = useTranslation()
   const [sceneIndex, setSceneIndex] = useState(0)
+
+  const chapterTitle = content?.locale[locale]?.title
+  usePageTitle(chapterTitle)
 
   useEffect(() => { setSceneIndex(0) }, [chapterId])
 
@@ -30,7 +36,7 @@ export default function ChapterView() {
       <div className="flex items-center justify-center h-full text-gray-500 dark:text-[#787b86]">
         <div className="text-center">
           <div className="w-8 h-8 border-2 border-[#2962ff] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-sm">Loading...</p>
+          <p className="text-sm">{t('chapter.loading')}</p>
         </div>
       </div>
     )
@@ -38,8 +44,17 @@ export default function ChapterView() {
 
   if (error || !content) {
     return (
-      <div className="flex items-center justify-center h-full text-gray-500 dark:text-[#787b86]">
-        <p className="text-sm">Chapter not found.</p>
+      <div className="flex items-center justify-center h-full min-h-[40vh] text-gray-500 dark:text-[#787b86] text-center px-6">
+        <div>
+          <p className="text-sm mb-3">{t('chapter.notFound')}</p>
+          <p className="text-xs mb-4 text-gray-400 dark:text-[#787b86]">{t('chapter.notFoundHint')}</p>
+          <Link
+            to="/"
+            className="text-sm text-[#2962ff] hover:underline"
+          >
+            ← {t('chapter.backToHome')}
+          </Link>
+        </div>
       </div>
     )
   }

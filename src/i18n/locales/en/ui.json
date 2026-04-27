@@ -3,13 +3,21 @@
   "tagline": "Master Japanese Candlestick Charting",
   "nav": {
     "home": "Home",
-    "chapters": "Chapters"
+    "chapters": "Chapters",
+    "cheatSheet": "Cheat Sheet"
   },
   "chapter": {
     "scene": "Scene",
     "of": "of",
     "prev": "Previous",
     "next": "Next",
+    "backToHome": "Back to Home",
+    "loading": "Loading...",
+    "notFound": "Chapter not found.",
+    "notFoundHint": "Go back to the home page to find a chapter."
+  },
+  "cheatSheet": {
+    "title": "Candlestick Cheat Sheet",
     "backToHome": "Back to Home"
   },
   "home": {
@@ -34,5 +42,19 @@
     "sectionTitle": "Real Chart Analysis",
     "tickerLabel": "NVDA",
     "dataNote": "Real NVIDIA (NVDA) historical data · split-adjusted · source: Yahoo Finance"
+  },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "The page you're looking for doesn't exist.",
+    "backToHome": "Back to Home"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "message": "An unexpected error occurred. Please try reloading the page.",
+    "retry": "Reload"
   }
 }

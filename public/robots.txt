@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://linlih.github.io/candle-lens/sitemap.xml

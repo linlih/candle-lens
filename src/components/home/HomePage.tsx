@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { catalog, partLabels } from '@/content/catalog'
 import ChapterCard from './ChapterCard'
 import type { ChapterMeta } from '@/types/content'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 function groupByPart(chapters: ChapterMeta[]) {
   const parts = new Map<number, ChapterMeta[]>()
@@ -20,6 +21,7 @@ export default function HomePage() {
   const grouped = groupByPart(catalog)
   const firstChapter = catalog[0]
   const faviconUrl = `${import.meta.env.BASE_URL}favicon.svg`
+  usePageTitle()
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
@@ -45,7 +47,7 @@ export default function HomePage() {
             to="/cheat-sheet"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-300 dark:border-[#363a45] text-gray-700 dark:text-[#d1d4dc] hover:bg-gray-100 dark:hover:bg-[#2a2e39] font-semibold text-sm transition-colors"
           >
-            {locale === 'zh' ? '📋 速查表' : '📋 Cheat Sheet'}
+            📋 {t('nav.cheatSheet')}
           </Link>
         </div>
       </div>

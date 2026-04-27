@@ -1,13 +1,17 @@
-import { Outlet, useLocation } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import TopBar from './TopBar'
 import Sidebar from './Sidebar'
 import { useAppStore } from '@/store/appStore'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useAnalytics } from '@/hooks/useAnalytics'
 
 export default function AppShell() {
   const theme = useAppStore((s) => s.theme)
   const location = useLocation()
+  const { t } = useTranslation()
   const isChapterPage = location.pathname.startsWith('/chapter/')
+  useAnalytics()
 
   const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768)
 
@@ -56,8 +60,19 @@ export default function AppShell() {
           </>
         )}
 
-        <main className="flex-1 min-w-0 overflow-y-auto">
-          <Outlet />
+        <main className="flex-1 min-w-0 overflow-y-auto flex flex-col">
+          <div className="flex-1">
+            <Outlet />
+          </div>
+          <footer className="border-t border-gray-200 dark:border-[#363a45] px-6 py-3 flex items-center justify-center gap-4 text-xs text-gray-400 dark:text-[#787b86]">
+            <Link to="/privacy" className="hover:text-gray-600 dark:hover:text-[#d1d4dc] transition-colors">
+              {t('footer.privacy')}
+            </Link>
+            <span>·</span>
+            <Link to="/terms" className="hover:text-gray-600 dark:hover:text-[#d1d4dc] transition-colors">
+              {t('footer.terms')}
+            </Link>
+          </footer>
         </main>
       </div>
     </div>

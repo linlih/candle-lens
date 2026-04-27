@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { patterns, patternsByPart, type Signal } from '@/content/cheatsheet'
 import { PatternCard } from './PatternCard'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 type FilterSignal = Signal | 'all'
 
@@ -20,9 +21,10 @@ const partTitles = {
 }
 
 export function CheatSheetPage() {
-  const { i18n } = useTranslation('ui')
+  const { i18n, t } = useTranslation('ui')
   const lang = i18n.language.startsWith('zh') ? 'zh' : 'en'
   const [filter, setFilter] = useState<FilterSignal>('all')
+  usePageTitle(t('cheatSheet.title'))
 
   const filterButtons: { key: FilterSignal; labelEn: string; labelZh: string }[] = [
     { key: 'all', labelEn: 'All', labelZh: '全部' },
@@ -43,11 +45,11 @@ export function CheatSheetPage() {
             to="/"
             className="text-slate-400 hover:text-white transition-colors text-sm"
           >
-            ← {lang === 'zh' ? '返回主页' : 'Back to Home'}
+            ← {t('cheatSheet.backToHome')}
           </Link>
           <div className="h-4 w-px bg-white/20" />
           <h1 className="text-lg font-bold text-white">
-            {lang === 'zh' ? '蜡烛图速查表' : 'Candlestick Cheat Sheet'}
+            {t('cheatSheet.title')}
           </h1>
         </div>
       </div>

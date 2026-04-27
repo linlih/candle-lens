@@ -48,7 +48,7 @@ export default function Sidebar({ onClose }: Props) {
             ].join(' ')
           }
         >
-          📋 {locale === 'zh' ? '速查表' : 'Cheat Sheet'}
+          📋 {t('nav.cheatSheet')}
         </NavLink>
       </div>
 
