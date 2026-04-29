@@ -10,6 +10,19 @@ interface Props {
   chapterId: string
 }
 
+interface StepInteractionState {
+  selectedBias: RealChartBias | null
+  submittedBias: RealChartBias | null
+  selectedComparison: string | null
+  submittedComparison: string | null
+  checkedChecklist: string[]
+}
+
+interface LessonCheckpointState {
+  selectedOption: string | null
+  submittedOption: string | null
+}
+
 const biasStyles: Record<RealChartBias, string> = {
   bullish: 'bg-[#26a69a]/12 text-[#26a69a] border border-[#26a69a]/30',
   bearish: 'bg-[#ef5350]/12 text-[#ef5350] border border-[#ef5350]/30',
@@ -30,20 +43,47 @@ function localizeAnnotations(
   )
 }
 
+function createDefaultInteractionState(): StepInteractionState {
+  return {
+    selectedBias: null,
+    submittedBias: null,
+    selectedComparison: null,
+    submittedComparison: null,
+    checkedChecklist: [],
+  }
+}
+
+function createDefaultCheckpointState(): LessonCheckpointState {
+  return {
+    selectedOption: null,
+    submittedOption: null,
+  }
+}
+
 export default function RealChartSection({ chapterId }: Props) {
   const { data, loading } = useRealChartData(chapterId)
   const { t } = useTranslation('ui')
   const { locale } = useLocale()
   const [stepIndex, setStepIndex] = useState(0)
   const [caseIndex, setCaseIndex] = useState(0)
+  const [practiceResponses, setPracticeResponses] = useState<
+    Record<string, StepInteractionState>
+  >({})
+  const [checkpointResponses, setCheckpointResponses] = useState<
+    Record<string, LessonCheckpointState>
+  >({})
 
   useEffect(() => {
     setStepIndex(0)
     setCaseIndex(0)
+    setPracticeResponses({})
+    setCheckpointResponses({})
   }, [chapterId])
 
   useEffect(() => {
     setStepIndex(0)
+    setPracticeResponses({})
+    setCheckpointResponses({})
   }, [caseIndex])
 
   if (loading) {
@@ -80,6 +120,43 @@ export default function RealChartSection({ chapterId }: Props) {
 
   const stepLocale = currentStep?.locale[locale]
   const dataNote = localeContent.dataNote ?? t('realChart.dataNote')
+  const practiceChoices = currentStep
+    ? (stepLocale?.practiceChoices ?? {
+      bullish: t('realChart.bias.bullish'),
+      bearish: t('realChart.bias.bearish'),
+      neutral: t('realChart.bias.neutral'),
+      wait: t('realChart.bias.wait'),
+    })
+    : null
+  const responseKey = currentStep ? `${caseIndex}:${currentStep.id}` : null
+  const practiceResponse = responseKey
+    ? practiceResponses[responseKey] ?? createDefaultInteractionState()
+    : createDefaultInteractionState()
+  const selectedBias = practiceResponse.selectedBias
+  const submittedBias = practiceResponse.submittedBias
+  const selectedComparison = practiceResponse.selectedComparison
+  const submittedComparison = practiceResponse.submittedComparison
+  const checkedChecklist = practiceResponse.checkedChecklist
+  const hasPractice = !!(currentStep && stepLocale?.answer && practiceChoices)
+  const showSolution = !hasPractice || submittedBias !== null
+  const solvedCorrectly = submittedBias !== null && submittedBias === currentStep?.bias
+  const nextStepLocked = hasPractice && submittedBias === null
+  const hasComparison = !!(
+    stepLocale?.comparisonPrompt &&
+    stepLocale.comparisonOptions?.length &&
+    stepLocale.comparisonAnswer
+  )
+  const comparisonSolvedCorrectly = submittedComparison !== null
+    && submittedComparison === stepLocale?.comparisonAnswer
+  const checkpointKey = `case:${caseIndex}`
+  const checkpointState = checkpointResponses[checkpointKey] ?? createDefaultCheckpointState()
+  const hasCheckpoint = !!(
+    lessonLocale?.checkpointPrompt &&
+    lessonLocale.checkpointOptions?.length &&
+    lessonLocale.checkpointAnswer
+  )
+  const checkpointSolvedCorrectly = checkpointState.submittedOption !== null
+    && checkpointState.submittedOption === lessonLocale?.checkpointAnswer
 
   return (
     <div className="mt-8">
@@ -171,13 +248,19 @@ export default function RealChartSection({ chapterId }: Props) {
               </button>
               <button
                 onClick={() => setStepIndex((index) => Math.min(steps.length - 1, index + 1))}
-                disabled={stepIndex === steps.length - 1}
+                disabled={stepIndex === steps.length - 1 || nextStepLocked}
                 className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed bg-[#2962ff] hover:bg-[#1a4fcc] text-white"
               >
                 {t('realChart.nextStep')} →
               </button>
             </div>
           </div>
+
+          {nextStepLocked && (
+            <p className="text-xs text-[#2962ff]">
+              {t('realChart.submitToContinue')}
+            </p>
+          )}
 
           <div className="grid gap-3 md:grid-cols-2">
             <div className="space-y-3">
@@ -194,7 +277,149 @@ export default function RealChartSection({ chapterId }: Props) {
                   </p>
                 </div>
               )}
-              {stepLocale.answer && (
+              {hasPractice && (
+                <div className="rounded-lg border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-3 space-y-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86]">
+                    {t('realChart.practiceLabel')}
+                  </p>
+                  <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                    {stepLocale.practicePrompt ?? t('realChart.practicePrompt')}
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(Object.keys(practiceChoices) as RealChartBias[]).map((bias) => {
+                      const label = practiceChoices[bias]
+                      if (!label) return null
+                      const isSelected = selectedBias === bias
+                      return (
+                        <button
+                          key={bias}
+                          onClick={() => {
+                            if (!responseKey) return
+                            setPracticeResponses((responses) => ({
+                              ...responses,
+                              [responseKey]: {
+                                ...(responses[responseKey] ?? createDefaultInteractionState()),
+                                selectedBias: bias,
+                                submittedBias: responses[responseKey]?.submittedBias ?? null,
+                              },
+                            }))
+                          }}
+                          className={`px-3 py-2 rounded-lg text-sm border transition-colors text-left ${
+                            isSelected
+                              ? 'border-[#2962ff] bg-[#2962ff]/10 text-[#2962ff]'
+                              : 'border-gray-200 dark:border-[#363a45] text-gray-700 dark:text-[#d1d4dc] hover:border-[#2962ff]/50'
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      )
+                    })}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        if (!responseKey || !selectedBias) return
+                        setPracticeResponses((responses) => ({
+                          ...responses,
+                          [responseKey]: {
+                            ...(responses[responseKey] ?? createDefaultInteractionState()),
+                            selectedBias,
+                            submittedBias: selectedBias,
+                          },
+                        }))
+                      }}
+                      disabled={!selectedBias || submittedBias !== null}
+                      className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed bg-[#2962ff] hover:bg-[#1a4fcc] text-white"
+                    >
+                      {t('realChart.submitAnswer')}
+                    </button>
+                    {submittedBias !== null && (
+                      <span className={`text-xs font-medium ${solvedCorrectly ? 'text-[#26a69a]' : 'text-[#ef5350]'}`}>
+                        {solvedCorrectly ? t('realChart.correctAnswer') : t('realChart.revealAnswer')}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+              {hasComparison && (
+                <div className="rounded-lg border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-3 space-y-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86]">
+                    {t('realChart.comparisonLabel')}
+                  </p>
+                  <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                    {stepLocale.comparisonPrompt}
+                  </p>
+                  <div className="space-y-2">
+                    {stepLocale.comparisonOptions?.map((option) => {
+                      const isSelected = selectedComparison === option
+                      const isCorrect = submittedComparison !== null && option === stepLocale.comparisonAnswer
+                      const isWrongPick = submittedComparison === option && option !== stepLocale.comparisonAnswer
+                      return (
+                        <button
+                          key={option}
+                          onClick={() => {
+                            if (!responseKey || submittedComparison !== null) return
+                            setPracticeResponses((responses) => ({
+                              ...responses,
+                              [responseKey]: {
+                                ...(responses[responseKey] ?? createDefaultInteractionState()),
+                                selectedComparison: option,
+                                submittedComparison: responses[responseKey]?.submittedComparison ?? null,
+                              },
+                            }))
+                          }}
+                          className={`w-full px-3 py-2 rounded-lg text-sm border transition-colors text-left ${
+                            isCorrect
+                              ? 'border-[#26a69a] bg-[#26a69a]/10 text-[#26a69a]'
+                              : isWrongPick
+                                ? 'border-[#ef5350] bg-[#ef5350]/10 text-[#ef5350]'
+                                : isSelected
+                                  ? 'border-[#2962ff] bg-[#2962ff]/10 text-[#2962ff]'
+                                  : 'border-gray-200 dark:border-[#363a45] text-gray-700 dark:text-[#d1d4dc] hover:border-[#2962ff]/50'
+                          }`}
+                        >
+                          {option}
+                        </button>
+                      )
+                    })}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        if (!responseKey || !selectedComparison) return
+                        setPracticeResponses((responses) => ({
+                          ...responses,
+                          [responseKey]: {
+                            ...(responses[responseKey] ?? createDefaultInteractionState()),
+                            selectedComparison,
+                            submittedComparison: selectedComparison,
+                          },
+                        }))
+                      }}
+                      disabled={!selectedComparison || submittedComparison !== null}
+                      className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed bg-[#2962ff] hover:bg-[#1a4fcc] text-white"
+                    >
+                      {t('realChart.submitComparison')}
+                    </button>
+                    {submittedComparison !== null && (
+                      <span className={`text-xs font-medium ${comparisonSolvedCorrectly ? 'text-[#26a69a]' : 'text-[#ef5350]'}`}>
+                        {comparisonSolvedCorrectly ? t('realChart.correctComparison') : t('realChart.revealComparison')}
+                      </span>
+                    )}
+                  </div>
+                  {submittedComparison !== null && stepLocale.comparisonExplanation && (
+                    <div className="rounded-lg border border-gray-200 dark:border-[#363a45] bg-gray-50 dark:bg-[#1e222d] p-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
+                        {t('realChart.comparisonAnswerLabel')}
+                      </p>
+                      <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                        {stepLocale.comparisonExplanation}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+              {showSolution && stepLocale.answer && (
                 <div className="rounded-lg border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-3">
                   <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
                     {t('realChart.answerLabel')}
@@ -207,7 +432,100 @@ export default function RealChartSection({ chapterId }: Props) {
             </div>
 
             <div className="space-y-3">
-              {!!stepLocale.confirmationSignals?.length && (
+              {!!stepLocale.checklistItems?.length && (
+                <div className="rounded-lg border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-3">
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
+                        {t('realChart.checklistLabel')}
+                      </p>
+                      <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                        {stepLocale.checklistPrompt ?? t('realChart.checklistPrompt')}
+                      </p>
+                    </div>
+                    <span className="text-[11px] text-gray-400 dark:text-[#787b86] whitespace-nowrap">
+                      {t('realChart.checklistProgress', {
+                        checked: checkedChecklist.length,
+                        total: stepLocale.checklistItems.length,
+                      })}
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    {stepLocale.checklistItems.map((item) => {
+                      const checked = checkedChecklist.includes(item)
+                      return (
+                        <button
+                          key={item}
+                          onClick={() => {
+                            if (!responseKey) return
+                            setPracticeResponses((responses) => {
+                              const current = responses[responseKey] ?? createDefaultInteractionState()
+                              const nextChecklist = current.checkedChecklist.includes(item)
+                                ? current.checkedChecklist.filter((entry) => entry !== item)
+                                : [...current.checkedChecklist, item]
+                              return {
+                                ...responses,
+                                [responseKey]: {
+                                  ...current,
+                                  checkedChecklist: nextChecklist,
+                                },
+                              }
+                            })
+                          }}
+                          className={`w-full px-3 py-2 rounded-lg text-sm border transition-colors text-left flex items-start gap-2 ${
+                            checked
+                              ? 'border-[#26a69a] bg-[#26a69a]/10 text-[#26a69a]'
+                              : 'border-gray-200 dark:border-[#363a45] text-gray-700 dark:text-[#d1d4dc] hover:border-[#26a69a]/40'
+                          }`}
+                        >
+                          <span className="mt-0.5">{checked ? '☑' : '☐'}</span>
+                          <span>{item}</span>
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+              {showSolution && (stepLocale.strengthLabel || stepLocale.strengthReason) && (
+                <div className="rounded-lg border border-[#2962ff]/20 bg-[#2962ff]/8 p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-[#2962ff] mb-1">
+                    {t('realChart.strengthLabel')}
+                  </p>
+                  {stepLocale.strengthLabel && (
+                    <p className="text-sm font-semibold text-gray-900 dark:text-[#d1d4dc] mb-1">
+                      {stepLocale.strengthLabel}
+                    </p>
+                  )}
+                  {stepLocale.strengthReason && (
+                    <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                      {stepLocale.strengthReason}
+                    </p>
+                  )}
+                </div>
+              )}
+              {showSolution && (stepLocale.failureScenario || stepLocale.failureAnswer) && (
+                <div className="rounded-lg border border-[#ef5350]/20 bg-white dark:bg-[#131722] p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-[#ef5350] mb-1">
+                    {t('realChart.failureLabel')}
+                  </p>
+                  {stepLocale.failurePrompt && (
+                    <p className="text-sm font-medium text-gray-700 dark:text-[#d1d4dc] leading-relaxed mb-1">
+                      {stepLocale.failurePrompt}
+                    </p>
+                  )}
+                  {stepLocale.failureScenario && (
+                    <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed mb-2">
+                      {stepLocale.failureScenario}
+                    </p>
+                  )}
+                  {stepLocale.failureAnswer && (
+                    <p className="text-sm text-gray-600 dark:text-[#9598a1] leading-relaxed">
+                      {stepLocale.failureAnswer}
+                    </p>
+                  )}
+                </div>
+              )}
+              {showSolution && !!stepLocale.confirmationSignals?.length && (
                 <div className="rounded-lg border border-[#26a69a]/20 bg-[#26a69a]/8 p-3">
                   <p className="text-[11px] font-semibold uppercase tracking-wide text-[#26a69a] mb-2">
                     {t('realChart.confirmationLabel')}
@@ -223,7 +541,7 @@ export default function RealChartSection({ chapterId }: Props) {
                 </div>
               )}
 
-              {!!stepLocale.invalidationSignals?.length && (
+              {showSolution && !!stepLocale.invalidationSignals?.length && (
                 <div className="rounded-lg border border-[#ef5350]/20 bg-[#ef5350]/8 p-3">
                   <p className="text-[11px] font-semibold uppercase tracking-wide text-[#ef5350] mb-2">
                     {t('realChart.invalidationLabel')}
@@ -248,6 +566,83 @@ export default function RealChartSection({ chapterId }: Props) {
           <p className="text-sm text-gray-600 dark:text-[#9598a1] leading-relaxed">
             {lessonLocale.conclusion}
           </p>
+          {stepIndex === steps.length - 1 && hasCheckpoint && (
+            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4 space-y-3">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86]">
+                {t('realChart.checkpointTitle')}
+              </p>
+              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                {lessonLocale.checkpointPrompt}
+              </p>
+              <div className="space-y-2">
+                {lessonLocale.checkpointOptions?.map((option) => {
+                  const isSelected = checkpointState.selectedOption === option
+                  const isCorrect = checkpointState.submittedOption !== null && option === lessonLocale.checkpointAnswer
+                  const isWrongPick = checkpointState.submittedOption === option && option !== lessonLocale.checkpointAnswer
+                  return (
+                    <button
+                      key={option}
+                      onClick={() => {
+                        if (checkpointState.submittedOption !== null) return
+                        setCheckpointResponses((responses) => ({
+                          ...responses,
+                          [checkpointKey]: {
+                            ...(responses[checkpointKey] ?? createDefaultCheckpointState()),
+                            selectedOption: option,
+                          },
+                        }))
+                      }}
+                      className={`w-full px-3 py-2 rounded-lg text-sm border transition-colors text-left ${
+                        isCorrect
+                          ? 'border-[#26a69a] bg-[#26a69a]/10 text-[#26a69a]'
+                          : isWrongPick
+                            ? 'border-[#ef5350] bg-[#ef5350]/10 text-[#ef5350]'
+                            : isSelected
+                              ? 'border-[#2962ff] bg-[#2962ff]/10 text-[#2962ff]'
+                              : 'border-gray-200 dark:border-[#363a45] text-gray-700 dark:text-[#d1d4dc] hover:border-[#2962ff]/50'
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  )
+                })}
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    if (!checkpointState.selectedOption) return
+                    setCheckpointResponses((responses) => ({
+                      ...responses,
+                      [checkpointKey]: {
+                        ...(responses[checkpointKey] ?? createDefaultCheckpointState()),
+                        selectedOption: checkpointState.selectedOption,
+                        submittedOption: checkpointState.selectedOption,
+                      },
+                    }))
+                  }}
+                  disabled={!checkpointState.selectedOption || checkpointState.submittedOption !== null}
+                  className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed bg-[#2962ff] hover:bg-[#1a4fcc] text-white"
+                >
+                  {t('realChart.submitCheckpoint')}
+                </button>
+                {checkpointState.submittedOption !== null && (
+                  <span className={`text-xs font-medium ${checkpointSolvedCorrectly ? 'text-[#26a69a]' : 'text-[#ef5350]'}`}>
+                    {checkpointSolvedCorrectly ? t('realChart.correctCheckpoint') : t('realChart.revealCheckpoint')}
+                  </span>
+                )}
+              </div>
+              {checkpointState.submittedOption !== null && lessonLocale.checkpointExplanation && (
+                <div className="rounded-lg border border-gray-200 dark:border-[#363a45] bg-gray-50 dark:bg-[#1e222d] p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
+                    {t('realChart.checkpointAnswerLabel')}
+                  </p>
+                  <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                    {lessonLocale.checkpointExplanation}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       ) : (
         <p className="text-sm text-gray-600 dark:text-[#9598a1] leading-relaxed mb-1">

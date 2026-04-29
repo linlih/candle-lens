@@ -17,8 +17,21 @@ export interface RealChartLessonStepLocale {
   summary: string
   question?: string
   answer?: string
+  strengthLabel?: string
+  strengthReason?: string
+  failurePrompt?: string
+  failureScenario?: string
+  failureAnswer?: string
   confirmationSignals?: string[]
   invalidationSignals?: string[]
+  practicePrompt?: string
+  practiceChoices?: Partial<Record<RealChartBias, string>>
+  comparisonPrompt?: string
+  comparisonOptions?: string[]
+  comparisonAnswer?: string
+  comparisonExplanation?: string
+  checklistPrompt?: string
+  checklistItems?: string[]
 }
 
 export interface RealChartLessonStep {
@@ -35,6 +48,10 @@ export interface RealChartLessonStep {
 export interface RealChartLessonLocale {
   intro: string
   conclusion: string
+  checkpointPrompt?: string
+  checkpointOptions?: string[]
+  checkpointAnswer?: string
+  checkpointExplanation?: string
 }
 
 export interface RealChartLesson {

@@ -34,6 +34,9 @@ export function PatternCard({ pattern }: PatternCardProps) {
 
   const name = locale === 'zh' ? pattern.nameZh : pattern.nameEn
   const desc = locale === 'zh' ? pattern.descZh : pattern.descEn
+  const location = locale === 'zh' ? pattern.locationZh : pattern.locationEn
+  const confirmation = locale === 'zh' ? pattern.confirmationZh : pattern.confirmationEn
+  const trap = locale === 'zh' ? pattern.trapZh : pattern.trapEn
   const sigLabel = signalLabels[locale][pattern.signal]
   const kindLabel = kindLabels[locale][pattern.kind]
 
@@ -69,6 +72,35 @@ export function PatternCard({ pattern }: PatternCardProps) {
 
         {/* Description */}
         <p className="text-[12px] text-slate-300 leading-relaxed flex-1">{desc}</p>
+
+        {(location || confirmation || trap) && (
+          <div className="space-y-2 rounded-lg border border-white/10 bg-black/15 p-2.5">
+            {location && (
+              <div>
+                <p className="text-[10px] uppercase tracking-wide text-slate-500 mb-1">
+                  {locale === 'zh' ? '出现位置' : 'Best Location'}
+                </p>
+                <p className="text-[11px] text-slate-300 leading-relaxed">{location}</p>
+              </div>
+            )}
+            {confirmation && (
+              <div>
+                <p className="text-[10px] uppercase tracking-wide text-slate-500 mb-1">
+                  {locale === 'zh' ? '需要确认' : 'Confirmation'}
+                </p>
+                <p className="text-[11px] text-slate-300 leading-relaxed">{confirmation}</p>
+              </div>
+            )}
+            {trap && (
+              <div>
+                <p className="text-[10px] uppercase tracking-wide text-slate-500 mb-1">
+                  {locale === 'zh' ? '常见误判' : 'Common Trap'}
+                </p>
+                <p className="text-[11px] text-slate-300 leading-relaxed">{trap}</p>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Link */}
         <Link

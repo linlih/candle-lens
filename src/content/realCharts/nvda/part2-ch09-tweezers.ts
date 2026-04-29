@@ -110,6 +110,30 @@ export const realChart: RealChartData = {
             summary:
               'October 10 probes the same $195 zone again, even slightly higher, but collapses into a very weak close. That second rejection is the essence of the pattern: the market discovered a ceiling and then proved the ceiling mattered.',
             question: 'Why is the nearly identical high more important than the pattern name itself?',
+            strengthLabel: 'High-quality level-based warning',
+            strengthReason:
+              'The signal is strong because the second candle is not failing at a random price. It is rejecting the same visible ceiling the prior session already identified.',
+            failurePrompt: 'How would this bearish top read fail?',
+            failureScenario:
+              'If price quickly reclaimed the $195 area and closed above it, then the repeated highs would stop being resistance and start looking like a failed breakout shakeout instead.',
+            failureAnswer:
+              'That would flip the interpretation from “shared ceiling” to “temporary rejection inside a larger breakout attempt.”',
+            comparisonPrompt:
+              'What is the best read once the second day fails from almost the same high?',
+            comparisonOptions: [
+              'Tweezers Top at resistance',
+              'Bullish breakout continuation',
+              'Bearish Engulfing',
+            ],
+            comparisonAnswer: 'Tweezers Top at resistance',
+            comparisonExplanation:
+              'The repeated high is the main clue. This is not breakout continuation because the second day fails instead of holding above the level, and it is not mainly a bearish engulfing lesson because the shared ceiling is the real structural signal.',
+            checklistItems: [
+              'Day two retests almost the same high zone as day one',
+              'Day two cannot hold above that ceiling',
+              'The close is much weaker than the intraday high',
+              'The rejection happens at a visible horizontal resistance area',
+            ],
             answer:
               'Because it ties the candle to structure. The pattern works here because the repeated highs reveal real resistance, not because two candles merely look similar.',
             confirmationSignals: [
@@ -125,6 +149,30 @@ export const realChart: RealChartData = {
             summary:
               '10 月 10 日再次上探同样的 195 美元区域，甚至略微更高，但随后暴跌收弱。第二次拒绝同一高位，才是这个形态的本质：市场先发现天花板，然后又证明这个天花板真的有效。',
             question: '为什么“几乎相同的高点”比形态名字本身更重要？',
+            strengthLabel: '高质量的关键位预警',
+            strengthReason:
+              '这个信号偏强，不是因为两根 K 线外观相似，而是因为第二次失败正好发生在前一天已经显露出来的同一阻力天花板上。',
+            failurePrompt: '什么样的后续会让这个顶部解读失效？',
+            failureScenario:
+              '如果价格很快重新站回 195 美元区域并强势收在其上，那重复高点就不再是阻力，而更像是假突破洗盘中的短暂拒绝。',
+            failureAnswer:
+              '那时解读重点就会从“共享天花板”转成“更大突破尝试中的中途震荡”。',
+            comparisonPrompt:
+              '当第二天从几乎相同的高点位置失败时，最准确的读法是什么？',
+            comparisonOptions: [
+              '阻力位上的镊子顶',
+              '看涨突破延续',
+              '看跌吞没',
+            ],
+            comparisonAnswer: '阻力位上的镊子顶',
+            comparisonExplanation:
+              '这里最重要的是重复高点，不是单根实体大小。它不是突破延续，因为第二天没有站稳高位；它也不该主要读成吞没，因为真正提供结构信息的是共享阻力位上的再次失败。',
+            checklistItems: [
+              '第二天重新测试了和第一天几乎相同的高位区域',
+              '第二天没能稳稳站上这个天花板',
+              '收盘相对盘中高点明显偏弱',
+              '拒绝动作发生在清晰的水平阻力区',
+            ],
             answer:
               '因为它把蜡烛图和价格结构连接起来。这里真正有效的是重复高点揭示了真实阻力，而不只是两根 K 线长得像。',
             confirmationSignals: [
@@ -148,6 +196,14 @@ export const realChart: RealChartData = {
             summary:
               'Subsequent sessions fail to recapture the $195 area and drift lower over the following days. That follow-through is what tells you the repeated highs really marked a ceiling rather than a one-day anomaly.',
             question: 'What should you take away from this pattern structurally?',
+            strengthLabel: 'Confirmed by follow-through',
+            strengthReason:
+              'The pattern earns more confidence because the market keeps respecting the ceiling afterward. Without that later weakness, the repeated highs would be less trustworthy.',
+            failurePrompt: 'What would have reduced confidence even after the pattern printed?',
+            failureScenario:
+              'A fast bounce back into the resistance band with no hesitation would suggest the second-day collapse was dramatic but not durable.',
+            failureAnswer:
+              'That is why later respect matters. Follow-through turns a visual pattern into a usable structural read.',
             answer:
               'Tweezers Top is best read as repeated failure at a shared level. The candles matter because they reveal where supply is waiting.',
             confirmationSignals: [
@@ -163,6 +219,14 @@ export const realChart: RealChartData = {
             summary:
               '之后几个交易日都没能重新收回 195 美元区域，价格继续往下漂移。正是这种后续表现告诉你：重复高点并不是单日巧合，而是真正的顶部区域。',
             question: '从结构角度看，这个形态最值得学的是什么？',
+            strengthLabel: '后续跟随让它更可信',
+            strengthReason:
+              '这个结构之所以越来越有把握，是因为市场后面持续尊重这个天花板。如果没有后续偏弱，重复高点的可信度就会低很多。',
+            failurePrompt: '即便形态已经打印出来，什么情况仍会明显降低把握？',
+            failureScenario:
+              '如果价格很快就重新弹回阻力带，而且几乎没有犹豫，那第二天的大跌就更像戏剧性波动，而不是耐久的结构切换。',
+            failureAnswer:
+              '这就是为什么要等后续跟随。真正可用的结构，不只是长得像，还得被后面的价格持续尊重。',
             answer:
               '镊子顶最适合被理解为“共享阻力位上的重复失败”。蜡烛图重要，是因为它把供给真正出现的位置显露出来。',
             confirmationSignals: [
@@ -182,12 +246,34 @@ export const realChart: RealChartData = {
           'This case teaches how to combine candle shapes with horizontal levels: the repeated high matters more than the label “Tweezers Top.”',
         conclusion:
           'Read tweezers as evidence that the same price zone rejected buyers twice, then check whether later candles respect that ceiling.',
+        checkpointPrompt:
+          'What is the best structural takeaway from this tweezers-top lesson?',
+        checkpointOptions: [
+          'Two candles with similar highs are automatically bearish',
+          'Tweezers Top matters most when repeated highs reveal a defended resistance level and later candles keep respecting it',
+          'The second day only matters if it fully engulfs the first day body',
+        ],
+        checkpointAnswer:
+          'Tweezers Top matters most when repeated highs reveal a defended resistance level and later candles keep respecting it',
+        checkpointExplanation:
+          'That is the durable lesson: the pattern is useful because it exposes supply at a shared ceiling, then later price action confirms that the ceiling is real.',
       },
       zh: {
         intro:
           '这个案例的重点是把蜡烛图和水平阻力位结合起来读：真正重要的是重复高点，而不只是“镊子顶”这个名字。',
         conclusion:
           '把镊子顶理解成“同一价位两次拒绝买方”，再观察后续蜡烛是否继续尊重这个顶部区域。',
+        checkpointPrompt:
+          '这个镊子顶案例最重要的结构结论是什么？',
+        checkpointOptions: [
+          '只要两根 K 线高点接近，就天然看跌',
+          '镊子顶真正有用，是因为重复高点暴露了被防守的阻力位，而且后续价格继续尊重它',
+          '第二天只有在完整吞没第一天实体时才有意义',
+        ],
+        checkpointAnswer:
+          '镊子顶真正有用，是因为重复高点暴露了被防守的阻力位，而且后续价格继续尊重它',
+        checkpointExplanation:
+          '这才是最耐用的理解：形态之所以可用，不是因为名字本身，而是因为它把供给集中的共享天花板显露出来，并被后续走势进一步验证。',
       },
     },
   },
@@ -207,3 +293,171 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const tweezersBottomCase: RealChartData = {
+  chapterId: 'part2-ch09-tweezers',
+  ticker: 'NVDA',
+  candles: [
+    { time: '2026-02-03', open: 189.10, high: 190.24, low: 185.44, close: 186.02 },
+    { time: '2026-02-04', open: 185.86, high: 186.55, low: 181.72, close: 182.31 },
+    { time: '2026-02-05', open: 182.10, high: 183.22, low: 178.64, close: 179.08 },
+    { time: '2026-02-06', open: 178.84, high: 180.15, low: 175.93, close: 176.44 },
+    { time: '2026-02-09', open: 176.20, high: 177.18, low: 171.92, close: 173.10 }, // first low
+    { time: '2026-02-10', open: 171.84, high: 183.64, low: 171.92, close: 182.41 }, // same low + reverse
+    { time: '2026-02-11', open: 182.55, high: 184.22, low: 180.98, close: 183.66 },
+    { time: '2026-02-12', open: 183.14, high: 183.88, low: 180.42, close: 181.15 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'tweezers-bottom-box',
+      timeRange: { from: '2026-02-09', to: '2026-02-10' },
+      priceRange: { high: 183.64, low: 171.92 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(38, 166, 154, 0.10)',
+      borderColor: '#26a69a',
+      borderWidth: 2,
+    },
+    {
+      kind: 'hline',
+      id: 'support-line',
+      price: 171.92,
+      color: 'rgba(38, 166, 154, 0.7)',
+      width: 1,
+      dash: [4, 3],
+    },
+    {
+      kind: 'label',
+      id: 'tweezers-bottom-label',
+      time: '2026-02-10',
+      price: 170.0,
+      text: 'Tweezers Bottom',
+      position: 'below',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'selloff-into-support',
+        visibleCount: 5,
+        annotationIds: ['support-line'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The first low defines the floor to watch',
+            summary:
+              'By February 9, NVDA has sold off into a visible low near $171.9. That first touch matters because it gives the next session a precise support level to retest.',
+            question: 'What would make the next session’s retest more meaningful than random volatility?',
+            answer:
+              'If price revisits the same floor and buyers defend it hard, the shared low begins to look like real support.',
+            confirmationSignals: ['The next session retests the same low zone'],
+            invalidationSignals: ['The next session cleanly breaks through support and stays there'],
+          },
+          zh: {
+            title: '第一次探低，先定义要观察的支撑位',
+            summary:
+              '到 2 月 9 日，NVDA 已经跌到接近 171.9 美元的明显低点。第一次低点的重要性在于，它给了下一交易日一个很清楚的支撑测试位置。',
+            question: '什么会让下一交易日的再次探底比随机波动更有意义？',
+            answer:
+              '如果价格再次回到同一低位并被买方强力守住，那么这个共同低点就开始具备真实支撑含义。',
+            confirmationSignals: ['下一交易日再次测试相同低点区域'],
+            invalidationSignals: ['下一交易日直接跌穿支撑并持续停留其下'],
+          },
+        },
+      },
+      {
+        id: 'double-defense',
+        visibleCount: 6,
+        annotationIds: ['tweezers-bottom-box', 'support-line', 'tweezers-bottom-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The second defense turns the level into a Tweezers Bottom',
+            summary:
+              'February 10 touches the same low and then reverses sharply higher. That shared low is what matters: buyers defended the level twice, and the second session finished with clear recovery instead of panic.',
+            question: 'Why is the repeated low more important than the pattern name?',
+            answer:
+              'Because the signal comes from structure. The matching low shows actual demand waiting at that price, not just two candles that happen to look similar.',
+            confirmationSignals: ['The second day rejects the same low zone', 'The second day closes with clear recovery'],
+            invalidationSignals: ['The second day revisits the low but cannot rebound from it'],
+          },
+          zh: {
+            title: '第二次守住低点，才把它变成镊子底',
+            summary:
+              '2 月 10 日再次碰到同样低点后迅速反转上去。真正重要的不是名字，而是这个共同低点：买方两次守住了同一个价位，而且第二天收出了明确恢复。',
+            question: '为什么“重复低点”比形态名字本身更重要？',
+            answer:
+              '因为信号来自价格结构。相同低点说明这个位置有真实买盘在等，而不只是两根 K 线看起来碰巧相似。',
+            confirmationSignals: ['第二天再次拒绝同一低点区域', '第二天收盘明显恢复'],
+            invalidationSignals: ['第二天虽然再探低点，但完全没有反弹能力'],
+          },
+        },
+      },
+      {
+        id: 'support-holds',
+        visibleCount: 8,
+        annotationIds: ['tweezers-bottom-box', 'support-line', 'tweezers-bottom-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'Later price action confirms that support held',
+            summary:
+              'The following sessions hold above the defended low rather than collapsing through it. That is what confirms the tweezers-bottom read: the market respected the floor it revealed.',
+            question: 'What should you retain structurally from this pattern?',
+            answer:
+              'Tweezers Bottom is best read as repeated defense of a shared floor. The candles matter because they expose where demand is willing to step in.',
+            confirmationSignals: ['Price stays above the shared low', 'The market no longer behaves like one-way panic selling'],
+            invalidationSignals: ['Price quickly falls back through the shared low again'],
+          },
+          zh: {
+            title: '后续没有再崩掉，说明支撑确实生效了',
+            summary:
+              '之后几根 K 线并没有重新跌穿这个共同低点，而是大体守在其上方。这才真正确认了镊子底的结构解读：市场尊重了它自己暴露出来的地板。',
+            question: '从结构角度最该带走的理解是什么？',
+            answer:
+              '镊子底最适合被理解成“共享低点上的重复防守”。蜡烛图有价值，是因为它把真实需求出现的位置显露了出来。',
+            confirmationSignals: ['价格维持在共同低点上方', '市场不再表现成单边恐慌抛售'],
+            invalidationSignals: ['价格很快再次跌穿这个共同低点'],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This mirror case teaches the bullish side of tweezers: the repeated low matters because it reveals a price floor buyers defended twice.',
+        conclusion:
+          'Tweezers Bottom works best when you read it as shared support plus recovery, then check that later candles keep respecting the floor.',
+      },
+      zh: {
+        intro:
+          '这个镜像案例训练的是镊子形态的看涨一侧：重复低点之所以重要，是因为它暴露了买方两次防守的价格地板。',
+        conclusion:
+          '镊子底最好的阅读方式，是把它看成“共享支撑 + 恢复反击”，再观察后续蜡烛是否继续尊重这个地板。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Tweezers Bottom',
+      patternLabel: 'Tweezers Bottom — Feb 9–10, 2026',
+      analysisText:
+        'After several weak sessions, NVDA printed nearly identical lows on February 9 and 10, 2026 around $171.9. The second session reversed sharply higher off the same floor, turning that repeated low into a clean tweezers-bottom support signal.',
+    },
+    zh: {
+      caseLabel: '镊子底',
+      patternLabel: '镊子底 — 2026年2月9-10日',
+      analysisText:
+        '在连续多日走弱之后，NVDA 于 2026 年 2 月 9 日与 10 日在约 171.9 美元附近打出几乎相同的低点。第二天从同一地板位置快速反转上行，使这个重复低点变成了一个清晰的镊子底支撑信号。',
+      labelText: {
+        'tweezers-bottom-label': '镊子底',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, tweezersBottomCase]

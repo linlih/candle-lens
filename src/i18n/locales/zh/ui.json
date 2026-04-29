@@ -18,7 +18,9 @@
   },
   "cheatSheet": {
     "title": "蜡烛图速查表",
-    "backToHome": "返回主页"
+    "backToHome": "返回主页",
+    "pathLabel": "推荐学习顺序",
+    "pathDescription": "速查表适合复习，但真正学习建议按这个顺序走：先学分析框架，再学实体与影线语法，最后再看蜡烛图和关键位的共振。"
   },
   "home": {
     "title": "学习日本蜡烛图技术",
@@ -26,7 +28,11 @@
     "startLearning": "开始学习",
     "chapters": "章节",
     "scenes": "场景",
-    "patterns": "形态"
+    "patterns": "形态",
+    "pathLabel": "推荐学习顺序",
+    "pathTitle": "先学“怎么读图”，再记形态名字",
+    "pathDescription": "先把趋势、位置、确认学明白，再掌握实体和影线语法，最后再往上叠加具体反转形态，学习效率会高得多。",
+    "pathStep": "第 {{number}} 步"
   },
   "parts": {
     "1": "第一部分：基础蜡烛线",
@@ -40,10 +46,31 @@
   },
   "realChart": {
     "sectionTitle": "真实图表分析",
-    "tickerLabel": "英伟达 NVDA",
-    "dataNote": "英伟达（NVDA）真实历史数据 · 已复权（10:1拆股）· 来源：雅虎财经",
+    "tickerLabel": "市场代码",
+    "dataNote": "真实历史市场数据 · 适用时按拆分复权 · 来源：雅虎财经",
     "caseLabel": "练习案例",
     "lessonLabel": "分步分析演练",
+    "practiceLabel": "先做判断",
+    "practicePrompt": "先不要看答案，先根据当前这一步判断你的偏向。",
+    "submitAnswer": "提交判断",
+    "submitToContinue": "先提交当前判断，再继续揭示后面的蜡烛。",
+    "correctAnswer": "你的判断与示范解读一致。",
+    "revealAnswer": "示范解读已展开。",
+    "comparisonLabel": "形态辨析",
+    "submitComparison": "检查形态",
+    "correctComparison": "你辨认出了正确结构。",
+    "revealComparison": "示范解释已展开。",
+    "comparisonAnswerLabel": "为什么是它",
+    "checklistLabel": "确认信号清单",
+    "checklistPrompt": "先把你从图上已经能确认的信号勾出来。",
+    "checklistProgress": "已勾选 {{checked}} / {{total}}",
+    "strengthLabel": "信号强度",
+    "failureLabel": "它会怎么失效",
+    "checkpointTitle": "本课 checkpoint",
+    "submitCheckpoint": "提交 checkpoint",
+    "correctCheckpoint": "你抓住了这课最重要的结论。",
+    "revealCheckpoint": "示范结论已展开。",
+    "checkpointAnswerLabel": "最佳结论",
     "stepCounter": "第 {{current}} / {{total}} 步",
     "prevStep": "上一步",
     "nextStep": "下一步",

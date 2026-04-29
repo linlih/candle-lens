@@ -218,3 +218,179 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const fallingWindowCase: RealChartData = {
+  chapterId: 'part3-ch11-windows',
+  ticker: 'NVDA',
+  candles: [
+    { time: '2026-01-06', open: 174.10, high: 176.55, low: 173.62, close: 176.12 },
+    { time: '2026-01-07', open: 176.34, high: 179.02, low: 175.98, close: 178.64 },
+    { time: '2026-01-08', open: 178.92, high: 182.88, low: 178.40, close: 181.94 },
+    { time: '2026-01-09', open: 182.30, high: 186.16, low: 181.72, close: 185.68 },
+    { time: '2026-01-12', open: 186.24, high: 186.88, low: 180.65, close: 181.22 },
+    { time: '2026-01-13', open: 179.44, high: 179.88, low: 176.24, close: 177.10 },
+    { time: '2026-01-14', open: 173.40, high: 174.86, low: 171.82, close: 172.64 }, // gap down
+    { time: '2026-01-15', open: 172.10, high: 173.24, low: 169.88, close: 170.42 },
+    { time: '2026-01-16', open: 170.75, high: 171.80, low: 168.62, close: 169.10 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'falling-gap-zone',
+      timeRange: { from: '2026-01-13', to: '2026-01-14' },
+      priceRange: { high: 176.24, low: 174.86 },
+      fillColor: 'rgba(239, 83, 80, 0.18)',
+      borderColor: '#ef5350',
+      borderWidth: 1,
+    },
+    {
+      kind: 'hline',
+      id: 'falling-gap-top',
+      price: 176.24,
+      color: 'rgba(239, 83, 80, 0.8)',
+      width: 1,
+      dash: [4, 3],
+    },
+    {
+      kind: 'hline',
+      id: 'falling-gap-bottom',
+      price: 174.86,
+      color: 'rgba(239, 83, 80, 0.8)',
+      width: 1,
+      dash: [4, 3],
+    },
+    {
+      kind: 'label',
+      id: 'falling-window-label',
+      time: '2026-01-14',
+      price: 173.0,
+      text: 'Falling Window',
+      position: 'below',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'reversal-context',
+        visibleCount: 6,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A bearish continuation gap needs weakness before it appears',
+            summary:
+              'Into January 13, NVDA has already started to turn lower after a topping sequence. That matters because a falling window is most useful when it expands existing bearish pressure.',
+            question: 'What would strengthen the bearish case after the market already starts slipping?',
+            answer:
+              'A decisive gap down that leaves empty space on the chart would show urgency from sellers, not just slow drift.',
+            confirmationSignals: ['The next session opens or trades clearly below the prior low'],
+            invalidationSignals: ['The next session snaps back into the prior range instead'],
+          },
+          zh: {
+            title: '看跌延续缺口必须建立在前面已经转弱的基础上',
+            summary:
+              '到 1 月 13 日，NVDA 在顶部结构后已经开始往下转弱。下降窗口最有价值的地方，就是它把这种弱势进一步放大，而不是凭空出现。',
+            question: '在市场已经开始走弱后，什么会明显强化看跌逻辑？',
+            answer:
+              '如果出现明确跳空下跌，并在图上留下空白区，就说明空方是带着急迫性接管，而不只是慢慢下滑。',
+            confirmationSignals: ['下一交易日明显开在或运行在前一日低点下方'],
+            invalidationSignals: ['下一交易日反而迅速回到前一日区间内部'],
+          },
+        },
+      },
+      {
+        id: 'gap-confirms-selling',
+        visibleCount: 7,
+        annotationIds: ['falling-gap-zone', 'falling-gap-top', 'falling-gap-bottom', 'falling-window-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'The falling window shows sellers have urgency',
+            summary:
+              'January 14 gaps fully below the prior day’s low, leaving a clean falling window. This is stronger than an ordinary red candle because price skips the old range entirely; supply is overwhelming demand.',
+            question: 'Why is a clean downside gap more informative than another weak close?',
+            answer:
+              'Because it shows imbalance. Trading did not even occur in the gap zone, which means sellers were strong enough to force immediate repricing lower.',
+            confirmationSignals: ['No overlap remains with the prior day’s range', 'Price stays beneath the window after the open'],
+            invalidationSignals: ['The gap is filled immediately and the close returns into the old range'],
+          },
+          zh: {
+            title: '下降窗口说明空方带着急迫性在接管',
+            summary:
+              '1 月 14 日直接跳空跌破前一日低点，在图上留下清晰的下降窗口。这比普通阴线更强，因为价格连旧区间都没再成交，说明供给远强于需求。',
+            question: '为什么一个干净的向下跳空比普通弱收盘更有信息量？',
+            answer:
+              '因为它体现了真正的失衡。缺口区域甚至没有成交，说明空方已经强到迫使市场立刻整体重定价。',
+            confirmationSignals: ['新交易日与前一日区间完全不重叠', '开盘后价格维持在窗口下方'],
+            invalidationSignals: ['缺口立刻被回补，收盘重新回到旧区间内'],
+          },
+        },
+      },
+      {
+        id: 'window-as-resistance',
+        visibleCount: 9,
+        annotationIds: ['falling-gap-zone', 'falling-gap-top', 'falling-gap-bottom', 'falling-window-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Later candles treat the gap zone as resistance',
+            summary:
+              'Subsequent candles stay below the falling window rather than reclaiming it. That is the practical lesson: once a falling window forms, the empty zone becomes resistance to monitor.',
+            question: 'How should you use the falling window after it appears?',
+            answer:
+              'Treat the gap zone as a ceiling. As long as price remains below it, the bearish continuation read remains stronger.',
+            confirmationSignals: ['Later candles stay beneath the gap zone', 'The market keeps leaning lower after the window'],
+            invalidationSignals: ['Price quickly closes back above the upper edge of the gap'],
+          },
+          zh: {
+            title: '后续蜡烛把这块缺口区域当成了阻力',
+            summary:
+              '后面的蜡烛并没有重新收回这个下降窗口，而是继续待在其下方。这正是实战用法：一旦下降窗口形成，这块空白区就会转化成后续观察的阻力带。',
+            question: '下降窗口出现后，最正确的分析用法是什么？',
+            answer:
+              '把缺口区域当作天花板。只要价格持续在它下方运行，原本的看跌延续解读就仍然更强。',
+            confirmationSignals: ['后续蜡烛持续停留在缺口下方', '窗口出现后市场继续向下倾斜'],
+            invalidationSignals: ['价格快速重新收上窗口上沿'],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This mirror case teaches the bearish side of windows: a downside gap confirms urgency from sellers and then becomes resistance.',
+        conclusion:
+          'Use falling windows in two stages: first as evidence of downside imbalance, then as a resistance zone that later candles should fail to reclaim.',
+      },
+      zh: {
+        intro:
+          '这个镜像案例训练的是窗口形态的看跌一侧：向下缺口先确认空方急迫性，再在后续变成阻力区域。',
+        conclusion:
+          '理解下降窗口时分两步：先把它看作空方失衡的证据，再把它看作后续蜡烛难以收回的阻力带。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Falling Window',
+      patternLabel: 'Falling Window — Jan 14, 2026',
+      analysisText:
+        'After the market had already begun slipping from a topping structure, NVDA gapped fully below the prior session on January 14, 2026. The clean falling window showed urgent downside repricing, and later candles continued to respect the gap area as resistance.',
+    },
+    zh: {
+      caseLabel: '下降窗口',
+      patternLabel: '下降窗口 — 2026年1月14日',
+      analysisText:
+        '在顶部结构之后市场已经开始转弱的背景下，NVDA 于 2026 年 1 月 14 日完整跳空跌破前一交易日，形成清晰下降窗口。这个缺口说明空方带着急迫性重新定价，后续蜡烛也继续把它当作阻力对待。',
+      labelText: {
+        'falling-window-label': '下降窗口',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, fallingWindowCase]
