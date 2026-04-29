@@ -214,3 +214,172 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const fallingThreeMethodsCase: RealChartData = {
+  chapterId: 'part3-ch12-three-methods',
+  ticker: 'NVDA',
+  candles: [
+    { time: '2026-01-07', open: 176.34, high: 179.02, low: 175.98, close: 178.64 },
+    { time: '2026-01-08', open: 178.92, high: 182.88, low: 178.40, close: 181.94 },
+    { time: '2026-01-09', open: 182.30, high: 186.16, low: 181.72, close: 185.68 },
+    { time: '2026-01-12', open: 186.24, high: 186.88, low: 180.65, close: 181.22 }, // first bear
+    { time: '2026-01-13', open: 181.48, high: 182.10, low: 178.24, close: 179.08 }, // small bounce
+    { time: '2026-01-14', open: 179.44, high: 180.22, low: 176.96, close: 177.65 }, // small bounce
+    { time: '2026-01-15', open: 177.92, high: 179.14, low: 176.72, close: 178.30 }, // small bounce
+    { time: '2026-01-16', open: 177.80, high: 178.10, low: 171.84, close: 172.44 }, // breakdown
+    { time: '2026-01-20', open: 172.70, high: 173.42, low: 169.90, close: 170.36 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'first-bear-box',
+      timeRange: { from: '2026-01-12', to: '2026-01-12' },
+      priceRange: { high: 186.88, low: 180.65 },
+      fillColor: 'rgba(239, 83, 80, 0.18)',
+      borderColor: '#ef5350',
+      borderWidth: 2,
+    },
+    {
+      kind: 'box',
+      id: 'bounce-box',
+      timeRange: { from: '2026-01-13', to: '2026-01-15' },
+      priceRange: { high: 182.10, low: 176.72 },
+      fillColor: 'rgba(255, 193, 7, 0.10)',
+      borderColor: '#ffc107',
+      borderWidth: 1,
+    },
+    {
+      kind: 'label',
+      id: 'falling-methods-label',
+      time: '2026-01-16',
+      price: 171.0,
+      text: 'Falling Three Methods',
+      position: 'below',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'impulse-bear',
+        visibleCount: 4,
+        annotationIds: ['first-bear-box'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A strong bearish impulse creates the reference move',
+            summary:
+              'January 12 gives you the key first ingredient: a forceful bearish candle that interrupts the prior rise. This candle becomes the benchmark for judging whether the following bounce is only a pause.',
+            question: 'After a strong bearish impulse, what would keep the continuation thesis alive?',
+            answer:
+              'The rebound must stay limited and fail to undo the bearish candle’s message.',
+            confirmationSignals: ['The next bounce remains relatively small and contained'],
+            invalidationSignals: ['The rebound quickly erases the bearish impulse and rebuilds the rally'],
+          },
+          zh: {
+            title: '第一根强势阴线，先建立“参考跌幅”',
+            summary:
+              '1 月 12 日先给出了关键的第一步：一根有分量的大阴线，打断了前面的上涨。这根阴线会变成判断后续反弹是否只是暂停的参照。',
+            question: '在强势阴线之后，什么能让延续逻辑继续成立？',
+            answer:
+              '后面的反弹必须受控，不能把这根阴线的含义很快抹掉。',
+            confirmationSignals: ['随后反弹幅度相对有限、仍被压制'],
+            invalidationSignals: ['反弹迅速收复大阴线并重新搭回上涨'],
+          },
+        },
+      },
+      {
+        id: 'contained-bounce',
+        visibleCount: 7,
+        annotationIds: ['first-bear-box', 'bounce-box'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The bounce behaves like consolidation, not reversal',
+            summary:
+              'January 13 to 15 brings several small recovery candles, but they stay controlled inside the bearish impulse structure. That is what keeps the falling-three-methods interpretation alive.',
+            question: 'Why is the limited character of the bounce more important than exact candle counting?',
+            answer:
+              'Because real markets are uneven. What matters is that the countertrend move remains weak enough to look like a pause, not a regime change.',
+            confirmationSignals: ['The bounce candles stay smaller than the bearish impulse', 'Price action still looks like a pause inside weakness'],
+            invalidationSignals: ['The bounce expands into a broad bullish reversal'],
+          },
+          zh: {
+            title: '反弹更像整理，而不像真正反转',
+            summary:
+              '1 月 13 日到 15 日出现了几根小幅恢复蜡烛，但整体仍被控制在前一根大阴线结构之内。这正是下降三法可以继续成立的关键。',
+            question: '为什么“反弹受控”比机械数 K 线根数更重要？',
+            answer:
+              '因为真实市场不会完全工整。真正有价值的是识别这段逆势波动是否仍然像暂停，而不是已经演变成结构切换。',
+            confirmationSignals: ['反弹 K 线整体小于前面那根趋势阴线', '价格行为仍然更像弱势中的暂停'],
+            invalidationSignals: ['反弹逐渐扩展成更完整的看涨反转'],
+          },
+        },
+      },
+      {
+        id: 'downtrend-resumes',
+        visibleCount: 9,
+        annotationIds: ['first-bear-box', 'bounce-box', 'falling-methods-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'The breakdown proves the pause was temporary',
+            summary:
+              'January 16 resumes the downside and breaks below the bounce structure. That final bearish continuation is what confirms the pattern: the rebound was only a pause and sellers regained full control.',
+            question: 'What is the main lesson from this continuation structure?',
+            answer:
+              'The edge comes from distinguishing weak countertrend rebound from genuine reversal. Falling three methods becomes useful when the final candle restarts the original downside direction.',
+            confirmationSignals: ['The final bearish candle restarts downside momentum', 'The market breaks below the bounce structure'],
+            invalidationSignals: ['The supposed continuation candle cannot break lower and gets reversed'],
+          },
+          zh: {
+            title: '重新下破，证明前面的反弹只是暂时休整',
+            summary:
+              '1 月 16 日重新启动下跌，并跌破了前面的小反弹结构。这一步才真正确认形态：中间那段恢复只是暂停，空方已经重新完全接管。',
+            question: '这个延续结构最值得学到的是什么？',
+            answer:
+              '真正的优势来自区分“弱反弹”和“真反转”。下降三法只有在最后一根阴线重新启动原有下跌方向时，才真正变得有用。',
+            confirmationSignals: ['最后一根阴线重新启动下行动能', '市场跌破中间反弹结构'],
+            invalidationSignals: ['所谓延续阴线无法继续下破，反而被快速反转'],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This mirror case teaches the bearish side of continuation: a weak rebound inside a down move becomes useful only when the final candle restarts the original selloff.',
+        conclusion:
+          'Falling Three Methods should train you to identify controlled rebounds that fail, then wait for the bearish continuation candle to confirm the read.',
+      },
+      zh: {
+        intro:
+          '这个镜像案例训练的是延续形态的看跌一侧：下跌中的弱反弹，只有在最后一根阴线重新启动卖压时，才真正有用。',
+        conclusion:
+          '下降三法最该训练你的，是识别“受控反弹的失败”，然后等待最后的延续阴线确认原判断。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Falling Three Methods',
+      patternLabel: 'Falling Three Methods — Jan 12–16, 2026',
+      analysisText:
+        'After a forceful bearish candle on January 12, 2026, NVDA produced several smaller recovery candles that never rebuilt the prior uptrend. On January 16 the market broke lower again, completing a falling three methods continuation structure and confirming that the rebound had been only a pause.',
+    },
+    zh: {
+      caseLabel: '下降三法',
+      patternLabel: '下降三法 — 2026年1月12-16日',
+      analysisText:
+        '在 2026 年 1 月 12 日先打出一根强势阴线后，NVDA 中间出现了几根较小的恢复蜡烛，但始终没能重新搭回上涨结构。1 月 16 日价格重新下破，完成了下降三法延续结构，确认中间那段反弹只是暂停。',
+      labelText: {
+        'falling-methods-label': '下降三法',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, fallingThreeMethodsCase]

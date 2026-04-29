@@ -110,6 +110,32 @@ export const realChart: RealChartData = {
             summary:
               'November 14 opens even lower, which initially looks bad, but buyers then drive price to $190.17. The critical detail is not just the rebound; it is that the close pierces above the midpoint of the November 13 bearish body.',
             question: 'Why does closing above the midpoint matter more than simply closing green?',
+            strengthLabel: 'Medium-strength reversal signal',
+            strengthReason:
+              'The signal is stronger than a random green candle because buyers reclaimed the midpoint, but it is still weaker than a full bullish engulfing because they did not erase the entire prior body.',
+            failurePrompt: 'What would make this bullish read fail quickly?',
+            failureScenario:
+              'If the next session immediately drops back through the piercing candle and closes near the lows, then the apparent buyer response was only a brief squeeze.',
+            failureAnswer:
+              'That kind of fast giveback would tell you the rebound changed intraday sentiment, but not actual short-term control.',
+            comparisonPrompt:
+              'Which read fits this two-candle structure best at the close of November 14?',
+            comparisonOptions: [
+              'Piercing Line',
+              'Bullish Engulfing',
+              'Morning Star',
+            ],
+            comparisonAnswer: 'Piercing Line',
+            comparisonExplanation:
+              'This is a Piercing Line because the second candle opens weak and closes back above the prior body midpoint, but it does not fully engulf the prior body and it is not a three-candle star structure.',
+            checklistPrompt:
+              'Before reading the explanation, check the objective conditions you can already confirm.',
+            checklistItems: [
+              'The first candle is clearly bearish',
+              'The second candle opens below the prior close',
+              'The second candle closes above the first body midpoint',
+              'The second candle still does not fully engulf the first body',
+            ],
             answer:
               'Because it proves buyers reclaimed a meaningful share of the prior session’s loss. A green candle alone could still be weak; closing above the midpoint shows real counter-pressure.',
             confirmationSignals: [
@@ -125,6 +151,32 @@ export const realChart: RealChartData = {
             summary:
               '11 月 14 日先继续低开，看起来像要延续下跌，但买方随后把价格推到 190.17 美元收盘。这里最重要的细节不是“收阳”本身，而是收盘明显刺穿了 11 月 13 日阴线实体中点。',
             question: '为什么“站上中点”比“只是收阳”更重要？',
+            strengthLabel: '中等强度的反转信号',
+            strengthReason:
+              '它比普通阳线更强，因为买方已经收回了前一根实体中点；但它又弱于完整看涨吞没，因为前一根实体并没有被全部抹掉。',
+            failurePrompt: '什么样的后续会让这个偏多解读很快失效？',
+            failureScenario:
+              '如果下一交易日立刻重新跌回刺透阳线下方，并接近低点收盘，那说明这次买方反击更像短暂挤压，而不是控制权真正转移。',
+            failureAnswer:
+              '这种快速回吐说明，盘中情绪虽然变了，但短线主导权并没有真的交给多方。',
+            comparisonPrompt:
+              '站在 11 月 14 日收盘时，这组双日结构最准确的读法是什么？',
+            comparisonOptions: [
+              '刺透形态',
+              '看涨吞没',
+              '早晨之星',
+            ],
+            comparisonAnswer: '刺透形态',
+            comparisonExplanation:
+              '这里是刺透形态，因为第二根 K 线弱开后收回到前一根实体中点上方，但并没有把前一根实体完整吞没，同时它也不是三根 K 线组成的星线结构。',
+            checklistPrompt:
+              '先不要急着看解释，先把你已经能从图上确认的客观条件勾出来。',
+            checklistItems: [
+              '第一根 K 线是明确阴线',
+              '第二根 K 线开在前一日收盘下方',
+              '第二根 K 线收盘站上第一根实体中点',
+              '第二根 K 线并没有完整吞没第一根实体',
+            ],
             answer:
               '因为它说明买方收回了前一日跌幅中真正有分量的一部分。单纯收阳可能仍然很弱，但站上中点意味着反击质量更高。',
             confirmationSignals: [
@@ -149,6 +201,14 @@ export const realChart: RealChartData = {
               'The next sessions do not explode upward, but they do show that the immediate downside panic was interrupted. That is an important teaching point: a piercing pattern often signals short-term exhaustion before it signals a full trend reversal.',
             question:
               'What should you learn when the pattern works as a pause rather than a massive trend change?',
+            strengthLabel: 'Good timing signal, weaker trend-change signal',
+            strengthReason:
+              'The pattern successfully interrupted the selloff, but the later action stayed more corrective than impulsive. That lowers trend-reversal confidence while preserving the timing value.',
+            failurePrompt: 'Why is this not a “perfect bullish reversal” lesson?',
+            failureScenario:
+              'Because later candles did not keep expanding upward. The market stabilised first, then broader weakness returned.',
+            failureAnswer:
+              'That teaches an important distinction: candlestick reversals often improve timing before they prove a larger trend has truly changed.',
             answer:
               'Candlestick reversals can improve timing even when they only produce a tradable pause or consolidation. You are reading momentum change, not promising a permanent reversal.',
             confirmationSignals: [
@@ -163,6 +223,14 @@ export const realChart: RealChartData = {
             summary:
               '后面几个交易日并没有立刻一路暴涨，但至少说明短线恐慌性抛售被打断了。这是很重要的教学点：刺透形态经常先标记短线衰竭，再决定是否演变成更大的趋势反转。',
             question: '如果形态只是带来一段喘息或整理，而不是大级别反转，你该学到什么？',
+            strengthLabel: '节奏判断强，趋势反转弱',
+            strengthReason:
+              '这个形态成功打断了下跌节奏，但后续上涨并没有演变成强趋势跟随，所以更适合当作节奏改善信号，而不是高置信度的大反转信号。',
+            failurePrompt: '为什么这里不能把它教成“完美看涨反转”？',
+            failureScenario:
+              '因为后面的蜡烛没有持续向上扩展，市场更像是先企稳整理，随后更大的弱势背景又回来了。',
+            failureAnswer:
+              '这恰好说明：蜡烛图反转常常先改善节奏，再决定是否足以改变更大趋势。',
             answer:
               '蜡烛图反转首先提升的是节奏判断。它告诉你动能在变，而不是保证趋势一定永久改变。',
             confirmationSignals: [
@@ -181,12 +249,34 @@ export const realChart: RealChartData = {
           'This example teaches quality of rebound: a piercing pattern is not just “green after red,” but a recovery strong enough to reclaim the prior body’s midpoint.',
         conclusion:
           'Use piercing patterns to judge whether sellers are losing control, even if the market only stabilises before choosing its next larger trend.',
+        checkpointPrompt:
+          'What is the best takeaway from this piercing-pattern lesson?',
+        checkpointOptions: [
+          'Any green candle after a decline is a bullish reversal',
+          'Piercing patterns are strongest when the second candle reclaims the prior body midpoint, even if the market only stabilises first',
+          'A piercing pattern always means a new uptrend has started',
+        ],
+        checkpointAnswer:
+          'Piercing patterns are strongest when the second candle reclaims the prior body midpoint, even if the market only stabilises first',
+        checkpointExplanation:
+          'That is the practical lesson here: the pattern improved the read on momentum and timing because buyers reclaimed meaningful ground, but the later candles also showed why “reversal” and “immediate new uptrend” are not the same thing.',
       },
       zh: {
         intro:
           '这个案例的重点在于“反弹质量”：刺透形态不是简单的“阴后转阳”，而是反弹强到足以收回前一根阴线实体中点。',
         conclusion:
           '用刺透形态去判断空方是否开始失去控制，即使市场后面只先进入企稳整理，也已经很有分析价值。',
+        checkpointPrompt:
+          '这个刺透形态案例最该留下的结论是什么？',
+        checkpointOptions: [
+          '下跌后只要收阳就等于看涨反转',
+          '刺透形态最重要的是第二根 K 线收回前一根实体中点，即使后面先只是企稳也依然有分析价值',
+          '刺透形态一出现，就代表新上升趋势已经开始',
+        ],
+        checkpointAnswer:
+          '刺透形态最重要的是第二根 K 线收回前一根实体中点，即使后面先只是企稳也依然有分析价值',
+        checkpointExplanation:
+          '这才是这里最实战的结论：买方收回关键位置，说明动能和节奏发生了改善；但后续蜡烛也提醒你，“出现反转信号”不等于“立刻进入新上升趋势”。',
       },
     },
   },
@@ -206,3 +296,172 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const darkCloudCase: RealChartData = {
+  chapterId: 'part2-ch06-cloud',
+  ticker: 'NVDA',
+  candles: [
+    { time: '2026-01-05', open: 171.44, high: 174.21, low: 170.92, close: 173.86 },
+    { time: '2026-01-06', open: 174.10, high: 176.55, low: 173.62, close: 176.12 },
+    { time: '2026-01-07', open: 176.34, high: 179.02, low: 175.98, close: 178.64 },
+    { time: '2026-01-08', open: 178.92, high: 182.88, low: 178.40, close: 181.94 },
+    { time: '2026-01-09', open: 182.30, high: 186.16, low: 181.72, close: 185.68 }, // long bull
+    { time: '2026-01-12', open: 186.24, high: 186.88, low: 180.65, close: 181.22 }, // dark cloud
+    { time: '2026-01-13', open: 181.48, high: 182.10, low: 178.24, close: 179.08 },
+    { time: '2026-01-14', open: 179.44, high: 180.22, low: 176.96, close: 177.65 },
+    { time: '2026-01-15', open: 177.92, high: 179.14, low: 176.72, close: 178.30 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'cloud-box',
+      timeRange: { from: '2026-01-09', to: '2026-01-12' },
+      priceRange: { high: 186.88, low: 180.65 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(239, 83, 80, 0.10)',
+      borderColor: '#ef5350',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'cloud-label',
+      time: '2026-01-12',
+      price: 188.2,
+      text: 'Dark Cloud Cover',
+      position: 'above',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+    {
+      kind: 'hline',
+      id: 'cloud-midpoint-line',
+      price: 183.99,
+      color: 'rgba(255, 193, 7, 0.7)',
+      width: 1,
+      dash: [4, 3],
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'rally-context',
+        visibleCount: 5,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The pattern needs a prior bullish drive',
+            summary:
+              'Into January 9, NVDA has climbed through several strong sessions and prints another wide bullish candle. That gives the next day room to matter as a top-side reversal attempt.',
+            question: 'What would make the next session more than a normal pullback?',
+            answer:
+              'Sellers need to open strong, reverse the optimism, and close deep into the prior bullish body instead of just trimming a little off the gains.',
+            confirmationSignals: ['The next session opens firm and then fades hard'],
+            invalidationSignals: ['The next session stays near the highs and extends the rally'],
+          },
+          zh: {
+            title: '形态必须建立在前面已有的多方推进上',
+            summary:
+              '到 1 月 9 日，NVDA 已经连续多日上行，并再次收出一根宽实体阳线。这样的背景才让下一根 K 线具备顶部反转意义。',
+            question: '什么会让下一交易日不只是普通回调？',
+            answer:
+              '空方必须先承接高位情绪，然后把价格明显打回前一日阳线实体内部，而不是只小幅回吐。',
+            confirmationSignals: ['下一交易日高位开出后明显转弱'],
+            invalidationSignals: ['下一交易日仍贴着高点运行并继续上攻'],
+          },
+        },
+      },
+      {
+        id: 'dark-cloud-forms',
+        visibleCount: 6,
+        annotationIds: ['cloud-box', 'cloud-label', 'cloud-midpoint-line'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Closing below the midpoint turns weakness into a pattern',
+            summary:
+              'January 12 opens above the prior close, but sellers take over and push the close down through the midpoint of the January 9 bullish body. That deep intrusion is what separates dark cloud cover from a mild pause.',
+            question: 'Why is the midpoint test the key detail?',
+            answer:
+              'Because it shows sellers reclaimed a meaningful share of the prior bullish session. Without that depth, the candle may only represent temporary hesitation.',
+            confirmationSignals: ['The bearish close lands below the midpoint of the prior bullish body', 'The session fails to hold the strong open'],
+            invalidationSignals: ['The close stays above the midpoint despite intraday weakness'],
+          },
+          zh: {
+            title: '收盘跌破中点，才把疲弱变成真正形态',
+            summary:
+              '1 月 12 日先高开在前一日收盘上方，但随后被空方接管，收盘打回 1 月 9 日阳线实体中点以下。正是这种“深度回插”让乌云盖顶和普通停顿区分开来。',
+            question: '为什么实体中点是这里最关键的细节？',
+            answer:
+              '因为它说明空方收回了前一日涨势中真正有分量的一部分。没有这种深度，很多时候只是短暂犹豫，而不是结构性转弱。',
+            confirmationSignals: ['阴线收盘跌回前一日阳线实体中点下方', '高开优势没能守住'],
+            invalidationSignals: ['虽然转弱但收盘仍在实体中点上方'],
+          },
+        },
+      },
+      {
+        id: 'follow-through',
+        visibleCount: 9,
+        annotationIds: ['cloud-box', 'cloud-label', 'cloud-midpoint-line'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Later weakness confirms the cloud was not cosmetic',
+            summary:
+              'Subsequent candles continue to lean lower instead of immediately rebuilding the rally. That is the practical validation that the dark cloud cover marked a real loss of bullish control.',
+            question: 'What is the main lesson from this structure?',
+            answer:
+              'A top-side reversal pattern earns trust only when later candles respect it. The candle shape starts the warning; follow-through turns it into a useful read.',
+            confirmationSignals: ['Later candles cannot quickly retake the prior highs', 'The market keeps drifting lower after the pattern'],
+            invalidationSignals: ['A fast bullish reclaim back above the prior high'],
+          },
+          zh: {
+            title: '后续走弱，说明这片“乌云”不是表面现象',
+            summary:
+              '之后几根 K 线没有立刻重新搭回涨势，而是继续偏弱。正是这种后续表现，证明乌云盖顶代表了真实的多方失控。',
+            question: '这个结构最值得记住的是什么？',
+            answer:
+              '顶部反转形态只有在后续蜡烛继续尊重它时，才值得信任。蜡烛外形负责发出警告，跟随走势负责把警告变成可用判断。',
+            confirmationSignals: ['后续蜡烛无法快速收回前高', '市场在形态后继续往下倾斜'],
+            invalidationSignals: ['价格迅速重新突破前高'],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This mirror case shows the bearish side of the cloud family: after an uptrend, the market opens optimistic and then loses control deep into the prior body.',
+        conclusion:
+          'Dark Cloud Cover becomes useful when you focus on the failed strong open and the close below the midpoint, then verify it with later weakness.',
+      },
+      zh: {
+        intro:
+          '这个镜像案例展示的是云层家族的看跌一侧：上涨后，市场带着乐观高开，却被一路打回前一日实体深处。',
+        conclusion:
+          '乌云盖顶最有价值的阅读方式，是盯住“高开失败 + 跌回中点以下”，再用后续弱势确认它。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Dark Cloud Cover',
+      patternLabel: 'Dark Cloud Cover — Jan 12, 2026',
+      analysisText:
+        'After a strong multi-session rally, NVDA opened January 12, 2026 above the prior close and looked ready to continue higher. Instead, sellers reversed the entire tone of the session and pushed the close down through the midpoint of the previous bullish body, creating a textbook dark cloud cover and shifting the short-term bias lower.',
+    },
+    zh: {
+      caseLabel: '乌云盖顶',
+      patternLabel: '乌云盖顶 — 2026年1月12日',
+      analysisText:
+        '在连续多日偏强上涨后，NVDA 于 2026 年 1 月 12 日高开，表面上看像要继续上攻，但空方随后完全反转了当日节奏，把收盘打回前一日阳线实体中点以下，形成教科书级乌云盖顶，并把短线偏向重新压回空方一侧。',
+      labelText: {
+        'cloud-label': '乌云盖顶',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, darkCloudCase]

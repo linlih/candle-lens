@@ -19,6 +19,12 @@ export interface PatternDef {
   candles: MiniCandle[]
   descEn: string
   descZh: string
+  locationEn?: string
+  locationZh?: string
+  confirmationEn?: string
+  confirmationZh?: string
+  trapEn?: string
+  trapZh?: string
   chapterId: string
   partNumber: 1 | 2 | 3 | 4
 }
@@ -36,7 +42,7 @@ const UT = (dx = 0): MiniCandle[] => [
 ]
 
 // ─── Pattern definitions ─────────────────────────────────────────────────────
-export const patterns: PatternDef[] = [
+const rawPatterns: PatternDef[] = [
   // ── Part 1: Basic Candlestick Lines ────────────────────────────────────────
   {
     id: 'bullish-candle',
@@ -503,6 +509,259 @@ export const patterns: PatternDef[] = [
     descZh: '长阴线 → 2-4根小阳线（区间内）→ 强势阴线收盘突破第一天最低价。',
   },
 ]
+
+type PatternGuideFields = Pick<
+  PatternDef,
+  'locationEn' | 'locationZh' | 'confirmationEn' | 'confirmationZh' | 'trapEn' | 'trapZh'
+>
+
+const patternGuides: Partial<Record<string, PatternGuideFields>> = {
+  'bullish-candle': {
+    locationEn: 'Inside trend continuation or early reversal confirmation.',
+    locationZh: '常见于趋势延续中，或作为反转后的早期确认。',
+    confirmationEn: 'Judge it together with trend and whether price can hold the close.',
+    confirmationZh: '结合趋势与收盘能否守住高位一起判断。',
+    trapEn: 'Do not treat every green candle as a bullish setup.',
+    trapZh: '不要把任何一根阳线都当成看涨信号。',
+  },
+  'bearish-candle': {
+    locationEn: 'Inside trend continuation or as a warning after failed rallies.',
+    locationZh: '常见于趋势延续中，或作为反弹失败后的警告。',
+    confirmationEn: 'Check whether later candles continue lower instead of snapping back.',
+    confirmationZh: '看后续是否继续走低，而不是立刻被拉回。',
+    trapEn: 'A single red candle near support may only be noise.',
+    trapZh: '支撑位附近单根阴线，很多时候只是噪音。',
+  },
+  'bullish-marubozu': {
+    locationEn: 'Best after breakout, reversal confirmation, or strong trend continuation.',
+    locationZh: '最适合出现在突破、反转确认或强趋势延续中。',
+    confirmationEn: 'Watch whether the next candles can hold most of the body.',
+    confirmationZh: '观察后续能否守住这根大实体收回的区域。',
+    trapEn: 'A late vertical marubozu can also mark exhaustion near resistance.',
+    trapZh: '阻力位附近的垂直拉升，也可能是衰竭而不是继续。',
+  },
+  'bearish-marubozu': {
+    locationEn: 'Best after breakdown, top reversal, or strong downside continuation.',
+    locationZh: '最适合出现在跌破、顶部反转或强势下跌延续中。',
+    confirmationEn: 'Check whether later candles stay below the body instead of rebounding fast.',
+    confirmationZh: '看后续是否维持在实体下方，而不是快速反弹。',
+    trapEn: 'A panic marubozu into support can be close to capitulation.',
+    trapZh: '支撑位附近的恐慌长阴，也可能接近宣泄末端。',
+  },
+  'spinning-top': {
+    locationEn: 'Most useful after a visible trend move or at key levels.',
+    locationZh: '最适合出现在明确趋势后，或关键位置附近。',
+    confirmationEn: 'Wait for the next candle to decide which side gains control.',
+    confirmationZh: '等下一根 K 线决定控制权偏向哪一边。',
+    trapEn: 'In the middle of a noisy range, it often means very little.',
+    trapZh: '如果出现在横盘噪音区中央，意义通常很小。',
+  },
+  'doji': {
+    locationEn: 'Most meaningful after extended trends or at support/resistance.',
+    locationZh: '最有价值的是出现在趋势延伸后或支撑阻力附近。',
+    confirmationEn: 'Need the next candle to confirm loss of momentum or reversal.',
+    confirmationZh: '需要下一根 K 线确认动能衰减或反转。',
+    trapEn: 'A doji alone is indecision, not a full reversal signal.',
+    trapZh: '十字线本身只是犹豫，不是完整反转信号。',
+  },
+  'gravestone-doji': {
+    locationEn: 'Best near highs or resistance after an advance.',
+    locationZh: '最适合出现在上涨后的高位或阻力附近。',
+    confirmationEn: 'Look for the next candle to close weak and reject the high again.',
+    confirmationZh: '观察次日是否继续收弱并再次拒绝高位。',
+    trapEn: 'Without top-side context, it may only show temporary intraday rejection.',
+    trapZh: '如果没有顶部背景，它可能只是盘中短暂拒绝。',
+  },
+  'dragonfly-doji': {
+    locationEn: 'Best near lows or support after a decline.',
+    locationZh: '最适合出现在下跌后的低位或支撑附近。',
+    confirmationEn: 'Need buyers to follow through with a stronger next close.',
+    confirmationZh: '需要多方在下一根 K 线继续跟进确认。',
+    trapEn: 'Do not assume a bottom if later candles keep breaking lower.',
+    trapZh: '如果后续继续下破，不要把它误判成见底。',
+  },
+  'long-legged-doji': {
+    locationEn: 'Useful when the market becomes unstable after a strong move.',
+    locationZh: '适合出现在强趋势后波动突然放大的阶段。',
+    confirmationEn: 'Let the next candle decide whether volatility resolves up or down.',
+    confirmationZh: '交给下一根 K 线决定波动最终向上还是向下解决。',
+    trapEn: 'High volatility does not automatically mean reversal.',
+    trapZh: '高波动不自动等于反转。',
+  },
+  'hammer': {
+    locationEn: 'After a selloff or near support where lower prices get rejected.',
+    locationZh: '出现在下跌后，或支撑位附近被明显拒绝时。',
+    confirmationEn: 'Need a strong next candle or gap-up confirmation.',
+    confirmationZh: '需要强势次日阳线或跳空确认。',
+    trapEn: 'A hammer in the middle of a range is much weaker.',
+    trapZh: '如果锤子线出现在区间中央，力度会明显下降。',
+  },
+  'hanging-man': {
+    locationEn: 'After an uptrend or near resistance where the market looks extended.',
+    locationZh: '出现在上涨末端或阻力附近、市场已有延伸时。',
+    confirmationEn: 'Need bearish follow-through; the warning candle alone is not enough.',
+    confirmationZh: '必须等待看跌跟随确认，单根警告不够。',
+    trapEn: 'Do not mistake it for a hammer just because the shape is identical.',
+    trapZh: '不要因为外形一样，就把它误看成锤子线。',
+  },
+  'shooting-star': {
+    locationEn: 'Best after rallies and near overhead resistance.',
+    locationZh: '最适合出现在上涨后和上方阻力附近。',
+    confirmationEn: 'Need later candles to fail at reclaiming the high.',
+    confirmationZh: '需要后续 K 线无法重新收回高点。',
+    trapEn: 'A long upper shadow in isolation is only a warning, not a verdict.',
+    trapZh: '单独的长上影线只是预警，不是最终结论。',
+  },
+  'inverted-hammer': {
+    locationEn: 'After a decline when buyers first test an upside reversal.',
+    locationZh: '出现在下跌后，买方首次测试向上反转时。',
+    confirmationEn: 'Need a strong next bullish candle to confirm buyers kept control.',
+    confirmationZh: '需要下一根强阳线确认买方接力。',
+    trapEn: 'Without confirmation it can be just a failed intraday bounce.',
+    trapZh: '没有确认时，它可能只是盘中反抽失败。',
+  },
+  'bullish-engulfing': {
+    locationEn: 'After a decline or near support where sellers lose control.',
+    locationZh: '出现在下跌后或支撑附近，空方开始失控时。',
+    confirmationEn: 'Look for the next candles to hold above the engulfing body.',
+    confirmationZh: '观察后续能否站稳在吞没阳线实体上方。',
+    trapEn: 'A large green candle after no prior decline is not the same signal.',
+    trapZh: '如果前面没有下跌背景，大阳线不等于看涨吞没。',
+  },
+  'bearish-engulfing': {
+    locationEn: 'After a rally or near resistance where buyers fail abruptly.',
+    locationZh: '出现在反弹后或阻力附近，多方突然失守时。',
+    confirmationEn: 'Need follow-through weakness instead of an instant rebound.',
+    confirmationZh: '需要后续继续偏弱，而不是立刻强力反抽。',
+    trapEn: 'Do not overrate it if the candle appears in a sideways mess.',
+    trapZh: '如果出现在横盘噪音中，不要高估它的意义。',
+  },
+  'dark-cloud-cover': {
+    locationEn: 'Best after an uptrend or at resistance.',
+    locationZh: '最适合出现在上涨后或阻力位附近。',
+    confirmationEn: 'The second candle should close deep into the prior body and later candles stay weak.',
+    confirmationZh: '第二根要深插入前一日实体，后续还应保持偏弱。',
+    trapEn: 'A shallow pullback after a gap-up is not enough.',
+    trapZh: '如果只是高开后浅回落，不能算有效乌云盖顶。',
+  },
+  'piercing-pattern': {
+    locationEn: 'Best after a decline or panic selloff into support.',
+    locationZh: '最适合出现在下跌后或支撑附近的恐慌抛售中。',
+    confirmationEn: 'The rebound should close above the prior body midpoint and then stabilise.',
+    confirmationZh: '反弹应站上前一日实体中点，并在后续企稳。',
+    trapEn: 'Just closing green is weaker than piercing the midpoint.',
+    trapZh: '只是收阳远不如站上实体中点有意义。',
+  },
+  'morning-star': {
+    locationEn: 'After a decline when selling pressure is stretched.',
+    locationZh: '出现在下跌后、空方压力已经延伸时。',
+    confirmationEn: 'Need the third candle to close strongly back into the first candle’s body.',
+    confirmationZh: '需要第三根强阳线重新收回第一根阴线的重要区域。',
+    trapEn: 'Do not call it complete before the confirmation candle appears.',
+    trapZh: '确认阳线没出现前，不要急着判定形态完成。',
+  },
+  'evening-star': {
+    locationEn: 'After an uptrend when buyers start losing follow-through.',
+    locationZh: '出现在上涨后，多方推进开始失去连续性时。',
+    confirmationEn: 'Need the third candle to drive back into the first candle’s body.',
+    confirmationZh: '需要第三根阴线明显打回第一根阳线实体内部。',
+    trapEn: 'A small middle candle alone is only hesitation, not a full top.',
+    trapZh: '中间那根小实体单独只代表犹豫，不是完整顶部。',
+  },
+  'bullish-harami': {
+    locationEn: 'After a large bearish candle when panic begins to slow.',
+    locationZh: '出现在大阴线之后，恐慌开始放缓时。',
+    confirmationEn: 'Look for later candles to stop accelerating lower and start stabilising.',
+    confirmationZh: '观察后续是否不再加速下跌，并开始企稳。',
+    trapEn: 'It often marks exhaustion before it marks a full reversal.',
+    trapZh: '它常常先标记衰竭，不一定立刻带来大反转。',
+  },
+  'bearish-harami': {
+    locationEn: 'After a large bullish candle when upside conviction starts shrinking.',
+    locationZh: '出现在大阳线之后，多方信心开始收缩时。',
+    confirmationEn: 'Need later candles to stop extending higher and begin weakening.',
+    confirmationZh: '需要后续停止创新高并逐步收弱。',
+    trapEn: 'The small inside candle alone does not guarantee a top.',
+    trapZh: '内部小实体本身并不保证就是顶部。',
+  },
+  'harami-cross': {
+    locationEn: 'Best after a forceful trend candle when the market suddenly stalls.',
+    locationZh: '最适合出现在强趋势 K 线之后，市场突然停顿时。',
+    confirmationEn: 'Need the next candles to lean against the prior direction.',
+    confirmationZh: '需要后续 K 线朝原趋势反方向跟随。',
+    trapEn: 'The doji makes the warning stronger, but still needs confirmation.',
+    trapZh: '十字线会加强警告，但仍然需要确认。',
+  },
+  'tweezers-top': {
+    locationEn: 'Near repeated highs or a visible resistance zone.',
+    locationZh: '最适合出现在重复高点或清晰阻力位附近。',
+    confirmationEn: 'Need the second rejection to be followed by continued weakness.',
+    confirmationZh: '需要第二次拒绝之后继续有弱势跟随。',
+    trapEn: 'Matching highs matter only if price structure makes that level important.',
+    trapZh: '相同高点只有在结构上重要时才有意义。',
+  },
+  'tweezers-bottom': {
+    locationEn: 'Near repeated lows or visible support after a decline.',
+    locationZh: '最适合出现在重复低点或下跌后的支撑附近。',
+    confirmationEn: 'Need the second defense to be followed by stronger closes.',
+    confirmationZh: '需要第二次守低后继续收强确认。',
+    trapEn: 'Matching lows without a rebound attempt are not enough.',
+    trapZh: '只有相同低点、没有后续反击，不足以形成强信号。',
+  },
+  'three-white-soldiers': {
+    locationEn: 'After a decline or base when buyers regain multi-session control.',
+    locationZh: '出现在下跌后或底部整理后，多方重新连续接管时。',
+    confirmationEn: 'Watch whether the market can hold most of the three-candle advance.',
+    confirmationZh: '看后续能否守住这三根阳线收回的大部分区域。',
+    trapEn: 'A vertical late-stage surge can also be exhaustion, not continuation.',
+    trapZh: '末端垂直拉升也可能是衰竭，而非继续。',
+  },
+  'three-black-crows': {
+    locationEn: 'After a rally or topping zone when sellers take over for several sessions.',
+    locationZh: '出现在上涨末端或顶部区域，空方连续接管数日时。',
+    confirmationEn: 'Need later price to fail at rebuilding the prior uptrend.',
+    confirmationZh: '需要后续价格无法重新搭回上涨结构。',
+    trapEn: 'One rebound after the pattern does not automatically negate it.',
+    trapZh: '形态后出现一次反弹，并不自动否定它。',
+  },
+  'rising-window': {
+    locationEn: 'After bullish reversal or inside a strong uptrend.',
+    locationZh: '适合出现在看涨反转后，或强势上涨趋势中。',
+    confirmationEn: 'Best when later candles keep respecting the gap as support.',
+    confirmationZh: '最好后续蜡烛继续把缺口区域当支撑。',
+    trapEn: 'A gap that gets filled immediately loses much of its message.',
+    trapZh: '如果缺口很快被回补，信号意义会明显减弱。',
+  },
+  'falling-window': {
+    locationEn: 'After bearish reversal or inside a strong downtrend.',
+    locationZh: '适合出现在看跌反转后，或强势下跌趋势中。',
+    confirmationEn: 'Best when later candles keep respecting the gap as resistance.',
+    confirmationZh: '最好后续蜡烛继续把缺口区域当阻力。',
+    trapEn: 'A fast full gap-fill weakens the bearish continuation read.',
+    trapZh: '如果很快完全回补，延续性会被削弱。',
+  },
+  'rising-three-methods': {
+    locationEn: 'Inside an uptrend where pullbacks remain controlled.',
+    locationZh: '出现在上涨趋势中，回调仍然受控时。',
+    confirmationEn: 'Need the final breakout candle to resume the trend cleanly.',
+    confirmationZh: '需要最后的突破阳线重新明确启动趋势。',
+    trapEn: 'If the pullback destroys the first candle’s structure, it is not healthy continuation.',
+    trapZh: '如果回调破坏了第一根趋势阳线结构，就不再是健康延续。',
+  },
+  'falling-three-methods': {
+    locationEn: 'Inside a downtrend where rebounds stay limited.',
+    locationZh: '出现在下跌趋势中，反弹幅度仍受限时。',
+    confirmationEn: 'Need the final bearish candle to restart downside control.',
+    confirmationZh: '需要最后一根阴线重新启动下行控制。',
+    trapEn: 'A rebound that turns into full trend change is not continuation.',
+    trapZh: '如果反弹已经演变成完整转势，就不能再算延续。',
+  },
+}
+
+export const patterns: PatternDef[] = rawPatterns.map((pattern) => ({
+  ...pattern,
+  ...patternGuides[pattern.id],
+}))
 
 // Grouped by part number for section rendering
 export const patternsByPart = (

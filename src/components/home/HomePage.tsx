@@ -6,6 +6,15 @@ import type { ChapterMeta } from '@/types/content'
 import { useLocale } from '@/hooks/useLocale'
 import { usePageTitle } from '@/hooks/usePageTitle'
 
+const learningPath = [
+  'part1-ch00-analysis',
+  'part1-ch00-syntax',
+  'part1-ch02-doji',
+  'part1-ch03-hammer',
+  'part2-ch05-engulfing',
+  'part4-ch13-western',
+] as const
+
 function groupByPart(chapters: ChapterMeta[]) {
   const parts = new Map<number, ChapterMeta[]>()
   for (const ch of chapters) {
@@ -21,6 +30,9 @@ export default function HomePage() {
   const { locale } = useLocale()
   const grouped = groupByPart(catalog)
   const firstChapter = catalog[0]
+  const recommendedChapters = learningPath
+    .map((id) => catalog.find((chapter) => chapter.id === id))
+    .filter((chapter): chapter is ChapterMeta => !!chapter)
   const faviconUrl = `${import.meta.env.BASE_URL}favicon.svg`
   usePageTitle()
 
@@ -74,6 +86,39 @@ export default function HomePage() {
           <p className="text-xs text-gray-500 dark:text-[#787b86] mt-0.5">{t('home.patterns')}</p>
         </div>
       </div>
+
+      <section className="mb-10 rounded-2xl border border-[#2962ff]/20 bg-[#2962ff]/6 p-5">
+        <div className="flex flex-col gap-2 mb-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#2962ff]">
+            {t('home.pathLabel')}
+          </p>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-[#d1d4dc]">
+            {t('home.pathTitle')}
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-[#9598a1] max-w-2xl">
+            {t('home.pathDescription')}
+          </p>
+        </div>
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {recommendedChapters.map((chapter, index) => (
+            <Link
+              key={chapter.id}
+              to={`/chapter/${chapter.id}`}
+              className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4 hover:border-[#2962ff]/50 transition-colors"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-[#2962ff] mb-1">
+                {t('home.pathStep', { number: index + 1 })}
+              </p>
+              <p className="text-sm font-semibold text-gray-900 dark:text-[#d1d4dc] mb-1">
+                {chapter.patternNames.join(' / ')}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-[#787b86]">
+                {t(`parts.${chapter.partNumber}`)} · {t('home.scenes')}: {chapter.sceneCount}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* Chapter sections by Part */}
       <div className="space-y-8">

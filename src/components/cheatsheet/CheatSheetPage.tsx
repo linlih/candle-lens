@@ -71,6 +71,35 @@ export function CheatSheetPage() {
           </p>
         </div>
 
+        <div className="mb-8 rounded-2xl border border-[#2962ff]/20 bg-[#2962ff]/8 p-4">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-[#8eb1ff] mb-1">
+            {t('cheatSheet.pathLabel')}
+          </p>
+          <p className="text-sm text-slate-200 leading-relaxed mb-3">
+            {t('cheatSheet.pathDescription')}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              to="/chapter/part1-ch00-analysis"
+              className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/8 text-white border border-white/10 hover:border-[#2962ff]/50"
+            >
+              1. {locale === 'zh' ? '先学分析框架' : 'Start with analysis'}
+            </Link>
+            <Link
+              to="/chapter/part1-ch00-syntax"
+              className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/8 text-white border border-white/10 hover:border-[#2962ff]/50"
+            >
+              2. {locale === 'zh' ? '再学实体与影线' : 'Then learn candle syntax'}
+            </Link>
+            <Link
+              to="/chapter/part4-ch13-western"
+              className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/8 text-white border border-white/10 hover:border-[#2962ff]/50"
+            >
+              3. {locale === 'zh' ? '最后看位置共振' : 'Finish with confluence'}
+            </Link>
+          </div>
+        </div>
+
         {/* Filter bar */}
         <div className="flex items-center gap-2 mb-8 flex-wrap">
           {filterButtons.map(btn => (

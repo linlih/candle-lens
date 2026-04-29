@@ -269,3 +269,177 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const eveningStarCase: RealChartData = {
+  chapterId: 'part2-ch07-stars',
+  ticker: 'BTC-USD',
+  candles: [
+    { time: '2024-03-04', open: 62100, high: 67600, low: 61850, close: 66840 },
+    { time: '2024-03-11', open: 66880, high: 69900, low: 66020, close: 69220 },
+    { time: '2024-03-18', open: 69250, high: 71320, low: 68450, close: 70780 },
+    { time: '2024-03-25', open: 70820, high: 71880, low: 69920, close: 71540 }, // bull
+    { time: '2024-04-01', open: 71620, high: 71980, low: 70980, close: 71490 }, // star
+    { time: '2024-04-08', open: 71380, high: 71520, low: 66400, close: 67680 }, // bear confirm
+    { time: '2024-04-15', open: 67640, high: 68120, low: 63480, close: 64890 },
+    { time: '2024-04-22', open: 64920, high: 66080, low: 62640, close: 63720 },
+    { time: '2024-04-29', open: 63780, high: 64550, low: 60820, close: 61840 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'evening-star-box',
+      timeRange: { from: '2024-03-25', to: '2024-04-08' },
+      priceRange: { high: 71980, low: 66400 },
+      pricePadding: 400,
+      fillColor: 'rgba(239, 83, 80, 0.10)',
+      borderColor: '#ef5350',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'evening-star-star-label',
+      time: '2024-04-01',
+      price: 72500,
+      text: 'Star',
+      position: 'above',
+      backgroundColor: '#ffc107',
+      textColor: '#1a1a2e',
+      fontSize: 10,
+      arrowhead: true,
+    },
+    {
+      kind: 'label',
+      id: 'evening-star-label',
+      time: '2024-04-08',
+      price: 65800,
+      text: 'Evening Star',
+      position: 'below',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'uptrend-context',
+        visibleCount: 5,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The first candle needs strong upside confidence',
+            summary:
+              'Into late March, BTC-USD has advanced through several firm weekly bullish candles. That strong first candle gives the later hesitation and reversal room to matter as a completed structure.',
+            question: 'Why is the force of the first bullish candle important in a topping pattern?',
+            answer:
+              'Because the pattern works by contrasting strong prior confidence with sudden hesitation and then reversal.',
+            confirmationSignals: ['The first candle is large and bullish'],
+            invalidationSignals: ['The first candle is already weak and indecisive'],
+          },
+          zh: {
+            title: '第一根阳线必须先代表强烈上行动能',
+            summary:
+              '到 3 月底，BTC-USD 已连续数周偏强上涨。第一根阳线足够强，后面的犹豫和反转才会形成完整顶部结构。',
+            question: '为什么顶部形态里，第一根强阳线这么重要？',
+            answer:
+              '因为这个形态的本质就是：前一刻还很有信心，下一刻突然犹豫，再下一刻开始反转。',
+            confirmationSignals: ['第一根 K 线是有分量的大阳线'],
+            invalidationSignals: ['第一根本身就已经很弱、很犹豫'],
+          },
+        },
+      },
+      {
+        id: 'star-hesitation',
+        visibleCount: 6,
+        annotationIds: ['evening-star-star-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The star pauses the trend but does not finish the top',
+            summary:
+              'The week of April 1 prints a tiny body after the strong bullish candle. This shows that upside control is no longer clean, but the market still needs one more bearish candle before the structure becomes actionable.',
+            question: 'What would the next candle need to do to complete the evening-star read?',
+            answer:
+              'It should drive down decisively and close back into the prior bullish body, showing that sellers can now reverse the prior optimism.',
+            confirmationSignals: ['The next candle closes clearly lower into the first candle’s body'],
+            invalidationSignals: ['The next candle resumes higher and restores the uptrend'],
+          },
+          zh: {
+            title: '中间的星线让趋势停顿，但还没完成顶部',
+            summary:
+              '4 月 1 日这一周在强阳线之后出现了一根很小的实体，这说明上行动能已经不再干净，但结构还差最后一根看跌确认，才具备可执行性。',
+            question: '下一根 K 线必须做什么，才能把暮星结构补完整？',
+            answer:
+              '它需要明显向下推进，并重新打回第一根阳线实体内部，说明空方开始把前面的乐观情绪反转掉。',
+            confirmationSignals: ['下一根 K 线明确收低并重新打回第一根阳线实体内部'],
+            invalidationSignals: ['下一根重新上涨并恢复原来的多方趋势'],
+          },
+        },
+      },
+      {
+        id: 'evening-star-completes',
+        visibleCount: 9,
+        annotationIds: ['evening-star-box', 'evening-star-star-label', 'evening-star-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'The third candle completes the reversal',
+            summary:
+              'The week of April 8 supplies the missing bearish confirmation and the next weeks continue lower. That sequence converts the star from mere hesitation into a full evening-star reversal attempt.',
+            question: 'What is the practical habit this pattern should build?',
+            answer:
+              'Do not label the structure complete at the middle candle. Wait for the third candle to prove that hesitation really became reversal.',
+            confirmationSignals: ['The third candle closes clearly lower', 'Later candles respect the shift and keep weakening'],
+            invalidationSignals: ['The bearish third candle is immediately erased by a new breakout'],
+          },
+          zh: {
+            title: '第三根 K 线把整组结构真正补成顶部反转',
+            summary:
+              '4 月 8 日这一周补上了缺失的看跌确认，之后几根周线也继续偏弱。正是这套顺序，让前面的星线从“犹豫”升级成完整的暮星反转尝试。',
+            question: '这个形态最该训练你形成什么习惯？',
+            answer:
+              '不要在中间那根星线出现时就急着宣布形态完成，而要等第三根 K 线证明犹豫已经真的转成反转。',
+            confirmationSignals: ['第三根 K 线明确收弱', '后续蜡烛继续尊重这次结构切换'],
+            invalidationSignals: ['第三根阴线很快被重新突破新高完全抹掉'],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This mirror case moves to weekly crypto data to train the bearish side of the star family: strong optimism, then hesitation, then a confirmed downside reversal.',
+        conclusion:
+          'An evening star is only complete once the third candle proves the stall has turned into a real reversal.',
+      },
+      zh: {
+        intro:
+          '这个镜像案例换成了加密货币周线，训练的是星线家族的看跌一侧：先有强乐观，再出现犹豫，最后由下跌确认真正完成反转。',
+        conclusion:
+          '暮星只有在第三根 K 线证明停顿已经转成真实反转之后，才算完整成立。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Evening Star · BTC-USD',
+      patternLabel: 'Evening Star — BTC-USD Weekly — Mar 25 to Apr 8, 2024',
+      analysisText:
+        'After a strong weekly rally, BTC-USD printed a large bullish candle, then a tiny hesitation candle, and finally a decisive bearish reversal during the week of April 8, 2024. The structure completed an evening star and marked a clear loss of upside follow-through on the weekly timeframe.',
+    },
+    zh: {
+      caseLabel: '暮星 · BTC-USD',
+      patternLabel: '暮星 — BTC-USD 周线 — 2024年3月25日到4月8日',
+      analysisText:
+        '在一段偏强周线上涨后，BTC-USD 先打出一根大阳线，随后出现一根小实体犹豫线，并在 2024 年 4 月 8 日这一周以明确阴线完成下跌确认。整组结构构成了完整暮星，并标记出周线级别上行动能的明显衰减。',
+      labelText: {
+        'evening-star-star-label': '星线',
+        'evening-star-label': '暮星',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, eveningStarCase]

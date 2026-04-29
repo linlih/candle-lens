@@ -226,3 +226,185 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const supportConfluenceCase: RealChartData = {
+  chapterId: 'part4-ch13-western',
+  ticker: 'NVDA',
+  candles: [
+    { time: '2026-02-03', open: 189.10, high: 190.24, low: 185.44, close: 186.02 },
+    { time: '2026-02-04', open: 185.86, high: 186.55, low: 181.72, close: 182.31 },
+    { time: '2026-02-05', open: 182.10, high: 183.22, low: 178.64, close: 179.08 },
+    { time: '2026-02-06', open: 178.84, high: 180.15, low: 175.93, close: 176.44 },
+    { time: '2026-02-09', open: 176.20, high: 177.18, low: 171.92, close: 173.10 },
+    { time: '2026-02-10', open: 171.84, high: 183.64, low: 171.42, close: 182.41 }, // bullish reversal at support
+    { time: '2026-02-11', open: 182.55, high: 184.22, low: 180.98, close: 183.66 },
+    { time: '2026-02-12', open: 183.14, high: 183.88, low: 180.42, close: 181.15 },
+    { time: '2026-02-13', open: 181.48, high: 182.01, low: 178.76, close: 179.42 },
+  ],
+  annotations: [
+    {
+      kind: 'hline',
+      id: 'support-line',
+      price: 171.9,
+      color: 'rgba(38, 166, 154, 0.7)',
+      width: 1,
+      dash: [5, 4],
+    },
+    {
+      kind: 'label',
+      id: 'support-label',
+      time: '2026-02-09',
+      price: 170.2,
+      text: 'Prior Low Support',
+      position: 'below',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 10,
+      arrowhead: false,
+    },
+    {
+      kind: 'box',
+      id: 'support-engulf-box',
+      timeRange: { from: '2026-02-09', to: '2026-02-10' },
+      priceRange: { high: 183.64, low: 171.42 },
+      pricePadding: 0.3,
+      fillColor: 'rgba(38, 166, 154, 0.12)',
+      borderColor: '#26a69a',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'support-engulf-label',
+      time: '2026-02-10',
+      price: 185.0,
+      text: 'Bullish Reversal + Support',
+      position: 'above',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'approach-support',
+        visibleCount: 5,
+        annotationIds: ['support-line', 'support-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The support level matters before the reversal candle appears',
+            summary:
+              'By February 9, NVDA has sold off into a prior low support zone near $171.9. This is the western-structure piece: if a bullish candle appears here, it will matter more because it is happening where buyers should logically defend price.',
+            question: 'Why should support be marked before reading the candle?',
+            answer:
+              'Because the level explains why the signal matters. Without support, a reversal candle is weaker and more isolated.',
+            confirmationSignals: ['Price reaches a known support area', 'The selloff starts probing that floor'],
+            invalidationSignals: ['Price slices through support with no response'],
+          },
+          zh: {
+            title: '关键支撑位必须先画出来，蜡烛图才有位置意义',
+            summary:
+              '到 2 月 9 日，NVDA 已经跌到接近 171.9 美元的前低支撑区。西方结构分析先告诉你：如果这里出现看涨蜡烛图，它会更有分量，因为这个位置本来就该有买方防守。',
+            question: '为什么支撑位应该在读蜡烛图之前就先标出来？',
+            answer:
+              '因为位置决定了信号为什么重要。没有支撑背景时，反转 K 线更像孤立现象，力度也更弱。',
+            confirmationSignals: ['价格推进到已知支撑区域', '下跌开始测试这块地板'],
+            invalidationSignals: ['价格毫无反应地直接跌穿支撑'],
+          },
+        },
+      },
+      {
+        id: 'reversal-at-support',
+        visibleCount: 6,
+        annotationIds: ['support-line', 'support-label', 'support-engulf-box', 'support-engulf-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The reversal candle is stronger because it fires at support',
+            summary:
+              'February 10 reverses sharply from the same floor and closes with a strong bullish body. This is the bullish mirror image of the resistance case: the candle says reversal, and the support level explains why that reversal deserves more trust.',
+            question: 'Why is candle plus support stronger than the candle alone?',
+            answer:
+              'Because the market is not just reversing anywhere. It is reversing exactly where prior demand had already proved important.',
+            confirmationSignals: ['Price rejects the support zone intraday', 'The close finishes strong above the support reaction'],
+            invalidationSignals: ['The bullish candle cannot hold and immediately falls back through support'],
+          },
+          zh: {
+            title: '支撑位上的反转蜡烛，会比孤立出现时更强',
+            summary:
+              '2 月 10 日价格从同一块地板上快速反转，并以强势阳线收盘。这就是阻力案例的看涨镜像：蜡烛图告诉你反转在发生，支撑位告诉你为什么这次反转更值得相信。',
+            question: '为什么“蜡烛图 + 支撑位”会比单独蜡烛图更强？',
+            answer:
+              '因为市场不是随便在哪都反转，而是在此前已经证明有需求的重要位置上反转。',
+            confirmationSignals: ['价格盘中拒绝支撑区', '收盘强势站在支撑反应之上'],
+            invalidationSignals: ['这根阳线无法守住，很快重新跌穿支撑'],
+          },
+        },
+      },
+      {
+        id: 'follow-through',
+        visibleCount: 9,
+        annotationIds: ['support-line', 'support-label', 'support-engulf-box', 'support-engulf-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'Later price action confirms the confluence read',
+            summary:
+              'The following candles do not immediately collapse back through support. That later respect is what validates the confluence: support held, and the bullish candlestick signal was not just cosmetic.',
+            question: 'What is the key lesson from bullish support confluence?',
+            answer:
+              'Western structure tells you where a bullish response should matter; the candle tells you how buyers behaved there. The combination makes both confirmation and invalidation cleaner.',
+            confirmationSignals: ['Price stays above the support zone after the reversal', 'The market no longer behaves like panic selling'],
+            invalidationSignals: ['A fast breakdown back below support'],
+          },
+          zh: {
+            title: '后续没有再跌穿，说明这次共振不是表面现象',
+            summary:
+              '之后几根蜡烛并没有立刻重新跌穿支撑。这种后续尊重，才真正验证了这次共振：支撑位生效了，而看涨蜡烛图也不是“看起来像而已”。',
+            question: '看涨支撑共振最核心的教学点是什么？',
+            answer:
+              '西方结构告诉你“哪里值得期待反应”，蜡烛图告诉你“买方在这里究竟做了什么”。两者结合后，确认和失效都会更清楚。',
+            confirmationSignals: ['反转后价格继续停留在支撑之上', '市场不再像恐慌抛售那样单边走弱'],
+            invalidationSignals: ['价格很快再次跌破支撑'],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This mirror case teaches the bullish side of western confluence: a reversal signal becomes stronger when it appears exactly where support should matter.',
+        conclusion:
+          'Use support confluence by identifying the level first, then reading whether the candlestick behaviour there shows genuine buyer defense.',
+      },
+      zh: {
+        intro:
+          '这个镜像案例训练的是西方共振的看涨一侧：当反转信号正好出现在本该有支撑的位置时，它会更有说服力。',
+        conclusion:
+          '支撑位共振的正确用法，是先确定关键位置，再看蜡烛图是否真的显示出买方在这里防守。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Support Confluence',
+      patternLabel: 'Candlestick + Support confluence — Feb 10, 2026',
+      analysisText:
+        'After a multi-session selloff, NVDA reached a prior low support zone around $171.9 and then reversed sharply higher on February 10, 2026. The bullish reversal was stronger because it occurred exactly where prior demand had already mattered, creating a clean support-confluence lesson.',
+    },
+    zh: {
+      caseLabel: '支撑位共振',
+      patternLabel: '蜡烛图信号+支撑位共振 — 2026年2月10日',
+      analysisText:
+        '在连续多日下跌后，NVDA 回到约 171.9 美元的前低支撑区域，并于 2026 年 2 月 10 日快速反转上行。这次看涨反转之所以更强，是因为它恰好发生在此前已经证明有效的需求位置上，形成了一个清晰的支撑位共振教学案例。',
+      labelText: {
+        'support-label': '前低支撑',
+        'support-engulf-label': '看涨反转 + 支撑位',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, supportConfluenceCase]

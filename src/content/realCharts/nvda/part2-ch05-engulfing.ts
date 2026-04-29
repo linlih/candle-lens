@@ -199,3 +199,164 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const bullishEngulfingCase: RealChartData = {
+  chapterId: 'part2-ch05-engulfing',
+  ticker: 'SPY',
+  candles: [
+    { time: '2024-04-12', open: 514.10, high: 516.22, low: 512.34, close: 515.48 },
+    { time: '2024-04-15', open: 515.02, high: 516.10, low: 511.62, close: 512.74 },
+    { time: '2024-04-16', open: 512.38, high: 513.05, low: 507.44, close: 508.26 },
+    { time: '2024-04-17', open: 507.94, high: 509.18, low: 503.42, close: 504.66 },
+    { time: '2024-04-18', open: 504.20, high: 505.04, low: 497.86, close: 499.12 }, // small bear
+    { time: '2024-04-19', open: 498.54, high: 510.82, low: 497.92, close: 509.64 }, // bullish engulfing
+    { time: '2024-04-22', open: 510.18, high: 512.26, low: 507.70, close: 511.04 },
+    { time: '2024-04-23', open: 511.20, high: 512.48, low: 508.96, close: 509.88 },
+    { time: '2024-04-24', open: 509.94, high: 513.14, low: 509.18, close: 512.62 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'bull-engulf-box',
+      timeRange: { from: '2024-04-18', to: '2024-04-19' },
+      priceRange: { high: 510.82, low: 497.92 },
+      pricePadding: 0.5,
+      fillColor: 'rgba(38, 166, 154, 0.12)',
+      borderColor: '#26a69a',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'bull-engulf-label',
+      time: '2024-04-19',
+      price: 512.8,
+      text: 'Bullish Engulfing',
+      position: 'above',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'selloff-context',
+        visibleCount: 5,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A bullish engulfing only matters after real weakness',
+            summary:
+              'By April 18, SPY has already been sliding for several sessions and closes near the low of the recent pullback. That gives the next candle the right reversal context.',
+            question: 'What would make the next day more than just a normal bounce?',
+            answer:
+              'Buyers need to take back not just the intraday low, but the entire prior body, showing a real control shift.',
+            confirmationSignals: ['The next session reverses the prior body completely'],
+            invalidationSignals: ['The next session bounces only weakly and stays inside the prior body'],
+          },
+          zh: {
+            title: '看涨吞没必须先放在真实弱势之后',
+            summary:
+              '到 4 月 18 日，SPY 已经连续多日走弱，并且再次接近这轮回落的低位收盘。这才让下一根 K 线具备反转背景。',
+            question: '什么会让下一天不只是普通反弹？',
+            answer:
+              '买方不仅要收复盘中低点，还要把前一根实体整个吞掉，才算真正的控制权转移。',
+            confirmationSignals: ['下一交易日把前一根实体完整吞回'],
+            invalidationSignals: ['下一交易日只弱弱反弹，仍留在前一根实体内部'],
+          },
+        },
+      },
+      {
+        id: 'engulfing-reversal',
+        visibleCount: 6,
+        annotationIds: ['bull-engulf-box', 'bull-engulf-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The second candle engulfs the prior bearish body',
+            summary:
+              'April 19 opens lower again, but buyers reverse the session aggressively and close above the entire prior bearish body. That is the essence of bullish engulfing: sentiment flips inside one day.',
+            question: 'Why is this stronger than a simple green candle after a decline?',
+            answer:
+              'Because buyers erase the prior session’s body instead of merely stabilising. The market does not just pause the decline; it reverses it.',
+            confirmationSignals: ['The bullish body fully swallows the prior bearish body', 'The close lands near the upper end of the range'],
+            invalidationSignals: ['Price quickly loses the engulfing body on the next candle'],
+          },
+          zh: {
+            title: '第二根 K 线把前一根阴线实体完整吞掉',
+            summary:
+              '4 月 19 日先继续低开，但买方随后强力反转，并收在前一根阴线实体上方。看涨吞没的本质就是：情绪在一个交易日内翻转。',
+            question: '为什么这比普通反弹阳线更强？',
+            answer:
+              '因为买方不是简单止跌，而是把前一日的实体完全抹掉。市场不是暂停下跌，而是在主动反转。',
+            confirmationSignals: ['阳线实体完整吞没前一根阴线实体', '收盘落在当日区间上端附近'],
+            invalidationSignals: ['下一根很快又把吞没阳线的实体跌回去'],
+          },
+        },
+      },
+      {
+        id: 'follow-through',
+        visibleCount: 9,
+        annotationIds: ['bull-engulf-box', 'bull-engulf-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'Later strength shows the reversal was respected',
+            summary:
+              'Subsequent candles hold the recovery rather than collapsing back through it. That is what makes the engulfing pattern useful: the market accepts the new bullish read.',
+            question: 'What is the main practical lesson here?',
+            answer:
+              'Treat engulfing as a control-shift hypothesis. It becomes high quality when later candles continue to respect the reversal instead of instantly undoing it.',
+            confirmationSignals: ['Price holds above much of the engulfing body', 'The decline no longer accelerates immediately'],
+            invalidationSignals: ['A fast collapse back below the engulfing low'],
+          },
+          zh: {
+            title: '后续守住反弹，说明市场尊重了这次反转',
+            summary:
+              '后面的蜡烛并没有立刻把反弹全部跌回去，而是大体守住了恢复区。这才让吞没形态真正有用：市场接受了新的偏多解读。',
+            question: '这里最实战的教训是什么？',
+            answer:
+              '把吞没看作“控制权转移”的假设。只有后续 K 线继续尊重这次反转，它才会变成高质量信号。',
+            confirmationSignals: ['价格能守住吞没阳线的大部分实体', '下跌节奏没有立刻重新加速'],
+            invalidationSignals: ['价格迅速跌破吞没低点'],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This mirror case uses a broad-market ETF to teach the bullish side of the pattern: after a decline, a full-body reversal can mark a real change in control.',
+        conclusion:
+          'A bullish engulfing is strongest when it appears after real weakness and later candles do not immediately give the reversal back.',
+      },
+      zh: {
+        intro:
+          '这个镜像案例换成了宽基 ETF，训练的是看涨版本：下跌之后，整根实体级别的反转往往代表了真实的控制权变化。',
+        conclusion:
+          '看涨吞没最强的时候，是它出现在真实弱势之后，并且后续蜡烛没有立刻把这次反转还回去。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Bullish Engulfing · SPY',
+      patternLabel: 'Bullish Engulfing — SPY Daily — Apr 19, 2024',
+      analysisText:
+        'After a multi-session pullback, SPY printed a final weak bearish candle on April 18, 2024 and then reversed sharply higher the next day. The April 19 bullish body completely engulfed the prior bearish body, showing that buyers had shifted the short-term balance of control back in their favor.',
+    },
+    zh: {
+      caseLabel: '看涨吞没 · SPY',
+      patternLabel: '看涨吞没 — SPY 日线 — 2024年4月19日',
+      analysisText:
+        '在连续多日回落之后，SPY 于 2024 年 4 月 18 日先收出一根偏弱阴线，次日则强力反转上行。4 月 19 日的阳线实体完整吞没了前一日阴线实体，说明短线控制权重新向买方倾斜。',
+      labelText: {
+        'bull-engulf-label': '看涨吞没',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, bullishEngulfingCase]

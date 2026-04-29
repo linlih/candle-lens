@@ -18,7 +18,9 @@
   },
   "cheatSheet": {
     "title": "Candlestick Cheat Sheet",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "pathLabel": "Recommended Path",
+    "pathDescription": "Use the cheat sheet for review, but learn in this order: analysis framework first, candle syntax second, and confluence with price levels after that."
   },
   "home": {
     "title": "Learn Japanese Candlestick Techniques",
@@ -26,7 +28,11 @@
     "startLearning": "Start Learning",
     "chapters": "Chapters",
     "scenes": "Scenes",
-    "patterns": "Patterns"
+    "patterns": "Patterns",
+    "pathLabel": "Recommended Path",
+    "pathTitle": "Learn the reading process before memorising shapes",
+    "pathDescription": "Start with trend, location, and confirmation. Then learn body and shadow syntax. Only after that should you stack named reversal patterns.",
+    "pathStep": "Step {{number}}"
   },
   "parts": {
     "1": "Part 1: Basic Candlestick Lines",
@@ -40,10 +46,31 @@
   },
   "realChart": {
     "sectionTitle": "Real Chart Analysis",
-    "tickerLabel": "NVDA",
-    "dataNote": "Real NVIDIA (NVDA) historical data · split-adjusted · source: Yahoo Finance",
+    "tickerLabel": "Market Ticker",
+    "dataNote": "Historical market data · split-adjusted where applicable · source: Yahoo Finance",
     "caseLabel": "Practice Cases",
     "lessonLabel": "Step-by-Step Analysis",
+    "practiceLabel": "Your Read",
+    "practicePrompt": "Before revealing the answer, choose your current bias from this step.",
+    "submitAnswer": "Submit",
+    "submitToContinue": "Submit your read before revealing the next candle.",
+    "correctAnswer": "Your read matches the model answer.",
+    "revealAnswer": "Model answer revealed below.",
+    "comparisonLabel": "Pattern Distinction",
+    "submitComparison": "Check Pattern",
+    "correctComparison": "You identified the right structure.",
+    "revealComparison": "Model explanation revealed below.",
+    "comparisonAnswerLabel": "Why This One?",
+    "checklistLabel": "Confirmation Checklist",
+    "checklistPrompt": "Mark the signals you can already verify from the chart.",
+    "checklistProgress": "{{checked}} / {{total}} checked",
+    "strengthLabel": "Signal Strength",
+    "failureLabel": "How It Fails",
+    "checkpointTitle": "Lesson Checkpoint",
+    "submitCheckpoint": "Submit Checkpoint",
+    "correctCheckpoint": "You landed on the best takeaway.",
+    "revealCheckpoint": "Model takeaway revealed below.",
+    "checkpointAnswerLabel": "Best Takeaway",
     "stepCounter": "Step {{current}} of {{total}}",
     "prevStep": "Previous",
     "nextStep": "Next",
