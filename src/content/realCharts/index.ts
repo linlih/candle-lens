@@ -1,6 +1,6 @@
-import type { RealChartData } from '@/types/realChart'
+import type { RealChartModule } from '@/types/realChart'
 
-type RealChartLoader = () => Promise<{ realChart: RealChartData }>
+type RealChartLoader = () => Promise<RealChartModule>
 
 export const realChartLoaders: Record<string, RealChartLoader> = {
   'part1-ch02-doji':          () => import('./nvda/part1-ch02-doji'),

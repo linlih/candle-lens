@@ -200,3 +200,206 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const invertedHammerCase: RealChartData = {
+  chapterId: 'part1-ch04-star',
+  ticker: 'NVDA',
+  candles: [
+    { time: '2026-02-02', open: 191.20, high: 192.55, low: 188.92, close: 189.66 },
+    { time: '2026-02-03', open: 189.10, high: 190.24, low: 185.44, close: 186.02 },
+    { time: '2026-02-04', open: 185.86, high: 186.55, low: 181.72, close: 182.31 },
+    { time: '2026-02-05', open: 182.10, high: 183.22, low: 178.64, close: 179.08 },
+    { time: '2026-02-06', open: 178.84, high: 180.15, low: 175.93, close: 176.44 },
+    { time: '2026-02-09', open: 176.20, high: 181.88, low: 175.70, close: 177.08 }, // Inverted Hammer
+    { time: '2026-02-10', open: 177.92, high: 183.64, low: 177.35, close: 182.41 },
+    { time: '2026-02-11', open: 182.55, high: 184.22, low: 180.98, close: 183.66 },
+    { time: '2026-02-12', open: 183.14, high: 183.88, low: 180.42, close: 181.15 },
+    { time: '2026-02-13', open: 181.48, high: 182.01, low: 178.76, close: 179.42 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'inv-hammer-box',
+      timeRange: { from: '2026-02-09', to: '2026-02-09' },
+      priceRange: { high: 181.88, low: 175.70 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(38, 166, 154, 0.12)',
+      borderColor: '#26a69a',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'inv-hammer-label',
+      time: '2026-02-09',
+      price: 183.2,
+      text: 'Inverted Hammer',
+      position: 'above',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+    {
+      kind: 'label',
+      id: 'inv-hammer-confirm-label',
+      time: '2026-02-10',
+      price: 185.0,
+      text: 'Bullish Confirmation',
+      position: 'above',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 10,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'selloff-context',
+        visibleCount: 5,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The inverted hammer needs a real downtrend behind it',
+            summary:
+              'Into February 6, NVDA is falling session after session. That matters because an inverted hammer is not a bullish shape by itself; it only becomes interesting when it appears after sellers have already been in control.',
+            question:
+              'What kind of intraday behaviour would hint that sellers are starting to lose their grip?',
+            answer:
+              'A session where price can suddenly probe much higher intraday, even if the close is still cautious. That upward test shows demand is trying to return.',
+            confirmationSignals: [
+              'After the decline, one candle spikes higher intraday',
+            ],
+            invalidationSignals: [
+              'Price keeps printing only weak closes near the lows',
+            ],
+          },
+          zh: {
+            title: '倒锤子线必须先有一段真实下跌作为背景',
+            summary:
+              '到 2 月 6 日，NVDA 已经连续多日下跌。倒锤子线不是天然看涨形状，只有先经历空方持续控制后，它才值得被重视。',
+            question: '什么样的盘中行为能暗示卖方开始失去绝对控制？',
+            answer:
+              '盘中突然有一段明显向上试探，即使收盘仍然谨慎，也说明需求在尝试回归。',
+            confirmationSignals: [
+              '连续下跌后出现盘中明显冲高的单根 K 线',
+            ],
+            invalidationSignals: [
+              '价格继续只是疲弱收在低位附近',
+            ],
+          },
+        },
+      },
+      {
+        id: 'inverted-hammer-forms',
+        visibleCount: 6,
+        annotationIds: ['inv-hammer-box', 'inv-hammer-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The upper shadow shows buyers tested a reversal',
+            summary:
+              'On February 9, the long upper shadow reveals that buyers managed to push price sharply higher intraday. But because the close still sits near the lower end of the range, this is only a test of demand, not yet a confirmed bottom.',
+            question:
+              'What must the next candle do to prove this upside probe was meaningful?',
+            answer:
+              'The next candle should close strong and build above the inverted hammer, showing that buyers can keep the initiative rather than merely testing it for one session.',
+            confirmationSignals: [
+              'The next session closes well above the inverted hammer body',
+            ],
+            invalidationSignals: [
+              'The next session slips back and undercuts the low',
+            ],
+          },
+          zh: {
+            title: '长上影线说明买方尝试过向上反转',
+            summary:
+              '2 月 9 日这根长上影线说明，买方盘中确实成功把价格推高过。但因为收盘仍然落在区间较低位置，它还只是“需求测试”，不是已经确认的底部。',
+            question: '下一根 K 线必须做什么，才能证明这次上探真的有意义？',
+            answer:
+              '下一根应强势收高，并站到倒锤子线实体上方，说明买方不只是试探一下，而是真的开始接管主动权。',
+            confirmationSignals: [
+              '次日收盘明显站上倒锤子线实体',
+            ],
+            invalidationSignals: [
+              '次日又重新转弱并跌破低点',
+            ],
+          },
+        },
+      },
+      {
+        id: 'confirmation-arrives',
+        visibleCount: 8,
+        annotationIds: ['inv-hammer-box', 'inv-hammer-label', 'inv-hammer-confirm-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'Confirmation turns the upside test into a reversal attempt',
+            summary:
+              'February 10 follows with a strong bullish candle, validating the prior day’s upside probe. That is the key teaching point: the inverted hammer starts the conversation, but the next candle decides whether the conversation matters.',
+            question: 'What habit should you build from this pattern?',
+            answer:
+              'Never assume a bullish reversal from the inverted hammer alone. Train yourself to wait for proof that buyers can follow through after the signal candle.',
+            confirmationSignals: [
+              'A strong next-day close confirms buyers stayed active',
+              'The market starts building above the signal candle',
+            ],
+            invalidationSignals: [
+              'Price quickly loses the confirmation candle and falls back down',
+            ],
+          },
+          zh: {
+            title: '确认阳线把“上探测试”升级成“反转尝试”',
+            summary:
+              '2 月 10 日出现强势阳线跟随，验证了前一天盘中的向上试探。这个形态最关键的教学点就在这里：倒锤子线负责发出线索，真正决定线索是否有效的是下一根 K 线。',
+            question: '这个形态最应该训练你形成什么习惯？',
+            answer:
+              '不要因为倒锤子线本身就默认反转成立，而是养成等待买方跟随确认的习惯。',
+            confirmationSignals: [
+              '次日强收盘证明买方并未只是一日冲高',
+              '价格开始在信号 K 线上方构建结构',
+            ],
+            invalidationSignals: [
+              '确认阳线很快失守，价格重新转弱',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This case teaches the bullish mirror image of the shooting star: after a downtrend, the long upper shadow shows that buyers are testing a reversal, but they still need confirmation.',
+        conclusion:
+          'An inverted hammer is a candidate signal first and a bullish message only after the next candles support it.',
+      },
+      zh: {
+        intro:
+          '这个案例训练的是流星线的看涨镜像：放在下跌后，长上影线意味着买方正在测试反转，但仍然必须等待确认。',
+        conclusion:
+          '倒锤子线首先是候选信号，只有在后续 K 线支持它时，才真正转成看涨信息。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Inverted Hammer',
+      patternLabel: 'Inverted Hammer after selloff — Feb 9, 2026',
+      analysisText:
+        'After a string of declining sessions, NVDA printed an inverted hammer on February 9, 2026: price surged intraday, but still closed back near the lower part of the range. The next session followed with a decisive bullish candle, confirming that buyers were no longer merely probing upward but starting to take control.',
+    },
+    zh: {
+      caseLabel: '倒锤子线',
+      patternLabel: '下跌后的倒锤子线 — 2026年2月9日',
+      analysisText:
+        '在连续多日回落之后，NVDA 于 2026 年 2 月 9 日打出倒锤子线：价格盘中明显上冲，但收盘仍回落到区间偏低位置。次日随即出现强势阳线确认，说明买方已不只是试探，而是开始真正接管节奏。',
+      labelText: {
+        'inv-hammer-label': '倒锤子线',
+        'inv-hammer-confirm-label': '看涨确认',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, invertedHammerCase]

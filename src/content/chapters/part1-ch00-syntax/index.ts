@@ -5,32 +5,32 @@ import { en } from './en'
 import { zh } from './zh'
 
 export const chapter: ChapterContent = {
-  id: 'part1-ch03-hammer',
+  id: 'part1-ch00-syntax',
   partNumber: 1,
-  chapterNumber: 3,
-  patternNames: ['Hammer', 'Hanging Man'],
+  chapterNumber: 0,
+  patternNames: ['Marubozu', 'Spinning Top', 'Shadow Psychology'],
   scenes: [
     {
-      id: 'scene-downtrend',
-      titleKey: 'scene-downtrend',
+      id: 'scene-marubozu',
+      titleKey: 'scene-marubozu',
       candles: scene1Candles,
       annotations: scene1Annotations,
     },
     {
-      id: 'scene-hammer',
-      titleKey: 'scene-hammer',
+      id: 'scene-spinning-top',
+      titleKey: 'scene-spinning-top',
       candles: scene2Candles,
       annotations: scene2Annotations,
     },
     {
-      id: 'scene-confirm',
-      titleKey: 'scene-confirm',
+      id: 'scene-upper-shadow',
+      titleKey: 'scene-upper-shadow',
       candles: scene3Candles,
       annotations: scene3Annotations,
     },
     {
-      id: 'scene-hanging-man',
-      titleKey: 'scene-hanging-man',
+      id: 'scene-lower-shadow',
+      titleKey: 'scene-lower-shadow',
       candles: scene4Candles,
       annotations: scene4Annotations,
     },

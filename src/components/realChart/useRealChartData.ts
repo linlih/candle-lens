@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react'
 import type { RealChartData } from '@/types/realChart'
 import { realChartLoaders } from '@/content/realCharts/index'
 import { createLatestRequestRunner } from '@/lib/asyncRequestGuard'
+import { normalizeRealCharts } from '@/lib/realChartModule'
 
 interface State {
-  data: RealChartData | null
+  data: RealChartData[] | null
   loading: boolean
   error: string | null
 }
 
-const cache = new Map<string, RealChartData>()
+const cache = new Map<string, RealChartData[]>()
 
 export function useRealChartData(chapterId: string): State {
   const [state, setState] = useState<State>(() => {
@@ -30,18 +31,17 @@ export function useRealChartData(chapterId: string): State {
       return
     }
 
-    const runner = createLatestRequestRunner<RealChartData>()
+    const runner = createLatestRequestRunner<RealChartData[]>()
     setState({ data: null, loading: true, error: null })
 
     return runner.run(
       async () => {
-        const { realChart } = await loader()
-        return realChart
+        return normalizeRealCharts(await loader())
       },
       {
-        onSuccess: (realChart) => {
-          cache.set(chapterId, realChart)
-          setState({ data: realChart, loading: false, error: null })
+        onSuccess: (realCharts) => {
+          cache.set(chapterId, realCharts)
+          setState({ data: realCharts, loading: false, error: null })
         },
         onError: (err: unknown) => {
           const msg = err instanceof Error ? err.message : String(err)

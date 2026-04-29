@@ -42,6 +42,7 @@
     "sectionTitle": "真实图表分析",
     "tickerLabel": "英伟达 NVDA",
     "dataNote": "英伟达（NVDA）真实历史数据 · 已复权（10:1拆股）· 来源：雅虎财经",
+    "caseLabel": "练习案例",
     "lessonLabel": "分步分析演练",
     "stepCounter": "第 {{current}} / {{total}} 步",
     "prevStep": "上一步",

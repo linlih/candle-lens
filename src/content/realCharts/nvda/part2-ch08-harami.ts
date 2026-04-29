@@ -201,3 +201,195 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const haramiCrossCase: RealChartData = {
+  chapterId: 'part2-ch08-harami',
+  ticker: 'NVDA',
+  candles: [
+    { time: '2026-01-05', open: 171.44, high: 174.21, low: 170.92, close: 173.86 },
+    { time: '2026-01-06', open: 174.10, high: 176.55, low: 173.62, close: 176.12 },
+    { time: '2026-01-07', open: 176.34, high: 179.02, low: 175.98, close: 178.64 },
+    { time: '2026-01-08', open: 178.92, high: 182.88, low: 178.40, close: 181.94 },
+    { time: '2026-01-09', open: 182.30, high: 186.16, low: 181.72, close: 185.68 }, // large bull
+    { time: '2026-01-12', open: 184.94, high: 186.24, low: 183.92, close: 184.96 }, // doji in body
+    { time: '2026-01-13', open: 184.32, high: 184.88, low: 180.65, close: 181.22 },
+    { time: '2026-01-14', open: 181.48, high: 182.10, low: 178.24, close: 179.08 },
+    { time: '2026-01-15', open: 179.44, high: 180.22, low: 176.96, close: 177.65 },
+    { time: '2026-01-16', open: 177.92, high: 179.14, low: 176.72, close: 178.30 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'harami-cross-box',
+      timeRange: { from: '2026-01-09', to: '2026-01-12' },
+      priceRange: { high: 186.24, low: 181.72 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(239, 83, 80, 0.10)',
+      borderColor: '#ef5350',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'harami-cross-label',
+      time: '2026-01-12',
+      price: 187.6,
+      text: 'Harami Cross',
+      position: 'above',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'extended-rally',
+        visibleCount: 5,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The first candle needs to represent real trend conviction',
+            summary:
+              'By January 9, NVDA has advanced through several strong sessions and then prints an oversized bullish candle. That wide body matters because the harami cross needs a forceful first candle before the sudden stall can mean anything.',
+            question:
+              'Why is the size and conviction of the first candle so important here?',
+            answer:
+              'Because the later doji must contrast with it. Without a powerful first candle, the inside doji would not clearly signal that momentum has stalled.',
+            confirmationSignals: [
+              'The first candle is large and directional',
+            ],
+            invalidationSignals: [
+              'The first candle is already small and indecisive',
+            ],
+          },
+          zh: {
+            title: '第一根 K 线必须先体现趋势的强烈信心',
+            summary:
+              '到 1 月 9 日，NVDA 已经连涨数日，并打出一根很有分量的大阳线。孕线十字之所以成立，正是因为前一根 K 线先代表了强烈单边推进，然后市场突然停顿。',
+            question: '为什么第一根 K 线的大小和力度在这里这么重要？',
+            answer:
+              '因为后面的十字线必须和它形成鲜明反差。没有一根强势前导阳线，内部十字就很难清楚地表达“动能停住了”。',
+            confirmationSignals: [
+              '第一根 K 线足够大、方向明确',
+            ],
+            invalidationSignals: [
+              '第一根本身就已经很小、很犹豫',
+            ],
+          },
+        },
+      },
+      {
+        id: 'harami-cross-appears',
+        visibleCount: 6,
+        annotationIds: ['harami-cross-box', 'harami-cross-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The doji inside the body is a stronger stall signal',
+            summary:
+              'January 12 prints a doji fully inside the prior bullish body. That is more meaningful than a normal harami because the inside candle shows near-complete indecision exactly where strong bullish conviction had appeared one session earlier.',
+            question:
+              'What makes the cross stronger than a standard harami with a small real body?',
+            answer:
+              'The doji intensifies the contrast. The market moves from strong directional control to almost no control at all, which sharpens the warning that upside momentum may be exhausting.',
+            confirmationSignals: [
+              'The inside doji stays within the prior real body',
+              'The market loses directional control immediately after the strong candle',
+            ],
+            invalidationSignals: [
+              'The next candle surges higher and restores the prior momentum',
+            ],
+          },
+          zh: {
+            title: '实体内的十字线，让停顿信号更强了',
+            summary:
+              '1 月 12 日出现一根完全落在前一日大阳线实体内部的十字线。相比普通孕线，这里更强的地方在于：市场从前一日的明显多方控制，突然切换成几乎没有收盘控制权的状态。',
+            question: '为什么孕线十字比普通的小实体孕线更强？',
+            answer:
+              '因为十字线把反差拉到了更极端。市场从强方向性推进，突然切到几乎零控制，这会更强烈地提示上涨动能可能在衰竭。',
+            confirmationSignals: [
+              '内部十字线完全落在前一日实体内部',
+              '强势大阳之后市场立刻失去方向控制',
+            ],
+            invalidationSignals: [
+              '下一根立刻继续大涨，恢复前面的推进动能',
+            ],
+          },
+        },
+      },
+      {
+        id: 'weakness-follows',
+        visibleCount: 10,
+        annotationIds: ['harami-cross-box', 'harami-cross-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Later weakness confirms that momentum really stalled',
+            summary:
+              'The next sessions tilt lower rather than reclaiming the highs. That is what converts the doji from a curiosity into a reversal warning: upside control did not return after the pause.',
+            question: 'What is the practical lesson from a harami cross?',
+            answer:
+              'Treat it as a high-quality pause signal. It does not guarantee a collapse, but it warns that strong prior momentum has lost its clean follow-through.',
+            confirmationSignals: [
+              'Price cannot rebuild the prior highs',
+              'Subsequent candles begin to close lower',
+            ],
+            invalidationSignals: [
+              'The market quickly breaks to new highs after the doji',
+            ],
+          },
+          zh: {
+            title: '后续走弱，说明上涨动能确实停住了',
+            summary:
+              '接下来几根 K 线没有重新夺回高点，反而逐步转弱。这才把这根十字线从“有意思的停顿”变成了真正的反转警告：暂停之后，多方没能重新掌控局面。',
+            question: '孕线十字最实战的理解应该是什么？',
+            answer:
+              '把它当作高质量的“停顿信号”。它不保证立刻崩跌，但会提醒你，前面那种顺畅单边上涨已经不再干净。',
+            confirmationSignals: [
+              '价格无法重新建立前高',
+              '后续蜡烛开始持续收弱',
+            ],
+            invalidationSignals: [
+              '十字线之后市场很快又突破新高',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This second harami lesson highlights why the doji variant is stronger: it marks a sharper transition from conviction to indecision.',
+        conclusion:
+          'A harami cross is most useful when it appears after a forceful trend candle and then receives follow-through weakness.',
+      },
+      zh: {
+        intro:
+          '这个第二案例强调了为什么“十字版孕线”更强：它让市场从强烈信心切换到明显犹豫的反差更剧烈。',
+        conclusion:
+          '孕线十字最有价值的用法，是让它出现在一根趋势性很强的 K 线之后，再观察后续是否继续走弱。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Harami Cross',
+      patternLabel: 'Harami Cross near the top — Jan 9–12, 2026',
+      analysisText:
+        'After several strong up sessions, NVDA printed a large bullish candle on January 9, 2026 and then followed with a doji fully inside that body on January 12. The doji sharply reduced the prior session’s conviction, and later candles leaned lower instead of extending the rally, making the harami cross a useful top-side warning.',
+    },
+    zh: {
+      caseLabel: '孕线十字',
+      patternLabel: '顶部附近的孕线十字 — 2026年1月9-12日',
+      analysisText:
+        '在连续多日偏强上涨后，NVDA 于 2026 年 1 月 9 日打出大阳线，随后在 1 月 12 日出现一根完全包在实体内部的十字线。十字线显著削弱了前一日的推进信心，而后面的蜡烛也没有继续延伸涨势，反而逐步走弱，使这个孕线十字成为一个更有质量的顶部预警。',
+      labelText: {
+        'harami-cross-label': '孕线十字',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, haramiCrossCase]

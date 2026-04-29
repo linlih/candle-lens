@@ -28,3 +28,12 @@ export const scene3Candles: CandleBar[] = [
   { time: '2024-01-15', open: 103, high: 111, low: 102, close: 110 }, // Strong bullish confirmation
   { time: '2024-01-16', open: 110, high: 114, low: 109, close: 113 },
 ]
+
+/** Scene 4: Hanging Man after an uptrend */
+export const scene4Candles: CandleBar[] = [
+  { time: '2024-02-05', open: 92, high: 96, low: 91, close: 95 },
+  { time: '2024-02-06', open: 95, high: 100, low: 94, close: 99 },
+  { time: '2024-02-07', open: 99, high: 105, low: 98, close: 104 },
+  { time: '2024-02-08', open: 104, high: 110, low: 103, close: 108 },
+  { time: '2024-02-09', open: 108, high: 109, low: 100, close: 107 }, // Hanging Man
+]

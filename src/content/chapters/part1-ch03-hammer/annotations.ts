@@ -77,3 +77,42 @@ export const scene3Annotations: AnnotationDef[] = [
     color: '#2962ff',
   },
 ]
+
+export const scene4Annotations: AnnotationDef[] = [
+  {
+    kind: 'arrow',
+    id: 'trend-arrow-2',
+    time: '2024-02-06',
+    direction: 'up',
+    color: '#26a69a',
+    labelKey: 'uptrend',
+  },
+  {
+    kind: 'box',
+    id: 'hanging-man-box',
+    timeRange: { from: '2024-02-09', to: '2024-02-09' },
+    pricePadding: 1,
+    fillColor: 'rgba(239, 83, 80, 0.12)',
+    borderColor: '#ef5350',
+    borderWidth: 2,
+  },
+  {
+    kind: 'label',
+    id: 'hanging-man-label',
+    time: '2024-02-09',
+    price: 111,
+    textKey: 'hanging_man',
+    position: 'above',
+    backgroundColor: '#ef5350',
+    textColor: '#ffffff',
+    fontSize: 11,
+  },
+  {
+    kind: 'arrow',
+    id: 'hanging-man-arrow',
+    time: '2024-02-09',
+    direction: 'down',
+    color: '#ef5350',
+    labelKey: 'reversal',
+  },
+]

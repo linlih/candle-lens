@@ -1,4 +1,4 @@
-import type { AnnotationDef } from './annotation'
+import type { AnnotationDef } from './annotation.js'
 
 /** Lightweight-charts time format: 'YYYY-MM-DD' */
 export type LWTime = string

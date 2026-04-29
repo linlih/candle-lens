@@ -54,5 +54,6 @@ export const en: ChapterLocaleContent = {
     'scene-downtrend': 'Downtrend context',
     'scene-hammer': 'The Hammer appears',
     'scene-confirm': 'Bullish confirmation',
+    'scene-hanging-man': 'The same shape becomes a Hanging Man at the top',
   },
 }

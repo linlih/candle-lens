@@ -5,32 +5,32 @@ import { en } from './en'
 import { zh } from './zh'
 
 export const chapter: ChapterContent = {
-  id: 'part1-ch03-hammer',
+  id: 'part1-ch00-analysis',
   partNumber: 1,
-  chapterNumber: 3,
-  patternNames: ['Hammer', 'Hanging Man'],
+  chapterNumber: 0,
+  patternNames: ['Trend', 'Location', 'Confirmation', 'Invalidation'],
   scenes: [
     {
-      id: 'scene-downtrend',
-      titleKey: 'scene-downtrend',
+      id: 'scene-context',
+      titleKey: 'scene-context',
       candles: scene1Candles,
       annotations: scene1Annotations,
     },
     {
-      id: 'scene-hammer',
-      titleKey: 'scene-hammer',
+      id: 'scene-candidate',
+      titleKey: 'scene-candidate',
       candles: scene2Candles,
       annotations: scene2Annotations,
     },
     {
-      id: 'scene-confirm',
-      titleKey: 'scene-confirm',
+      id: 'scene-confirmed',
+      titleKey: 'scene-confirmed',
       candles: scene3Candles,
       annotations: scene3Annotations,
     },
     {
-      id: 'scene-hanging-man',
-      titleKey: 'scene-hanging-man',
+      id: 'scene-failed',
+      titleKey: 'scene-failed',
       candles: scene4Candles,
       annotations: scene4Annotations,
     },

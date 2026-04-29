@@ -35,10 +35,16 @@ export default function RealChartSection({ chapterId }: Props) {
   const { t } = useTranslation('ui')
   const { locale } = useLocale()
   const [stepIndex, setStepIndex] = useState(0)
+  const [caseIndex, setCaseIndex] = useState(0)
 
   useEffect(() => {
     setStepIndex(0)
+    setCaseIndex(0)
   }, [chapterId])
+
+  useEffect(() => {
+    setStepIndex(0)
+  }, [caseIndex])
 
   if (loading) {
     return (
@@ -49,10 +55,11 @@ export default function RealChartSection({ chapterId }: Props) {
     )
   }
 
-  if (!data) return null
+  if (!data?.length) return null
 
-  const localeContent = data.locale[locale]
-  const lesson = data.lesson
+  const currentChart = data[caseIndex] ?? data[0]
+  const localeContent = currentChart.locale[locale]
+  const lesson = currentChart.lesson
   const lessonLocale = lesson?.locale[locale]
   const steps = lesson?.steps ?? []
   const currentStep = steps[stepIndex]
@@ -60,7 +67,7 @@ export default function RealChartSection({ chapterId }: Props) {
     ? new Set(currentStep.annotationIds)
     : null
 
-  const localizedAnnotations = localizeAnnotations(data.annotations, localeContent.labelText)
+  const localizedAnnotations = localizeAnnotations(currentChart.annotations, localeContent.labelText)
   const annotations = allowedAnnotationIds
     ? localizedAnnotations.filter((annotation) => {
       return allowedAnnotationIds.has(annotation.id)
@@ -68,10 +75,11 @@ export default function RealChartSection({ chapterId }: Props) {
     : localizedAnnotations
 
   const visibleCandles = currentStep
-    ? data.candles.slice(0, currentStep.visibleCount)
-    : data.candles
+    ? currentChart.candles.slice(0, currentStep.visibleCount)
+    : currentChart.candles
 
   const stepLocale = currentStep?.locale[locale]
+  const dataNote = localeContent.dataNote ?? t('realChart.dataNote')
 
   return (
     <div className="mt-8">
@@ -84,12 +92,39 @@ export default function RealChartSection({ chapterId }: Props) {
           {t('realChart.sectionTitle')}
         </h2>
         <span className="px-2 py-0.5 rounded text-xs font-medium bg-[#2962ff]/10 text-[#2962ff] dark:bg-[#2962ff]/20 dark:text-[#5c8fff]">
-          {data.ticker}
+          {currentChart.ticker}
         </span>
       </div>
       <p className="text-xs text-gray-400 dark:text-[#787b86] mb-3">
         {localeContent.patternLabel}
       </p>
+
+      {data.length > 1 && (
+        <div className="mb-4">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400 dark:text-[#787b86] mb-2">
+            {t('realChart.caseLabel')}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {data.map((chart, index) => {
+              const label = chart.locale[locale].caseLabel ?? chart.locale[locale].patternLabel
+              const isActive = index === caseIndex
+              return (
+                <button
+                  key={`${chart.chapterId}-${index}`}
+                  onClick={() => setCaseIndex(index)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                    isActive
+                      ? 'bg-[#2962ff] text-white border-[#2962ff]'
+                      : 'bg-white dark:bg-[#131722] text-gray-600 dark:text-[#9598a1] border-gray-200 dark:border-[#363a45] hover:border-[#2962ff] hover:text-[#2962ff]'
+                  }`}
+                >
+                  {label}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Chart */}
       <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-[#363a45] mb-3">
@@ -220,7 +255,7 @@ export default function RealChartSection({ chapterId }: Props) {
         </p>
       )}
       <p className="text-xs text-gray-400 dark:text-[#4c525e]">
-        {t('realChart.dataNote')}
+        {dataNote}
       </p>
     </div>
   )

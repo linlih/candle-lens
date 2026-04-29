@@ -203,3 +203,195 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const threeWhiteSoldiersCase: RealChartData = {
+  chapterId: 'part2-ch10-three',
+  ticker: 'NVDA',
+  candles: [
+    { time: '2026-02-12', open: 188.42, high: 189.18, low: 184.82, close: 185.24 },
+    { time: '2026-02-13', open: 185.10, high: 185.84, low: 181.24, close: 182.05 },
+    { time: '2026-02-17', open: 181.88, high: 182.24, low: 177.32, close: 178.40 },
+    { time: '2026-02-18', open: 178.55, high: 180.02, low: 175.82, close: 176.11 },
+    { time: '2026-02-19', open: 176.20, high: 181.48, low: 175.76, close: 180.64 }, // Soldier 1
+    { time: '2026-02-20', open: 180.22, high: 185.14, low: 179.88, close: 184.96 }, // Soldier 2
+    { time: '2026-02-23', open: 184.44, high: 189.56, low: 183.98, close: 188.72 }, // Soldier 3
+    { time: '2026-02-24', open: 188.95, high: 190.84, low: 186.92, close: 189.41 },
+    { time: '2026-02-25', open: 189.22, high: 190.08, low: 186.35, close: 187.12 },
+    { time: '2026-02-26', open: 187.44, high: 188.60, low: 184.96, close: 185.74 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'soldiers-box',
+      timeRange: { from: '2026-02-19', to: '2026-02-23' },
+      priceRange: { high: 189.56, low: 175.76 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(38, 166, 154, 0.12)',
+      borderColor: '#26a69a',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'soldiers-label',
+      time: '2026-02-20',
+      price: 191.0,
+      text: 'Three White Soldiers',
+      position: 'above',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'decline-context',
+        visibleCount: 4,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'Three soldiers matter because they interrupt a decline',
+            summary:
+              'Into February 18, NVDA has been sliding lower for multiple sessions. That gives the coming bullish sequence a proper reversal context instead of making it just a random cluster of green candles.',
+            question:
+              'What should you be looking for after a selloff if buyers are truly regaining control?',
+            answer:
+              'You want a sequence, not just one bounce. Repeated strong closes show demand is becoming organised and persistent.',
+            confirmationSignals: [
+              'Several consecutive bullish closes appear after the decline',
+            ],
+            invalidationSignals: [
+              'Any rally attempt is immediately reversed back to the lows',
+            ],
+          },
+          zh: {
+            title: '三白兵之所以重要，是因为它打断了下跌',
+            summary:
+              '到 2 月 18 日，NVDA 已经连续多日走弱。正因为先有这段回落，后面的三根阳线才具备反转背景，而不是随便三根绿色 K 线。',
+            question: '在一段下跌后，如果买方真的要接管，你应该等什么？',
+            answer:
+              '你要等的是“连续性”，而不是单根反弹。连续强收盘说明需求开始变得有组织、有持续性。',
+            confirmationSignals: [
+              '下跌后出现连续几根收高的阳线',
+            ],
+            invalidationSignals: [
+              '任何反弹尝试都很快被重新打回低点',
+            ],
+          },
+        },
+      },
+      {
+        id: 'three-soldiers-form',
+        visibleCount: 7,
+        annotationIds: ['soldiers-box', 'soldiers-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'Three White Soldiers show sustained upside control',
+            summary:
+              'From February 19 to 23, NVDA prints three strong bullish candles in sequence. Each session opens within or near the prior body and closes higher, which is exactly what you want to see when buyers are steadily taking control back from sellers.',
+            question:
+              'Why is this sequence stronger than one giant bullish reversal candle?',
+            answer:
+              'Because control persists across multiple sessions. Each soldier confirms that buyers did not just react once; they kept returning day after day.',
+            confirmationSignals: [
+              'Each candle closes higher than the previous one',
+              'Buyers keep control across several sessions',
+            ],
+            invalidationSignals: [
+              'The second or third candle is immediately erased by a large bearish reversal',
+            ],
+          },
+          zh: {
+            title: '三白兵代表多方连续几天都在接管市场',
+            summary:
+              '从 2 月 19 日到 23 日，NVDA 连续打出三根强势阳线。每一根都在前一根实体附近开盘，并继续收得更高，这正是买方逐步从空方手里夺回控制权时应出现的节奏。',
+            question: '为什么这组连续阳线比单根大阳反转更强？',
+            answer:
+              '因为控制权不是只出现一天，而是连续维持了多个交易日。每一根白兵都在证明买方不是偶然反击，而是在持续回到市场里。',
+            confirmationSignals: [
+              '每根阳线的收盘都比前一根更高',
+              '多方连续多日维持控制',
+            ],
+            invalidationSignals: [
+              '第二根或第三根很快被大阴线完全吞掉',
+            ],
+          },
+        },
+      },
+      {
+        id: 'later-consolidation',
+        visibleCount: 10,
+        annotationIds: ['soldiers-box', 'soldiers-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'Later consolidation does not erase the regime shift',
+            summary:
+              'After the three soldiers, the market pauses and cools off. That does not undo the pattern. The practical reading is that the decline has been interrupted and the character of price action has changed in favour of buyers.',
+            question: 'What should you remember if price pauses after the three soldiers?',
+            answer:
+              'A pause is not the same as failure. The key question is whether the market keeps the newly recovered ground instead of collapsing back into the old selloff.',
+            confirmationSignals: [
+              'Price holds much of the recovery after the sequence',
+              'The market no longer behaves like a one-way decline',
+            ],
+            invalidationSignals: [
+              'Price quickly falls back through the entire three-candle advance',
+            ],
+          },
+          zh: {
+            title: '后续整理不会抹掉这次结构切换',
+            summary:
+              '三白兵出现后，市场会有停顿和降温，这并不自动否定形态。更实战的阅读方式是：原来的跌势已经被打断，价格行为的性格开始朝买方一侧变化。',
+            question: '如果三白兵后面出现整理，你最该记住什么？',
+            answer:
+              '整理不等于失败。真正的问题是，市场能否保住这三根阳线收回的区域，而不是立刻重新跌回旧的单边下跌节奏。',
+            confirmationSignals: [
+              '三根阳线收回的大部分区域得以维持',
+              '市场不再表现成单边急跌',
+            ],
+            invalidationSignals: [
+              '价格很快把三根阳线的涨幅全部跌回去',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This case teaches the bullish mirror image of the crows: repeated upside control after a decline matters more than any single green candle.',
+        conclusion:
+          'Three White Soldiers should train you to watch for sequences of recovery, not isolated one-day rebounds.',
+      },
+      zh: {
+        intro:
+          '这个案例训练的是三只乌鸦的看涨镜像：下跌后的连续上行控制，比任何单根阳线都更重要。',
+        conclusion:
+          '三白兵真正要训练你的，是观察连续恢复结构，而不是只盯着单日大反弹。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Three White Soldiers',
+      patternLabel: 'Three White Soldiers — Feb 19–23, 2026',
+      analysisText:
+        'After several weak sessions, NVDA shifted character with three strong bullish candles from February 19 to 23, 2026. Each close pushed higher than the last, showing that buying pressure was not a one-day bounce but a multi-session regime change. Even though later candles cooled off, the three-soldiers sequence still marked a clear interruption of the decline.',
+    },
+    zh: {
+      caseLabel: '三白兵',
+      patternLabel: '三白兵 — 2026年2月19-23日',
+      analysisText:
+        '在连续几日走弱之后，NVDA 于 2026 年 2 月 19 日到 23 日打出三根强势阳线，价格行为明显变了性格。每根收盘都继续抬高，说明买盘不是单日反弹，而是持续多日的结构切换。即使后续有降温整理，这组三白兵仍然清楚地打断了原有跌势。',
+      labelText: {
+        'soldiers-label': '三白兵',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, threeWhiteSoldiersCase]

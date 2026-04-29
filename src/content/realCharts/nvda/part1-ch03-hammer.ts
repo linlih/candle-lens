@@ -209,3 +209,207 @@ export const realChart: RealChartData = {
     },
   },
 }
+
+const hangingManCase: RealChartData = {
+  chapterId: 'part1-ch03-hammer',
+  ticker: 'NVDA',
+  candles: [
+    { time: '2026-03-02', open: 168.20, high: 170.55, low: 167.84, close: 170.11 },
+    { time: '2026-03-03', open: 170.34, high: 171.92, low: 169.65, close: 171.40 },
+    { time: '2026-03-04', open: 171.22, high: 173.88, low: 170.90, close: 173.41 },
+    { time: '2026-03-05', open: 173.65, high: 176.44, low: 173.10, close: 175.93 },
+    { time: '2026-03-06', open: 176.20, high: 178.95, low: 175.82, close: 178.11 },
+    { time: '2026-03-09', open: 178.44, high: 181.03, low: 177.88, close: 180.52 },
+    { time: '2026-03-10', open: 180.80, high: 182.21, low: 174.92, close: 179.84 }, // Hanging Man
+    { time: '2026-03-11', open: 178.36, high: 178.90, low: 174.21, close: 175.12 },
+    { time: '2026-03-12', open: 175.40, high: 176.10, low: 171.55, close: 172.48 },
+    { time: '2026-03-13', open: 172.75, high: 174.44, low: 171.62, close: 173.31 },
+    { time: '2026-03-16', open: 173.55, high: 174.02, low: 169.88, close: 170.42 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'hanging-man-box',
+      timeRange: { from: '2026-03-10', to: '2026-03-10' },
+      priceRange: { high: 182.21, low: 174.92 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(239, 83, 80, 0.12)',
+      borderColor: '#ef5350',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'hanging-man-label',
+      time: '2026-03-10',
+      price: 183.8,
+      text: 'Hanging Man',
+      position: 'above',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+    {
+      kind: 'label',
+      id: 'hanging-man-confirm-label',
+      time: '2026-03-11',
+      price: 173.2,
+      text: 'Bearish Confirmation',
+      position: 'below',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 10,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'uptrend-context',
+        visibleCount: 6,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The shape is only dangerous because it appears after an advance',
+            summary:
+              'Into March 9, NVDA has been climbing steadily for several sessions. That matters because the hanging man shares the hammer shape, but its meaning changes completely when it appears after an uptrend.',
+            question:
+              'Before the warning candle prints, what makes an uptrend vulnerable enough to watch closely?',
+            answer:
+              'A mature advance near recent highs where buyers may still push upward intraday, but need to prove they can hold the gains into the close.',
+            confirmationSignals: [
+              'The market is already extended after several bullish sessions',
+            ],
+            invalidationSignals: [
+              'The trend is still accelerating with no sign of intraday rejection',
+            ],
+          },
+          zh: {
+            title: '同样的形状放在上涨后，含义就会变危险',
+            summary:
+              '到 3 月 9 日，NVDA 已经连续多日稳步上行。这里最重要的是：上吊线和锤子线外形相同，但一旦出现在上涨后，解释会完全不同。',
+            question: '在警告 K 线出现前，什么样的上涨背景值得提高警惕？',
+            answer:
+              '一段已经走出延伸的上涨，买方盘中还能继续推高，但是否能把涨幅守到收盘，开始变得关键。',
+            confirmationSignals: [
+              '市场已经经历多根偏强阳线后的延伸上涨',
+            ],
+            invalidationSignals: [
+              '趋势仍在无停顿地加速，没有盘中被打回的迹象',
+            ],
+          },
+        },
+      },
+      {
+        id: 'hanging-man-forms',
+        visibleCount: 7,
+        annotationIds: ['hanging-man-box', 'hanging-man-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The hanging man shows intraday weakness beneath the surface',
+            summary:
+              'On March 10, price trades sharply lower intraday before recovering most of the drop into the close. That long lower shadow says sellers managed to break the session’s confidence, even though buyers repaired part of the damage by the close.',
+            question:
+              'Why is this still only a warning and not yet a bearish verdict?',
+            answer:
+              'Because buyers did recover late in the session. You still need the next candle to prove that the intraday weakness was the start of a shift, not just noise.',
+            confirmationSignals: [
+              'The next candle closes weak and stays below the hanging man close',
+            ],
+            invalidationSignals: [
+              'The next candle rallies and closes above the hanging man high',
+            ],
+          },
+          zh: {
+            title: '上吊线暴露了上涨表面之下的盘中脆弱性',
+            summary:
+              '3 月 10 日价格盘中被明显打低，虽然收盘前收复了大部分跌幅，但长下影线已经告诉你：空方成功打破了这根上涨 K 线原本应有的稳定性。',
+            question: '为什么这时还只是警告，而不能直接下看跌结论？',
+            answer:
+              '因为买方毕竟在尾盘修复了一部分跌幅。你还需要下一根 K 线证明，这种盘中脆弱不是噪音，而是真正的控制权转移开端。',
+            confirmationSignals: [
+              '下一根 K 线继续收弱，并位于上吊线收盘下方',
+            ],
+            invalidationSignals: [
+              '下一根强势反弹并收在上吊线高点之上',
+            ],
+          },
+        },
+      },
+      {
+        id: 'bearish-follow-through',
+        visibleCount: 11,
+        annotationIds: ['hanging-man-box', 'hanging-man-label', 'hanging-man-confirm-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'The next candles confirm the warning by leaning lower',
+            summary:
+              'March 11 and the following sessions fail to reclaim the highs and instead press lower. That is what validates the pattern: the hanging man was not just a shape, it was the first visible crack in the uptrend.',
+            question: 'What habit should a hanging man case train?',
+            answer:
+              'It should train you to separate shape from context. The candle is the same as a hammer, but after an uptrend you wait for bearish follow-through instead of assuming a bullish reversal.',
+            confirmationSignals: [
+              'The market cannot rebuild the prior highs',
+              'Subsequent closes drift lower after the warning candle',
+            ],
+            invalidationSignals: [
+              'Price quickly recovers above the hanging man high',
+            ],
+          },
+          zh: {
+            title: '后续走弱让顶部警告真正成立',
+            summary:
+              '3 月 11 日以及之后几根 K 线都没能重建高点，反而持续向下施压。真正验证这个形态的，不是外形本身，而是它之后确实成了上涨结构的第一道裂缝。',
+            question: '上吊线案例最该训练你形成什么习惯？',
+            answer:
+              '它要训练你把“形状”和“位置”分开理解。蜡烛外形虽然和锤子线一样，但放在上涨后，就必须等看跌跟随，而不是下意识联想到反转向上。',
+            confirmationSignals: [
+              '市场无法重新站回前高',
+              '警告 K 线之后收盘持续转弱',
+            ],
+            invalidationSignals: [
+              '价格迅速重新突破上吊线高点',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'Use this second case to learn the mirror image of the hammer: the same shape becomes bearish when it appears after an advance and then receives downside confirmation.',
+        conclusion:
+          'A hanging man teaches one core lesson: identical candle shapes can mean the opposite if trend context changes.',
+      },
+      zh: {
+        intro:
+          '这个第二案例用来训练锤子线的镜像逻辑：同样的外形一旦出现在上涨末端，并被后续下跌确认，就会转成看跌含义。',
+        conclusion:
+          '上吊线最重要的教训是：完全相同的 K 线外形，只要趋势背景改变，解释就可能反过来。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Hanging Man',
+      patternLabel: 'Hanging Man after rally — Mar 10, 2026',
+      analysisText:
+        'After a steady multi-session advance, NVDA printed a hanging man on March 10, 2026: price briefly broke lower intraday, then recovered most of the drop before the close, leaving a long lower shadow beneath a small body. The next session failed to rebuild the highs and instead closed decisively lower, confirming that the uptrend had started to lose balance.',
+    },
+    zh: {
+      caseLabel: '上吊线',
+      patternLabel: '上涨后的上吊线 — 2026年3月10日',
+      analysisText:
+        '在连续多日稳步上涨后，NVDA 于 2026 年 3 月 10 日打出上吊线：盘中一度明显下探，尾盘虽收复大部分跌幅，但仍在小实体下方留下了很长下影线。次日价格没能重建高点，反而明确收弱，确认了上涨结构已经开始失衡。',
+      labelText: {
+        'hanging-man-label': '上吊线',
+        'hanging-man-confirm-label': '看跌确认',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, hangingManCase]

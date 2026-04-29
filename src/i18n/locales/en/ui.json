@@ -42,6 +42,7 @@
     "sectionTitle": "Real Chart Analysis",
     "tickerLabel": "NVDA",
     "dataNote": "Real NVIDIA (NVDA) historical data · split-adjusted · source: Yahoo Finance",
+    "caseLabel": "Practice Cases",
     "lessonLabel": "Step-by-Step Analysis",
     "stepCounter": "Step {{current}} of {{total}}",
     "prevStep": "Previous",

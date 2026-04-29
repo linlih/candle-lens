@@ -1,4 +1,4 @@
-import type { LWTime } from './content'
+import type { LWTime } from './content.js'
 
 export interface TimeRange {
   from: LWTime

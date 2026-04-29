@@ -54,5 +54,6 @@ export const zh: ChapterLocaleContent = {
     'scene-downtrend': '下跌趋势背景',
     'scene-hammer': '锤子线出现',
     'scene-confirm': '看涨确认信号',
+    'scene-hanging-man': '同样形状放到顶部就变成上吊线',
   },
 }

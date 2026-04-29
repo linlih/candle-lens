@@ -1,11 +1,13 @@
-import type { CandleBar } from './content'
-import type { AnnotationDef } from './annotation'
+import type { CandleBar } from './content.js'
+import type { AnnotationDef } from './annotation.js'
 
 export type RealChartBias = 'bullish' | 'bearish' | 'neutral' | 'wait'
 
 export interface RealChartLocale {
+  caseLabel?: string
   patternLabel: string   // shown below section header, e.g. "Doji — Oct 2023"
   analysisText: string   // 2–4 sentences explaining the highlighted pattern
+  dataNote?: string
   /** annotation id → localized label text; overrides the English `text` field on LabelAnnotations */
   labelText?: Record<string, string>
 }
@@ -53,4 +55,9 @@ export interface RealChartData {
     en: RealChartLocale
     zh: RealChartLocale
   }
+}
+
+export interface RealChartModule {
+  realChart?: RealChartData
+  realCharts?: RealChartData[]
 }

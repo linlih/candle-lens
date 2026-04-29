@@ -3,6 +3,20 @@ import type { ChapterMeta } from '@/types/content'
 export const catalog: ChapterMeta[] = [
   // Part 1: Basic Candlestick Lines
   {
+    id: 'part1-ch00-analysis',
+    partNumber: 1,
+    chapterNumber: 0,
+    patternNames: ['Trend', 'Location', 'Confirmation', 'Invalidation'],
+    sceneCount: 4,
+  },
+  {
+    id: 'part1-ch00-syntax',
+    partNumber: 1,
+    chapterNumber: 0,
+    patternNames: ['Marubozu', 'Spinning Top', 'Shadow Psychology'],
+    sceneCount: 4,
+  },
+  {
     id: 'part1-ch01-intro',
     partNumber: 1,
     chapterNumber: 1,
@@ -21,7 +35,7 @@ export const catalog: ChapterMeta[] = [
     partNumber: 1,
     chapterNumber: 3,
     patternNames: ['Hammer', 'Hanging Man'],
-    sceneCount: 3,
+    sceneCount: 4,
   },
   {
     id: 'part1-ch04-star',

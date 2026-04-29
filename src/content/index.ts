@@ -3,6 +3,8 @@ import type { ChapterContent } from '@/types/content'
 type ChapterLoader = () => Promise<{ chapter: ChapterContent }>
 
 export const chapterLoaders: Record<string, ChapterLoader> = {
+  'part1-ch00-analysis': () => import('./chapters/part1-ch00-analysis/index'),
+  'part1-ch00-syntax': () => import('./chapters/part1-ch00-syntax/index'),
   'part1-ch01-intro': () => import('./chapters/part1-ch01-intro/index'),
   'part1-ch02-doji': () => import('./chapters/part1-ch02-doji/index'),
   'part1-ch03-hammer': () => import('./chapters/part1-ch03-hammer/index'),
