@@ -91,6 +91,13 @@ export default function RealChartSection({ chapterId }: Props) {
         {localeContent.patternLabel}
       </p>
 
+      {/* Chart */}
+      <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-[#363a45] mb-3">
+        <div style={{ height: '320px' }}>
+          <CandleChart candles={visibleCandles} annotations={annotations} />
+        </div>
+      </div>
+
       {lesson && lessonLocale && currentStep && stepLocale && (
         <div className="mb-4 rounded-xl border border-gray-200 dark:border-[#363a45] bg-gray-50 dark:bg-[#1e222d] p-4 space-y-4">
           <div className="flex items-start justify-between gap-3">
@@ -107,7 +114,7 @@ export default function RealChartSection({ chapterId }: Props) {
             </span>
           </div>
 
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs text-gray-400 dark:text-[#787b86] mb-1">
                 {t('realChart.stepCounter', {
@@ -200,13 +207,6 @@ export default function RealChartSection({ chapterId }: Props) {
           </div>
         </div>
       )}
-
-      {/* Chart */}
-      <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-[#363a45] mb-3">
-        <div style={{ height: '320px' }}>
-          <CandleChart candles={visibleCandles} annotations={annotations} />
-        </div>
-      </div>
 
       {lesson && lessonLocale && currentStep && stepLocale ? (
         <div className="space-y-2">
