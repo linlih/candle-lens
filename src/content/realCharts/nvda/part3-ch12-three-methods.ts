@@ -63,6 +63,141 @@ export const realChart: RealChartData = {
       arrowhead: true,
     },
   ],
+  lesson: {
+    steps: [
+      {
+        id: 'impulse-candle',
+        visibleCount: 3,
+        annotationIds: ['first-bull-box'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A strong trend candle creates the reference move',
+            summary:
+              'October 17 gives you the first key ingredient: a meaningful bullish impulse candle inside an advancing market. This candle becomes the benchmark for what later pullbacks should and should not do.',
+            question:
+              'After a strong trend candle, what would tell you a pullback is still healthy rather than becoming a reversal?',
+            answer:
+              'You want the retracement to stay relatively contained and temporary. If sellers completely erase the impulse, the continuation thesis weakens fast.',
+            confirmationSignals: [
+              'The next few candles pull back only modestly',
+              'The market does not fully erase the bullish impulse',
+            ],
+            invalidationSignals: [
+              'The pullback completely breaks down the prior impulse structure',
+            ],
+          },
+          zh: {
+            title: '第一根强势趋势 K 线，先定义“参考涨幅”',
+            summary:
+              '10 月 17 日先给出了第一个关键元素：上涨过程中的一根有分量的大阳线。它的重要性在于，后面的回调都要拿它作为参照，看看回调到底是正常整理还是趋势反转。',
+            question: '在强势趋势 K 线之后，什么样的回调才算健康，而不是转势？',
+            answer:
+              '回调应该相对受控、持续时间也不宜太长。如果空方把这根大阳线的推进几乎全部抹掉，延续逻辑就会迅速变弱。',
+            confirmationSignals: [
+              '接下来几根 K 线只是温和回调',
+              '市场没有把前面阳线的推进彻底吃掉',
+            ],
+            invalidationSignals: [
+              '回调完全破坏前一根趋势阳线建立的结构',
+            ],
+          },
+        },
+      },
+      {
+        id: 'contained-pullback',
+        visibleCount: 6,
+        annotationIds: ['first-bull-box', 'pullback-box'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The pullback stays inside a consolidation role',
+            summary:
+              'October 20 to 22 brings several smaller bearish candles, but the move behaves more like a pause than a takeover. This is the heart of Rising Three Methods: the market relaxes without handing full control to sellers.',
+            question:
+              'Why is the “contained” character of the pullback more important than counting an exact number of candles?',
+            answer:
+              'Because real markets are messy. The analytical edge comes from recognising that the countertrend move is limited and does not reverse the larger direction.',
+            confirmationSignals: [
+              'The pullback candles are smaller than the impulse move',
+              'Price action still looks like consolidation within an uptrend',
+            ],
+            invalidationSignals: [
+              'The pullback expands into a full bearish trend change',
+            ],
+          },
+          zh: {
+            title: '回调被控制在“整理”角色里，而不是趋势反转',
+            summary:
+              '10 月 20 日到 22 日出现了几根较小的阴线，但整体更像上涨中的暂停，而不是空方全面接管。这正是上升三法的核心：市场在放松，却没有把控制权真正交给卖方。',
+            question: '为什么“回调被控制住”比死记几根 K 线更重要？',
+            answer:
+              '因为真实市场本来就不完美。分析上的优势来自识别逆势波动是否有限，而不是机械数 K 线根数。',
+            confirmationSignals: [
+              '回调 K 线整体小于最初的推进阳线',
+              '价格行为仍然更像上升趋势里的整理',
+            ],
+            invalidationSignals: [
+              '回调逐渐演变成完整的下跌趋势切换',
+            ],
+          },
+        },
+      },
+      {
+        id: 'continuation-breakout',
+        visibleCount: 16,
+        annotationIds: ['first-bull-box', 'pullback-box', 'methods-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The later breakout proves the pause was only temporary',
+            summary:
+              'The rally resumes and eventually closes well above the first bullish candle’s high. That is the confirmation you were waiting for: the pullback was a resting phase, and the broader uptrend reasserted itself.',
+            question:
+              'What is the real takeaway from this continuation pattern?',
+            answer:
+              'The lesson is not that every small pullback is bullish. It is that a controlled countertrend pause becomes useful only when later price action re-breaks in the original trend direction.',
+            confirmationSignals: [
+              'Price breaks above the first impulse candle’s high',
+              'The market resumes higher closes after the pause',
+            ],
+            invalidationSignals: [
+              'Price fails to continue and instead breaks below the pullback structure',
+            ],
+          },
+          zh: {
+            title: '后续突破说明之前只是短暂休整，不是转势',
+            summary:
+              '之后上涨重新启动，收盘明显越过了最初那根大阳线的高点。这才是你真正要等的确认：前面的回调只是休息阶段，更大的上升趋势重新占据主导。',
+            question: '这个延续形态最值得带走的实战理解是什么？',
+            answer:
+              '不是所有小回调都该看多，而是“受控的逆势整理”只有在后续价格重新朝原趋势突破时，才真正有分析价值。',
+            confirmationSignals: [
+              '价格突破最初推进阳线的高点',
+              '整理结束后市场重新持续收高',
+            ],
+            invalidationSignals: [
+              '价格迟迟不能延续，反而跌破整理结构',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This case is best used to teach continuation logic: a pullback inside an uptrend is only useful when later candles prove it was consolidation rather than reversal.',
+        conclusion:
+          'Study Rising Three Methods as a sequence of impulse, contained pullback, and confirmed continuation, not as a rigid picture to memorise.',
+      },
+      zh: {
+        intro:
+          '这个案例最适合拿来教“趋势延续”的思路：上升趋势中的回调，只有在后续 K 线证明它是整理而不是反转时，才有意义。',
+        conclusion:
+          '学习上升三法时，把重点放在“推进 -> 受控回调 -> 延续确认”的顺序上，而不是把它当成必须长得一模一样的固定图形。',
+      },
+    },
+  },
   locale: {
     en: {
       patternLabel: 'Rising Three Methods — Oct 17–28, 2025',

@@ -41,7 +41,21 @@
   "realChart": {
     "sectionTitle": "Real Chart Analysis",
     "tickerLabel": "NVDA",
-    "dataNote": "Real NVIDIA (NVDA) historical data · split-adjusted · source: Yahoo Finance"
+    "dataNote": "Real NVIDIA (NVDA) historical data · split-adjusted · source: Yahoo Finance",
+    "lessonLabel": "Step-by-Step Analysis",
+    "stepCounter": "Step {{current}} of {{total}}",
+    "prevStep": "Previous",
+    "nextStep": "Next",
+    "questionLabel": "Question to Ask",
+    "answerLabel": "Current Read",
+    "confirmationLabel": "What Confirms It?",
+    "invalidationLabel": "What Weakens It?",
+    "bias": {
+      "bullish": "Bullish Bias",
+      "bearish": "Bearish Bias",
+      "neutral": "Neutral Read",
+      "wait": "Wait for Confirmation"
+    }
   },
   "footer": {
     "privacy": "Privacy Policy",

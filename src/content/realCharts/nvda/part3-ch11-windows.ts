@@ -68,6 +68,140 @@ export const realChart: RealChartData = {
       arrowhead: true,
     },
   ],
+  lesson: {
+    steps: [
+      {
+        id: 'reversal-context',
+        visibleCount: 7,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A reversal setup needs proof that demand has really returned',
+            summary:
+              'Into November 7, NVDA has just come through a sharp selloff and prints a hammer-style recovery day. That is encouraging, but a single rebound candle is still only a candidate reversal until the next session proves buyers can keep control.',
+            question:
+              'After a hammer-like reversal day, what kind of next candle would strengthen the bullish case the most?',
+            answer:
+              'A decisive follow-through move higher, especially if price can separate from the prior session’s range and show urgency from buyers.',
+            confirmationSignals: [
+              'The next session opens or trades clearly above the prior high',
+              'The next session closes strong and extends the rebound',
+            ],
+            invalidationSignals: [
+              'The next session falls back into the prior selloff range',
+            ],
+          },
+          zh: {
+            title: '反转日出现后，还需要证明买盘真的回来了',
+            summary:
+              '到 11 月 7 日，NVDA 刚经历一段急跌，并打出带反转意味的锤子式恢复日。这当然是积极信号，但单独一根反转 K 线还只是候选，必须看下一天能不能继续由买方掌控。',
+            question: '在这种反转日之后，什么样的下一根 K 线最能强化看涨逻辑？',
+            answer:
+              '最好是明确的后续上行，尤其是价格能脱离前一日区间，表现出买方的急迫性。',
+            confirmationSignals: [
+              '下一交易日开盘或盘中明显站上前高',
+              '下一交易日强势收高并延续反弹',
+            ],
+            invalidationSignals: [
+              '下一交易日重新跌回前面下跌区间内部',
+            ],
+          },
+        },
+      },
+      {
+        id: 'gap-confirms-demand',
+        visibleCount: 8,
+        annotationIds: ['gap-zone', 'gap-top', 'gap-bottom', 'window-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The rising window confirms demand with urgency',
+            summary:
+              'November 10 does more than rise; it gaps above the prior session’s high and leaves a clean empty space on the chart. That window tells you buyers were willing to pay up immediately, which is much stronger than a slow grind higher.',
+            question:
+              'Why does a clean gap matter more than just another green candle?',
+            answer:
+              'Because it shows imbalance. Price skipped the prior range entirely, which means demand was strong enough that trading did not even occur in the gap zone.',
+            confirmationSignals: [
+              'The new session leaves no overlap with the prior high-low range',
+              'Price closes well above the gap area',
+            ],
+            invalidationSignals: [
+              'The gap is filled immediately and the session closes back inside the old range',
+            ],
+          },
+          zh: {
+            title: '上升窗口用“急迫买盘”确认了反转',
+            summary:
+              '11 月 10 日不仅上涨，而且直接跳空站上前一日高点，在图上留下清晰空白区。这个窗口说明买方不是慢慢推高，而是愿意立刻追价接盘。',
+            question: '为什么一个干净缺口比普通阳线更有意义？',
+            answer:
+              '因为它体现的是失衡。价格直接跳过了前一段成交区，说明需求强到连缺口区域都没有成交。',
+            confirmationSignals: [
+              '新交易日与前一日区间完全不重叠',
+              '价格收盘明显站在缺口上方',
+            ],
+            invalidationSignals: [
+              '缺口当天就被完全回补并收回旧区间内部',
+            ],
+          },
+        },
+      },
+      {
+        id: 'window-as-support',
+        visibleCount: 15,
+        annotationIds: ['gap-zone', 'gap-top', 'gap-bottom', 'window-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'Later candles test the gap zone as support',
+            summary:
+              'The following sessions consolidate around the window instead of instantly negating it. That is the practical lesson from Nison’s framing: once a rising window forms, the empty gap area becomes a support zone to monitor.',
+            question: 'What is the correct way to use the window after it appears?',
+            answer:
+              'Treat the gap area as a reference zone. As long as price generally respects it, the bullish interpretation remains intact; repeated failure back through it would weaken the setup.',
+            confirmationSignals: [
+              'Later candles hold around or above the gap zone',
+              'The gap area acts as a floor during consolidation',
+            ],
+            invalidationSignals: [
+              'Price decisively closes back below the lower edge of the window',
+            ],
+          },
+          zh: {
+            title: '后续整理验证：这个窗口开始充当支撑',
+            summary:
+              '后面几天价格围绕窗口整理，而不是立刻把它否定掉。这正是尼森对窗口的实战用法：一旦出现上升窗口，这块空白区域就会变成后续要观察的支撑带。',
+            question: '窗口出现后，正确的分析用法是什么？',
+            answer:
+              '把缺口区域当成参考支撑。只要价格大体仍然尊重它，看涨解释就还成立；如果反复跌回并收在其下方，形态就会被削弱。',
+            confirmationSignals: [
+              '后续蜡烛围绕缺口上方或附近企稳',
+              '缺口区域在整理过程中充当地板',
+            ],
+            invalidationSignals: [
+              '价格明确收回窗口下沿以下',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This lesson shows how a gap becomes more than a visual feature: it confirms urgency from buyers and then provides a support zone for later analysis.',
+        conclusion:
+          'Read a rising window in two stages: first as confirmation that demand has returned, then as a support area that later candles should respect.',
+      },
+      zh: {
+        intro:
+          '这个案例展示了窗口不只是“图上有个缺口”，它既能确认买方急迫性，也会在后续分析里转化成支撑区域。',
+        conclusion:
+          '理解上升窗口时分两步：先把它看成需求回归的确认，再把它看成后续蜡烛应该尊重的支撑带。',
+      },
+    },
+  },
   locale: {
     en: {
       patternLabel: 'Rising Window (Gap Up) — Nov 7→10, 2025',

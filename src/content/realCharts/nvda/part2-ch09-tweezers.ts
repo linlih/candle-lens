@@ -60,6 +60,137 @@ export const realChart: RealChartData = {
       arrowhead: true,
     },
   ],
+  lesson: {
+    steps: [
+      {
+        id: 'approach-resistance',
+        visibleCount: 7,
+        annotationIds: ['resistance-line'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The first touch defines the ceiling to watch',
+            summary:
+              'By October 9, NVDA has pushed back into the $195 area. The first high matters because it marks a level that traders now have to monitor: if the next session revisits that zone and fails, the level becomes much more meaningful.',
+            question:
+              'After the first test of a high, what would make the next day’s revisit analytically important?',
+            answer:
+              'A second test that cannot break through and instead reverses hard. That would show the level is not random; it is defended.',
+            confirmationSignals: [
+              'The next session retests the same price zone',
+            ],
+            invalidationSignals: [
+              'The next session cleanly breaks out and holds above the level',
+            ],
+          },
+          zh: {
+            title: '第一次摸到高点，只是先定义观察上限',
+            summary:
+              '到 10 月 9 日，NVDA 已经重新推到 195 美元区域。第一次高点的重要性在于：它先告诉你这个价位值得盯住。如果下一天再次测试并失败，这个水平才会变得真正有分析意义。',
+            question: '第一次冲高之后，什么会让第二天的再次测试变得关键？',
+            answer:
+              '第二次测试如果突破不了并出现强烈反转，就说明这个位置不是偶然，而是真正有人在防守。',
+            confirmationSignals: [
+              '下一交易日再次测试相同价位区域',
+            ],
+            invalidationSignals: [
+              '下一交易日干净突破并稳稳站上该区域',
+            ],
+          },
+        },
+      },
+      {
+        id: 'second-failure',
+        visibleCount: 8,
+        annotationIds: ['tweezers-box', 'resistance-line', 'tweezers-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'The second failure turns the level into a Tweezers Top',
+            summary:
+              'October 10 probes the same $195 zone again, even slightly higher, but collapses into a very weak close. That second rejection is the essence of the pattern: the market discovered a ceiling and then proved the ceiling mattered.',
+            question: 'Why is the nearly identical high more important than the pattern name itself?',
+            answer:
+              'Because it ties the candle to structure. The pattern works here because the repeated highs reveal real resistance, not because two candles merely look similar.',
+            confirmationSignals: [
+              'The second day rejects the same high zone',
+              'The close is dramatically weaker than the intraday high',
+            ],
+            invalidationSignals: [
+              'The second day closes strong near the highs instead of collapsing',
+            ],
+          },
+          zh: {
+            title: '第二次冲高失败，才把它变成镊子顶',
+            summary:
+              '10 月 10 日再次上探同样的 195 美元区域，甚至略微更高，但随后暴跌收弱。第二次拒绝同一高位，才是这个形态的本质：市场先发现天花板，然后又证明这个天花板真的有效。',
+            question: '为什么“几乎相同的高点”比形态名字本身更重要？',
+            answer:
+              '因为它把蜡烛图和价格结构连接起来。这里真正有效的是重复高点揭示了真实阻力，而不只是两根 K 线长得像。',
+            confirmationSignals: [
+              '第二天再次拒绝同一高位区域',
+              '收盘相对盘中高点极度疲弱',
+            ],
+            invalidationSignals: [
+              '第二天不是崩跌，而是接近高点强势收盘',
+            ],
+          },
+        },
+      },
+      {
+        id: 'resistance-holds',
+        visibleCount: 15,
+        annotationIds: ['tweezers-box', 'resistance-line', 'tweezers-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Later drift lower confirms resistance held',
+            summary:
+              'Subsequent sessions fail to recapture the $195 area and drift lower over the following days. That follow-through is what tells you the repeated highs really marked a ceiling rather than a one-day anomaly.',
+            question: 'What should you take away from this pattern structurally?',
+            answer:
+              'Tweezers Top is best read as repeated failure at a shared level. The candles matter because they reveal where supply is waiting.',
+            confirmationSignals: [
+              'Price cannot retake the resistance zone',
+              'The market keeps leaning lower after the second rejection',
+            ],
+            invalidationSignals: [
+              'A quick recovery back above the resistance band',
+            ],
+          },
+          zh: {
+            title: '后续回落说明阻力位确实生效了',
+            summary:
+              '之后几个交易日都没能重新收回 195 美元区域，价格继续往下漂移。正是这种后续表现告诉你：重复高点并不是单日巧合，而是真正的顶部区域。',
+            question: '从结构角度看，这个形态最值得学的是什么？',
+            answer:
+              '镊子顶最适合被理解为“共享阻力位上的重复失败”。蜡烛图重要，是因为它把供给真正出现的位置显露出来。',
+            confirmationSignals: [
+              '价格无法重新站回阻力区',
+              '第二次拒绝后市场持续偏弱',
+            ],
+            invalidationSignals: [
+              '价格迅速重新突破并站稳阻力带',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This case teaches how to combine candle shapes with horizontal levels: the repeated high matters more than the label “Tweezers Top.”',
+        conclusion:
+          'Read tweezers as evidence that the same price zone rejected buyers twice, then check whether later candles respect that ceiling.',
+      },
+      zh: {
+        intro:
+          '这个案例的重点是把蜡烛图和水平阻力位结合起来读：真正重要的是重复高点，而不只是“镊子顶”这个名字。',
+        conclusion:
+          '把镊子顶理解成“同一价位两次拒绝买方”，再观察后续蜡烛是否继续尊重这个顶部区域。',
+      },
+    },
+  },
   locale: {
     en: {
       patternLabel: 'Tweezers Top at $195 — Oct 9–10, 2025',

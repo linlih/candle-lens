@@ -52,6 +52,138 @@ export const realChart: RealChartData = {
       arrowhead: true,
     },
   ],
+  lesson: {
+    steps: [
+      {
+        id: 'rally-context',
+        visibleCount: 8,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A star matters because it appears after an advance',
+            summary:
+              'By the end of December, NVDA has already rallied strongly off the prior lows. That gives the next candle context: the market is asking whether buyers can keep extending the move.',
+            question:
+              'Before seeing the star candle, what would count as the first warning that the rally is losing conviction?',
+            answer:
+              'A candle that pushes to a new high intraday but cannot keep that strength into the close.',
+            confirmationSignals: [
+              'Upper shadow expands while the body stays small',
+            ],
+            invalidationSignals: [
+              'Buyers keep printing broad bullish closes at new highs',
+            ],
+          },
+          zh: {
+            title: '星线的意义来自它出现在上涨后',
+            summary:
+              '到 12 月底，NVDA 已经从前面的低点明显反弹上来。正确背景是：市场正在测试多方能否继续把涨势往上推进。',
+            question: '在看到星线之前，什么会是“上涨开始失去说服力”的第一道预警？',
+            answer:
+              '盘中继续冲高，但收盘无法守住强势，说明更高价位开始出现抛压。',
+            confirmationSignals: [
+              '上影线明显扩张，而实体仍然偏小',
+            ],
+            invalidationSignals: [
+              '多方继续用宽实体阳线刷新高点',
+            ],
+          },
+        },
+      },
+      {
+        id: 'shooting-star-forms',
+        visibleCount: 9,
+        annotationIds: ['star-box', 'star-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The Shooting Star marks failed upside extension',
+            summary:
+              'January 2 pushes to $192.93 intraday but closes back near the open at $188.85. The long upper shadow tells you buyers reached for a breakout and were rejected before the session ended.',
+            question:
+              'What do you still need before upgrading this from a warning into a bearish read?',
+            answer:
+              'You need the next candles to fail at reclaiming the high and start closing weaker, proving the rejection was real.',
+            confirmationSignals: [
+              'Subsequent candles fail to retake the star high',
+              'Closing prices start drifting lower',
+            ],
+            invalidationSignals: [
+              'Price immediately reclaims and closes above the star high',
+            ],
+          },
+          zh: {
+            title: '流星线代表向上突破尝试失败',
+            summary:
+              '1 月 2 日盘中冲到 192.93 美元，但收盘又回到接近开盘价的 188.85 美元。长上影线说明买方尝试往上突破，却在收盘前被明显压回。',
+            question: '要把它从“警告”升级成偏空判断，还差什么？',
+            answer:
+              '还需要后面的蜡烛无法重新站上高点，并逐渐收弱，证明这次上冲失败是真实的，而不是单日噪音。',
+            confirmationSignals: [
+              '后续蜡烛无法重新站上流星线高点',
+              '收盘开始逐步走弱',
+            ],
+            invalidationSignals: [
+              '价格立刻重新收在流星线高点之上',
+            ],
+          },
+        },
+      },
+      {
+        id: 'follow-through-lower',
+        visibleCount: 14,
+        annotationIds: ['star-box', 'star-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Later candles validate the rejection',
+            summary:
+              'The next several sessions never rebuild the breakout attempt. Instead, NVDA keeps fading and drifts lower into the following week. That is what turns the Shooting Star into a useful analysis pattern rather than a one-day curiosity.',
+            question: 'What is the repeatable lesson from this case?',
+            answer:
+              'A top-side star is best treated as failed extension plus later weakness. The pattern works when you connect the rejection candle with the loss of follow-through afterward.',
+            confirmationSignals: [
+              'Highs stop extending',
+              'Price rotates down over the following sessions',
+            ],
+            invalidationSignals: [
+              'A strong reversal back above the rejection high',
+            ],
+          },
+          zh: {
+            title: '后续走弱才让这次拒绝上冲有意义',
+            summary:
+              '接下来的几个交易日都没有重新建立突破尝试，反而继续震荡走弱并向下回落。这正是让流星线变成实用分析信号的关键，而不只是单日图形。',
+            question: '这个案例真正可复用的教训是什么？',
+            answer:
+              '顶部星线最好理解为“突破失败 + 后续走弱”。只有把拒绝上冲和之后的跟随下跌连起来看，形态才真正有分析价值。',
+            confirmationSignals: [
+              '高点不再继续上移',
+              '后续数日价格转入回落',
+            ],
+            invalidationSignals: [
+              '价格强势重新站上被拒绝的高点',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This lesson teaches failed upside extension: the star is important not because of its name, but because the rally could not hold new highs.',
+        conclusion:
+          'A Shooting Star should train you to ask whether the breakout attempt failed and whether later candles confirmed that failure.',
+      },
+      zh: {
+        intro:
+          '这个案例训练的是“向上延伸失败”的阅读方式：流星线重要，不是因为名字，而是因为新高没能站稳。',
+        conclusion:
+          '流星线真正要训练你的，是持续追问这次冲高是否失败，以及后续蜡烛有没有确认这次失败。',
+      },
+    },
+  },
   locale: {
     en: {
       patternLabel: 'Shooting Star at local top — Jan 2, 2026',

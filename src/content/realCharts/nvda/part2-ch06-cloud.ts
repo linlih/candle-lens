@@ -60,6 +60,136 @@ export const realChart: RealChartData = {
       dash: [4, 3],
     },
   ],
+  lesson: {
+    steps: [
+      {
+        id: 'bearish-context',
+        visibleCount: 7,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A piercing pattern starts with real downside pressure',
+            summary:
+              'By November 13, NVDA has already been sold off and prints another bearish day into weakness. That gives the setup proper downtrend context; without that, a bullish rebound would be less meaningful.',
+            question:
+              'Before the second candle forms, what would you want to see from buyers to even consider a reversal attempt?',
+            answer:
+              'You want buyers to absorb a weak open and reclaim a meaningful portion of the prior bearish body, not just bounce a little.',
+            confirmationSignals: [
+              'The next session responds strongly from a weak open',
+            ],
+            invalidationSignals: [
+              'The next session stays weak and closes near the lows',
+            ],
+          },
+          zh: {
+            title: '刺透形态一定要先有真实下压背景',
+            summary:
+              '到 11 月 13 日，NVDA 已经出现下跌并再次收出阴线。这样的背景才让双日反转有意义；如果没有先前的弱势，后面的阳线穿回就没那么值得重视。',
+            question: '第二根 K 线形成前，买方至少要做到什么，你才会考虑反转尝试？',
+            answer:
+              '买方必须在弱开后明显收回前一根阴线实体的重要部分，而不是只做一个技术性小反弹。',
+            confirmationSignals: [
+              '下一交易日从弱开中快速反击',
+            ],
+            invalidationSignals: [
+              '下一交易日继续收弱并接近低点收盘',
+            ],
+          },
+        },
+      },
+      {
+        id: 'piercing-candle',
+        visibleCount: 8,
+        annotationIds: ['piercing-box', 'piercing-label', 'midpoint-line'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The key is the close above the midpoint',
+            summary:
+              'November 14 opens even lower, which initially looks bad, but buyers then drive price to $190.17. The critical detail is not just the rebound; it is that the close pierces above the midpoint of the November 13 bearish body.',
+            question: 'Why does closing above the midpoint matter more than simply closing green?',
+            answer:
+              'Because it proves buyers reclaimed a meaningful share of the prior session’s loss. A green candle alone could still be weak; closing above the midpoint shows real counter-pressure.',
+            confirmationSignals: [
+              'The bullish candle closes above the midpoint line',
+              'The rebound reverses much of the prior damage',
+            ],
+            invalidationSignals: [
+              'The candle closes below the midpoint despite the bounce',
+            ],
+          },
+          zh: {
+            title: '关键不只是反弹，而是收盘站上中点',
+            summary:
+              '11 月 14 日先继续低开，看起来像要延续下跌，但买方随后把价格推到 190.17 美元收盘。这里最重要的细节不是“收阳”本身，而是收盘明显刺穿了 11 月 13 日阴线实体中点。',
+            question: '为什么“站上中点”比“只是收阳”更重要？',
+            answer:
+              '因为它说明买方收回了前一日跌幅中真正有分量的一部分。单纯收阳可能仍然很弱，但站上中点意味着反击质量更高。',
+            confirmationSignals: [
+              '阳线收盘站上实体中点虚线',
+              '反弹力度足以回收前一日大部分伤害',
+            ],
+            invalidationSignals: [
+              '虽然反弹但收盘仍在中点下方',
+            ],
+          },
+        },
+      },
+      {
+        id: 'short-term-bottoming',
+        visibleCount: 10,
+        annotationIds: ['piercing-box', 'piercing-label', 'midpoint-line'],
+        bias: 'neutral',
+        locale: {
+          en: {
+            title: 'The pattern marks exhaustion even without a huge trend change',
+            summary:
+              'The next sessions do not explode upward, but they do show that the immediate downside panic was interrupted. That is an important teaching point: a piercing pattern often signals short-term exhaustion before it signals a full trend reversal.',
+            question:
+              'What should you learn when the pattern works as a pause rather than a massive trend change?',
+            answer:
+              'Candlestick reversals can improve timing even when they only produce a tradable pause or consolidation. You are reading momentum change, not promising a permanent reversal.',
+            confirmationSignals: [
+              'The market stops accelerating downward immediately after the pattern',
+            ],
+            invalidationSignals: [
+              'The next session instantly erases the piercing candle',
+            ],
+          },
+          zh: {
+            title: '它先标记“下跌衰竭”，未必立刻意味着大反转',
+            summary:
+              '后面几个交易日并没有立刻一路暴涨，但至少说明短线恐慌性抛售被打断了。这是很重要的教学点：刺透形态经常先标记短线衰竭，再决定是否演变成更大的趋势反转。',
+            question: '如果形态只是带来一段喘息或整理，而不是大级别反转，你该学到什么？',
+            answer:
+              '蜡烛图反转首先提升的是节奏判断。它告诉你动能在变，而不是保证趋势一定永久改变。',
+            confirmationSignals: [
+              '形态后市场不再立刻加速下跌',
+            ],
+            invalidationSignals: [
+              '下一交易日立刻完全抹掉刺透阳线',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This example teaches quality of rebound: a piercing pattern is not just “green after red,” but a recovery strong enough to reclaim the prior body’s midpoint.',
+        conclusion:
+          'Use piercing patterns to judge whether sellers are losing control, even if the market only stabilises before choosing its next larger trend.',
+      },
+      zh: {
+        intro:
+          '这个案例的重点在于“反弹质量”：刺透形态不是简单的“阴后转阳”，而是反弹强到足以收回前一根阴线实体中点。',
+        conclusion:
+          '用刺透形态去判断空方是否开始失去控制，即使市场后面只先进入企稳整理，也已经很有分析价值。',
+      },
+    },
+  },
   locale: {
     en: {
       patternLabel: 'Piercing Line — Nov 13–14, 2025',

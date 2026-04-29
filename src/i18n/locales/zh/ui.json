@@ -41,7 +41,21 @@
   "realChart": {
     "sectionTitle": "真实图表分析",
     "tickerLabel": "英伟达 NVDA",
-    "dataNote": "英伟达（NVDA）真实历史数据 · 已复权（10:1拆股）· 来源：雅虎财经"
+    "dataNote": "英伟达（NVDA）真实历史数据 · 已复权（10:1拆股）· 来源：雅虎财经",
+    "lessonLabel": "分步分析演练",
+    "stepCounter": "第 {{current}} / {{total}} 步",
+    "prevStep": "上一步",
+    "nextStep": "下一步",
+    "questionLabel": "此时该问什么",
+    "answerLabel": "当前判断",
+    "confirmationLabel": "确认信号",
+    "invalidationLabel": "失效/减弱信号",
+    "bias": {
+      "bullish": "偏多假设",
+      "bearish": "偏空假设",
+      "neutral": "中性观察",
+      "wait": "等待确认"
+    }
   },
   "footer": {
     "privacy": "隐私政策",

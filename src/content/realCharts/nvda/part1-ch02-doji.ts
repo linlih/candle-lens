@@ -60,6 +60,142 @@ export const realChart: RealChartData = {
       arrowhead: true,
     },
   ],
+  lesson: {
+    steps: [
+      {
+        id: 'rally-context',
+        visibleCount: 7,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'Strong rally into a potential exhaustion zone',
+            summary:
+              'By January 29, NVDA had rallied from the high $170s back into the $190s over several sessions. That gives the Doji its context: the market is extended upward short term, so a hesitation candle near the highs matters more than it would in the middle of a range.',
+            question:
+              'At this stage, are you looking for an immediate short signal, or only for evidence that bullish momentum is beginning to stall?',
+            answer:
+              'Only for evidence of stalling. A strong rally is not a sell signal by itself; you need the market to show indecision first.',
+            confirmationSignals: [
+              'A very small-bodied candle appears after the rally',
+              'The next candle fails to continue higher',
+            ],
+            invalidationSignals: [
+              'Buyers keep printing strong closes at fresh highs',
+            ],
+          },
+          zh: {
+            title: '先识别一段上涨后的潜在衰竭区',
+            summary:
+              '到 1 月 29 日，NVDA 已经从 170 多美元连续反弹回到 190 美元区域。十字星的意义正来自这个背景：价格短线上行已经延伸，所以高位出现犹豫 K 线才更值得重视。',
+            question:
+              '此时你应该立刻找做空点，还是先观察多方动能是否开始停滞？',
+            answer:
+              '先观察动能是否停滞。单纯上涨并不是做空信号，必须先看到市场自己表现出犹豫。',
+            confirmationSignals: [
+              '上涨后出现极小实体 K 线',
+              '下一交易日无法继续走高',
+            ],
+            invalidationSignals: [
+              '多方继续强势收高并刷新高点',
+            ],
+          },
+        },
+      },
+      {
+        id: 'doji-warning',
+        visibleCount: 8,
+        annotationIds: ['doji-box', 'doji-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The Doji is a warning, not a finished conclusion',
+            summary:
+              'January 30 prints a near-perfect Doji: the market swings widely intraday, but closes almost exactly where it opened. That means neither side could finish the session in control, which becomes meaningful after an extended rise.',
+            question:
+              'What would make this top-side Doji actionable instead of merely “interesting”?',
+            answer:
+              'You need bearish follow-through. Without a weak next session, the Doji remains only a warning that momentum may be fading.',
+            confirmationSignals: [
+              'The next candle closes lower and expands downside range',
+              'Price slips back under recent short-term support',
+            ],
+            invalidationSignals: [
+              'The next candle closes strong above the Doji high',
+            ],
+          },
+          zh: {
+            title: '十字星是预警，不是最终结论',
+            summary:
+              '1 月 30 日出现近乎完美的十字星：盘中波动很大，但收盘几乎回到开盘价。这说明多空都无法在收盘前取得主导。放在连续上涨后，这是一种有意义的警告。',
+            question:
+              '要让这个顶部十字星从“有意思”变成“可执行”，还差什么？',
+            answer:
+              '还差看跌跟随。没有后续走弱，它只是在提醒上涨动能可能在衰减。',
+            confirmationSignals: [
+              '下一根收低并扩大下行波幅',
+              '价格跌回最近的短线支撑区域下方',
+            ],
+            invalidationSignals: [
+              '下一根强势收在十字星高点之上',
+            ],
+          },
+        },
+      },
+      {
+        id: 'bearish-follow-through',
+        visibleCount: 10,
+        annotationIds: ['doji-box', 'doji-label', 'confirm-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Follow-through confirms the top-side warning',
+            summary:
+              'The next sessions do what a bearish confirmation should do: price breaks lower, closes weaken, and the market leaves the top area quickly. By February 3, the follow-through is strong enough to treat the Doji as a valid warning rather than just a pause.',
+            question: 'What is the main lesson once the decline starts following through?',
+            answer:
+              'The lesson is sequencing: rally first, then indecision, then confirmation. The Doji matters because later candles validate it.',
+            confirmationSignals: [
+              'Consecutive weaker closes after the Doji',
+              'Momentum shifts from hesitation to clear downside control',
+            ],
+            invalidationSignals: [
+              'A fast recovery back above the Doji high',
+            ],
+          },
+          zh: {
+            title: '后续走弱让预警变成确认',
+            summary:
+              '之后几根 K 线给出了标准的看跌确认：价格继续下破，收盘持续转弱，市场迅速离开顶部区域。到 2 月 3 日，后续走弱已经足以把这根十字星视为有效的顶部预警。',
+            question: '当价格开始连续走弱时，真正应该学到的是什么？',
+            answer:
+              '关键是顺序：先上涨，再犹豫，最后确认。十字星之所以重要，是因为后面的蜡烛验证了它。',
+            confirmationSignals: [
+              '十字星之后连续收弱',
+              '市场从“犹豫”切换成明确的下行主导',
+            ],
+            invalidationSignals: [
+              '价格迅速重新站回十字星高点之上',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'Read this case as a top-side warning lesson: the Doji itself is not enough; the edge comes from waiting for the next candles to confirm the loss of momentum.',
+        conclusion:
+          'When learning Doji analysis, ask where it appeared, what trend preceded it, and which later candle proved the warning mattered.',
+      },
+      zh: {
+        intro:
+          '把这个案例当作“顶部预警”来读：十字星本身还不够，真正的优势来自等待后续蜡烛确认上涨动能确实减弱。',
+        conclusion:
+          '学习十字星分析时，重点不是死记图形，而是持续追问：它出现在什么位置、前面是什么趋势、后续哪根 K 线证明这个预警有意义。',
+      },
+    },
+  },
   locale: {
     en: {
       patternLabel: 'Doji at peak — Jan 30, 2026',

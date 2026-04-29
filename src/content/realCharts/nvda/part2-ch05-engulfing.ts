@@ -52,6 +52,137 @@ export const realChart: RealChartData = {
       arrowhead: true,
     },
   ],
+  lesson: {
+    steps: [
+      {
+        id: 'rally-before-engulfing',
+        visibleCount: 10,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A bearish engulfing needs prior upward pressure',
+            summary:
+              'Into November 19, NVDA has already bounced strongly off the earlier hammer low. The market is trying to continue upward, which is exactly why a reversal pattern here matters.',
+            question:
+              'Before the engulfing candle prints, what would make you suspicious that the rally is vulnerable?',
+            answer:
+              'A rally becomes vulnerable when buyers cannot hold a strong open or gap-up and sellers start reclaiming the session quickly.',
+            confirmationSignals: [
+              'The next session opens strong but cannot sustain the strength',
+            ],
+            invalidationSignals: [
+              'The next session keeps extending higher and closes strong',
+            ],
+          },
+          zh: {
+            title: '看跌吞没要放在已有上冲背景里看',
+            summary:
+              '到 11 月 19 日，NVDA 已经从前面的锤子线低点反弹了一段距离。此时市场是在尝试继续上攻，这正是反转形态有意义的位置。',
+            question: '在吞没出现前，什么会让你怀疑这段反弹可能撑不住？',
+            answer:
+              '如果价格在偏高位置继续上冲，却守不住强势开盘或跳空，那就说明上攻质量可能有问题。',
+            confirmationSignals: [
+              '下一交易日强势开盘，但无法把强势保持到收盘',
+            ],
+            invalidationSignals: [
+              '下一交易日继续上攻并强势收盘',
+            ],
+          },
+        },
+      },
+      {
+        id: 'engulfing-reversal',
+        visibleCount: 11,
+        annotationIds: ['engulf-box', 'engulf-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'The gap-up failure creates the engulfing reversal',
+            summary:
+              'November 20 opens almost euphorically at $195.95, far above the prior close, but sellers seize control and drive the session all the way down to $180.64. The candle swallows the previous bullish body and turns optimism into a full-session reversal.',
+            question: 'Why is this stronger than a normal bearish candle?',
+            answer:
+              'Because it reverses sentiment inside one session. Buyers begin with a gap-up advantage and still lose total control by the close.',
+            confirmationSignals: [
+              'The bearish body fully engulfs the prior bullish body',
+              'The close lands near the session low after a strong open',
+            ],
+            invalidationSignals: [
+              'The next session immediately erases the bearish candle',
+            ],
+          },
+          zh: {
+            title: '跳空失败让吞没形态具备反转力度',
+            summary:
+              '11 月 20 日几乎带着亢奋情绪高开到 195.95 美元，远高于前收，但空方随后全面接管，把价格一路砸到 180.64 美元收盘。这根 K 线把前一日阳线实体完全吞没，把多方情绪在一个交易日内彻底反转。',
+            question: '为什么这比普通阴线更强？',
+            answer:
+              '因为它在同一交易日里完成了情绪反转。买方明明带着跳空优势开场，却仍然在收盘前被彻底压制。',
+            confirmationSignals: [
+              '阴线实体完全包住前一日阳线实体',
+              '强势开盘后却接近当日低点收盘',
+            ],
+            invalidationSignals: [
+              '下一交易日立刻把这根大阴线完全吞回去',
+            ],
+          },
+        },
+      },
+      {
+        id: 'post-pattern-weakness',
+        visibleCount: 15,
+        annotationIds: ['engulf-box', 'engulf-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Later weakness confirms the reversal was genuine',
+            summary:
+              'Subsequent sessions stay heavy rather than instantly snapping back. That matters because a bearish engulfing is most valuable when the market keeps respecting the reversal instead of treating it as a one-day overreaction.',
+            question: 'What habit should this case train?',
+            answer:
+              'Treat reversal patterns as hypothesis updates. The engulfing candle changed the bias, and later weak candles validated that shift.',
+            confirmationSignals: [
+              'Follow-through weakness after the engulfing day',
+              'No immediate reclaim of the engulfing high',
+            ],
+            invalidationSignals: [
+              'A sharp recovery back through the engulfing candle range',
+            ],
+          },
+          zh: {
+            title: '后续持续偏弱，说明这次反转不是假动作',
+            summary:
+              '之后几个交易日并没有立刻强力收回，而是继续偏弱运行。这样一来，看跌吞没的价值才真正体现出来：市场尊重了这次反转，而不是把它当作单日过度波动。',
+            question: '这个案例应该训练你形成什么习惯？',
+            answer:
+              '把反转形态当作“更新假设”的工具。吞没那天先改变偏向，后面的弱势蜡烛再验证这个偏向是否成立。',
+            confirmationSignals: [
+              '吞没出现后继续有弱势跟随',
+              '价格没有立刻重新站回吞没高点',
+            ],
+            invalidationSignals: [
+              '价格迅速强势收回整根吞没阴线区间',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This case teaches a key reversal idea: a gap-up is not bullish if sellers can completely reverse it before the close.',
+        conclusion:
+          'A bearish engulfing becomes educational when you read the sentiment shift inside the session, then verify it through later weakness.',
+      },
+      zh: {
+        intro:
+          '这个案例要训练的核心是：跳空高开并不天然看涨，如果空方能在收盘前把它完全反转，意义反而更偏空。',
+        conclusion:
+          '看跌吞没的教学重点，是先读懂单日内的情绪反转，再用后续弱势确认这个变化。',
+      },
+    },
+  },
   locale: {
     en: {
       patternLabel: 'Bearish Engulfing — Nov 20, 2025',

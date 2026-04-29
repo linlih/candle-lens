@@ -51,6 +51,140 @@ export const realChart: RealChartData = {
       arrowhead: true,
     },
   ],
+  lesson: {
+    steps: [
+      {
+        id: 'panic-selloff',
+        visibleCount: 7,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The large bearish candle creates the setup',
+            summary:
+              'October 10 is a violent sell-off day. That oversized bearish body is important because a harami only has meaning when the first candle represents real emotional pressure.',
+            question:
+              'After a very large bearish candle, what would a meaningful “pause” look like on the next session?',
+            answer:
+              'You would want a much smaller body that sits inside the prior real body, showing that the panic has stopped expanding.',
+            confirmationSignals: [
+              'The next body shrinks dramatically',
+              'That small body stays inside the prior body',
+            ],
+            invalidationSignals: [
+              'The next candle remains large and bearish',
+            ],
+          },
+          zh: {
+            title: '先有大阴线，孕线结构才成立',
+            summary:
+              '10 月 10 日是一根情绪化很强的大阴线。孕线之所以有意义，正是因为第一根 K 线必须先代表真实的恐慌性抛压。',
+            question: '在这样一根大阴线之后，什么样的“停顿”才算有分析意义？',
+            answer:
+              '下一根实体必须明显缩小，并且落在前一根实体内部，说明恐慌没有继续扩散。',
+            confirmationSignals: [
+              '下一根实体明显缩小',
+              '小实体完全落在前一根实体内部',
+            ],
+            invalidationSignals: [
+              '下一根仍然是大阴线并继续扩张',
+            ],
+          },
+        },
+      },
+      {
+        id: 'harami-appears',
+        visibleCount: 8,
+        annotationIds: ['harami-box', 'harami-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The harami says panic has paused',
+            summary:
+              'October 13 prints a tiny bullish body entirely inside October 10’s huge bearish body. The message is not “bull trend resumed.” The message is smaller: the one-sided selling panic has paused, and the market is rebalancing.',
+            question:
+              'What should you expect from the next candles if this small inside body really marks a short-term bottoming process?',
+            answer:
+              'You want later candles to stop making fresh impulsive lows and begin stabilising, even if the rebound is not immediate and clean.',
+            confirmationSignals: [
+              'Later candles stop extending the selloff aggressively',
+              'Price begins to stabilise after the panic day',
+            ],
+            invalidationSignals: [
+              'The market quickly breaks into new panic lows again',
+            ],
+          },
+          zh: {
+            title: '孕线说明恐慌暂时停下来了',
+            summary:
+              '10 月 13 日出现一根很小的阳线实体，并且完全包在 10 月 10 日的大阴线实体内部。它传达的信息不是“上涨趋势恢复”，而是更克制的一层：单边恐慌性抛售先停下来了，市场开始重新平衡。',
+            question: '如果这个小实体真的在提示短线筑底过程，后面应该看到什么？',
+            answer:
+              '你希望后面的蜡烛不再继续情绪化创新低，并逐渐进入企稳状态，哪怕反弹不是立刻又快又强。',
+            confirmationSignals: [
+              '后续蜡烛不再激烈延续下跌',
+              '恐慌日之后价格开始企稳',
+            ],
+            invalidationSignals: [
+              '市场很快再次进入新的恐慌低点',
+            ],
+          },
+        },
+      },
+      {
+        id: 'stabilisation-after-harami',
+        visibleCount: 13,
+        annotationIds: ['harami-box', 'harami-label'],
+        bias: 'neutral',
+        locale: {
+          en: {
+            title: 'The harami works by slowing the decline first',
+            summary:
+              'The following candles remain volatile, but the market does stabilise and later recovers. That is a realistic lesson: a bullish harami often marks exhaustion of panic before it marks a clean upside breakout.',
+            question: 'What is the teaching value if the pattern gives stabilisation before a strong uptrend?',
+            answer:
+              'It teaches you to spot regime change early. You are not forecasting perfection; you are noticing when panic selling has stopped dominating every close.',
+            confirmationSignals: [
+              'The decline loses urgency',
+              'Subsequent candles start building a base',
+            ],
+            invalidationSignals: [
+              'Price immediately resumes one-way collapse',
+            ],
+          },
+          zh: {
+            title: '孕线常常先让跌势放缓，再谈真正反转',
+            summary:
+              '后面的蜡烛仍然有波动，但市场确实先企稳，随后才逐渐恢复。这是更真实的教学点：看涨孕线很多时候先标记恐慌衰竭，再慢慢演变成更明确的反弹。',
+            question: '如果形态先带来企稳，而不是立刻大涨，它的教学价值在哪里？',
+            answer:
+              '它训练你提早识别市场状态变化。你不是在追求完美预言，而是在发现恐慌性抛售何时不再主导每一次收盘。',
+            confirmationSignals: [
+              '跌势的急迫性下降',
+              '后续蜡烛开始构建底部结构',
+            ],
+            invalidationSignals: [
+              '价格立刻恢复成单边崩跌',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This harami case is best read as a panic-exhaustion lesson: the small inside candle does not promise a huge reversal, but it does tell you the emotional selloff has paused.',
+        conclusion:
+          'Use harami structures to detect shrinking conviction after a shock candle, then watch whether the market stabilises instead of demanding an instant rally.',
+      },
+      zh: {
+        intro:
+          '这个孕线案例更适合当作“恐慌衰竭”来读：小实体并不保证立刻大反转，但它确实告诉你情绪化抛售先停下来了。',
+        conclusion:
+          '用孕线去识别冲击性大阴线之后的动能收缩，再观察市场是否转入企稳，而不是要求它立刻暴涨。',
+      },
+    },
+  },
   locale: {
     en: {
       patternLabel: 'Bullish Harami — Oct 10–13, 2025',

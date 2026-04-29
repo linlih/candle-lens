@@ -52,6 +52,141 @@ export const realChart: RealChartData = {
       arrowhead: true,
     },
   ],
+  lesson: {
+    steps: [
+      {
+        id: 'rally-peak',
+        visibleCount: 5,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A rally peak only becomes vulnerable after momentum breaks',
+            summary:
+              'By November 3, NVDA has pushed to a fresh swing high near $211. That alone does not justify a bearish call. The analytical task here is to watch whether sellers can turn a strong advance into repeated weak closes.',
+            question:
+              'At a fresh high, what kind of evidence would tell you this is more than a normal pause?',
+            answer:
+              'You want to see sustained downside control, not just one red candle. Repeated weak closes show the market is shifting from profit-taking to organised selling.',
+            confirmationSignals: [
+              'Several consecutive bearish closes appear after the peak',
+              'Each session closes near new local lows',
+            ],
+            invalidationSignals: [
+              'Price quickly reclaims the high and resumes the rally',
+            ],
+          },
+          zh: {
+            title: '高位本身不是问题，关键是动能会不会被打断',
+            summary:
+              '到 11 月 3 日，NVDA 已经推到接近 211 美元的新高。光有新高并不能直接看空。这里真正要观察的是，卖方能不能把一段强势上涨扭转成连续的弱收盘。',
+            question: '在新高附近，什么样的证据才能说明这不只是普通整理？',
+            answer:
+              '要看到持续性的下行控制，而不只是单根阴线。连续弱收盘说明市场正在从获利回吐，转向更有组织的抛售。',
+            confirmationSignals: [
+              '高点之后出现连续几根收弱的阴线',
+              '每个交易日都收在新的局部低位附近',
+            ],
+            invalidationSignals: [
+              '价格迅速收回高点并恢复上涨',
+            ],
+          },
+        },
+      },
+      {
+        id: 'three-crows-complete',
+        visibleCount: 8,
+        annotationIds: ['crows-box', 'crows-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Three Black Crows show coordinated downside control',
+            summary:
+              'From November 4 to 6, NVDA prints three consecutive bearish candles that open within the prior range and keep driving to fresh closing lows. The pattern matters because selling pressure is persistent for multiple sessions, not because one candle looks dramatic.',
+            question:
+              'Why is this sequence stronger than a single large bearish candle at the top?',
+            answer:
+              'Because it reveals follow-through inside the pattern itself. Each day confirms the prior day’s weakness, so sellers are not just reacting once; they are staying in control.',
+            confirmationSignals: [
+              'Three sessions in a row close at lower levels',
+              'Each candle opens within the prior range and still breaks lower',
+            ],
+            invalidationSignals: [
+              'The second or third candle is quickly reversed by a strong bullish recovery',
+            ],
+          },
+          zh: {
+            title: '三只乌鸦的重点，是连续三天都由空方掌控',
+            summary:
+              '11 月 4 日到 6 日，NVDA 连续出现三根阴线：都在前一日区间内开盘，却持续把收盘价压到更低。这个形态的价值在于抛压连续存在了多个交易日，而不是某一天单根长阴线看起来很吓人。',
+            question: '为什么这组连续阴线比顶部单根大阴线更强？',
+            answer:
+              '因为它在形态内部就自带跟随确认。每一天都在验证前一天的疲弱，说明卖方不是一次性反应，而是在持续掌控节奏。',
+            confirmationSignals: [
+              '连续三个交易日都收在更低位置',
+              '每根 K 线都在前一日区间内开盘后继续下破',
+            ],
+            invalidationSignals: [
+              '第二根或第三根阴线很快被强阳线完全反包',
+            ],
+          },
+        },
+      },
+      {
+        id: 'failed-rebound',
+        visibleCount: 15,
+        annotationIds: ['crows-box', 'crows-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'The rebound is temporary; the breakdown still defines the structure',
+            summary:
+              'After the sharp selloff, NVDA does bounce, but later sessions fail to rebuild the prior uptrend and the market rolls over again. That is the practical takeaway: Three Black Crows often mark a meaningful regime shift even if you get short-lived countertrend rebounds.',
+            question:
+              'What should you remember when a bearish pattern gets followed by a bounce?',
+            answer:
+              'A bounce does not automatically cancel the signal. What matters is whether buyers can rebuild structure and reclaim key levels. Here they cannot, so the bearish read remains valid.',
+            confirmationSignals: [
+              'The rebound fails to restore the prior trend structure',
+              'Later candles lean weak again after the bounce',
+            ],
+            invalidationSignals: [
+              'Price quickly reclaims the breakdown zone and sustains above it',
+            ],
+          },
+          zh: {
+            title: '反弹只是中途喘息，破坏结构的事实没有变',
+            summary:
+              '急跌之后，NVDA 的确出现了一次反弹，但后面的 K 线没能把原来的上涨趋势重新搭起来，市场随后又转弱。这里最值得学的是：三只乌鸦经常意味着结构切换，即使中间会有短暂的逆势反弹。',
+            question: '如果看跌形态后面接了一段反弹，应该怎么理解？',
+            answer:
+              '反弹并不自动否定信号。关键是多方能不能重新站稳关键价位、把结构修复回来。这个案例里做不到，所以原本的看跌判断仍然成立。',
+            confirmationSignals: [
+              '反弹无法恢复原来的上涨结构',
+              '反弹过后后续蜡烛再次转弱',
+            ],
+            invalidationSignals: [
+              '价格迅速重新收回破位区并持续站稳',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'Use this case to learn that Three Black Crows is about repeated downside control after a peak, not just about seeing three red candles in a row.',
+        conclusion:
+          'When studying Three Black Crows, focus on sequence: rally first, then three consecutive weak closes, then check whether later rebounds can repair the damage.',
+      },
+      zh: {
+        intro:
+          '这个案例最适合用来理解：三只乌鸦的核心不是“连续三根阴线”，而是高位之后空方连续掌控市场。',
+        conclusion:
+          '学习三只乌鸦时，重点看顺序：先上涨，再连续三天弱收盘，最后观察后续反弹能不能把被破坏的结构修复回来。',
+      },
+    },
+  },
   locale: {
     en: {
       patternLabel: 'Three Black Crows — Nov 4–6, 2025',
