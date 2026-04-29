@@ -10,6 +10,7 @@ import SceneControls from './SceneControls'
 import PatternBadge from './PatternBadge'
 import RealChartSection from '@/components/realChart/RealChartSection'
 import { usePageTitle } from '@/hooks/usePageTitle'
+import { chapterGuides } from '@/content/chapterGuides'
 
 export default function ChapterView() {
   const { chapterId } = useParams<{ chapterId: string }>()
@@ -63,6 +64,7 @@ export default function ChapterView() {
   const localeContent = content.locale[locale]
   const currentScene = content.scenes[sceneIndex]
   const sceneTitle = localeContent.sceneTitles[currentScene.titleKey] ?? currentScene.titleKey
+  const chapterGuide = chapterGuides[content.id]?.[locale]
 
   const chartBlock = (
     <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-[#363a45] my-2">
@@ -108,6 +110,85 @@ export default function ChapterView() {
         blocks={localeContent.explanation}
         chartBlock={chartBlock}
       />
+
+      {chapterGuide && (
+        <div className="mt-8 rounded-2xl border border-gray-200 dark:border-[#363a45] bg-gray-50 dark:bg-[#1e222d] p-5 space-y-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#2962ff] mb-1">
+              {t('chapter.analysisGuide')}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-[#9598a1] leading-relaxed">
+              {chapterGuide.whyNotMemorize}
+            </p>
+          </div>
+
+          <div className="grid gap-3 md:grid-cols-2">
+            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
+                {t('chapter.templateTrend')}
+              </p>
+              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                {chapterGuide.trend}
+              </p>
+            </div>
+            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
+                {t('chapter.templateLocation')}
+              </p>
+              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                {chapterGuide.location}
+              </p>
+            </div>
+            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
+                {t('chapter.templateSignal')}
+              </p>
+              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                {chapterGuide.signal}
+              </p>
+            </div>
+            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
+                {t('chapter.templateConfirmation')}
+              </p>
+              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                {chapterGuide.confirmation}
+              </p>
+            </div>
+            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4 md:col-span-2">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
+                {t('chapter.templateInvalidation')}
+              </p>
+              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                {chapterGuide.invalidation}
+              </p>
+            </div>
+          </div>
+
+          {chapterGuide.confusion && (
+            <div className="rounded-xl border border-[#f5a623]/20 bg-[#f5a623]/8 p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-[#c58618] dark:text-[#f5c76b] mb-1">
+                {t('chapter.commonConfusion')}
+              </p>
+              <p className="text-sm font-semibold text-gray-900 dark:text-[#d1d4dc] mb-1">
+                {chapterGuide.confusion.pattern}
+              </p>
+              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
+                {chapterGuide.confusion.reason}
+              </p>
+            </div>
+          )}
+
+          <div className="rounded-xl border border-[#26a69a]/20 bg-[#26a69a]/8 p-4">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-[#26a69a] mb-1">
+              {t('chapter.keyTakeaway')}
+            </p>
+            <p className="text-sm text-gray-800 dark:text-[#d1d4dc] leading-relaxed font-medium">
+              {chapterGuide.takeaway}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Real-world candlestick analysis (NVDA) */}
       <RealChartSection chapterId={content.id} />

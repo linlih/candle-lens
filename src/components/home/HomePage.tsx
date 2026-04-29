@@ -15,6 +15,24 @@ const learningPath = [
   'part4-ch13-western',
 ] as const
 
+const recognitionPath = [
+  'part1-ch01-intro',
+  'part1-ch02-doji',
+  'part1-ch03-hammer',
+  'part1-ch04-star',
+  'part2-ch05-engulfing',
+  'part2-ch07-stars',
+] as const
+
+const analysisPath = [
+  'part1-ch00-analysis',
+  'part1-ch00-syntax',
+  'part2-ch06-cloud',
+  'part2-ch09-tweezers',
+  'part3-ch11-windows',
+  'part4-ch13-western',
+] as const
+
 function groupByPart(chapters: ChapterMeta[]) {
   const parts = new Map<number, ChapterMeta[]>()
   for (const ch of chapters) {
@@ -31,6 +49,12 @@ export default function HomePage() {
   const grouped = groupByPart(catalog)
   const firstChapter = catalog[0]
   const recommendedChapters = learningPath
+    .map((id) => catalog.find((chapter) => chapter.id === id))
+    .filter((chapter): chapter is ChapterMeta => !!chapter)
+  const recognitionChapters = recognitionPath
+    .map((id) => catalog.find((chapter) => chapter.id === id))
+    .filter((chapter): chapter is ChapterMeta => !!chapter)
+  const analysisChapters = analysisPath
     .map((id) => catalog.find((chapter) => chapter.id === id))
     .filter((chapter): chapter is ChapterMeta => !!chapter)
   const faviconUrl = `${import.meta.env.BASE_URL}favicon.svg`
@@ -117,6 +141,54 @@ export default function HomePage() {
               </p>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="mb-10 grid gap-4 lg:grid-cols-2">
+        <div className="rounded-2xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#26a69a] mb-1">
+            {t('home.recognitionPathLabel')}
+          </p>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-[#d1d4dc] mb-2">
+            {t('home.recognitionPathTitle')}
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-[#9598a1] mb-4">
+            {t('home.recognitionPathDescription')}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {recognitionChapters.map((chapter) => (
+              <Link
+                key={chapter.id}
+                to={`/chapter/${chapter.id}`}
+                className="px-3 py-1.5 rounded-full text-xs font-medium border border-[#26a69a]/30 text-[#1d8f85] dark:text-[#55cfc2] bg-[#26a69a]/8 hover:border-[#26a69a]/50"
+              >
+                {chapter.patternNames[0]}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#ef5350] mb-1">
+            {t('home.analysisPathLabel')}
+          </p>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-[#d1d4dc] mb-2">
+            {t('home.analysisPathTitle')}
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-[#9598a1] mb-4">
+            {t('home.analysisPathDescription')}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {analysisChapters.map((chapter) => (
+              <Link
+                key={chapter.id}
+                to={`/chapter/${chapter.id}`}
+                className="px-3 py-1.5 rounded-full text-xs font-medium border border-[#ef5350]/30 text-[#d14a47] dark:text-[#ff8b88] bg-[#ef5350]/8 hover:border-[#ef5350]/50"
+              >
+                {chapter.patternNames[0]}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

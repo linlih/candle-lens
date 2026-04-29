@@ -87,6 +87,34 @@ export const catalog: ChapterMeta[] = [
     patternNames: ['Three White Soldiers', 'Three Black Crows'],
     sceneCount: 3,
   },
+  {
+    id: 'part2-ch14-special-reversals',
+    partNumber: 2,
+    chapterNumber: 14,
+    patternNames: ['Abandoned Baby', 'Tri-Star', 'Kicking'],
+    sceneCount: 3,
+  },
+  {
+    id: 'part2-ch15-line-reversals',
+    partNumber: 2,
+    chapterNumber: 15,
+    patternNames: ['Belt Hold', 'Counterattack', 'Meeting Lines', 'Matching Low'],
+    sceneCount: 4,
+  },
+  {
+    id: 'part2-ch16-neck-and-breakaway',
+    partNumber: 2,
+    chapterNumber: 16,
+    patternNames: ['On-Neck', 'In-Neck', 'Thrusting', 'Breakaway'],
+    sceneCount: 4,
+  },
+  {
+    id: 'part2-ch17-advanced-structures',
+    partNumber: 2,
+    chapterNumber: 17,
+    patternNames: ['Advance Block', 'Deliberation', 'Ladder Bottom'],
+    sceneCount: 3,
+  },
   // Part 3: Continuation Patterns
   {
     id: 'part3-ch11-windows',
@@ -102,6 +130,13 @@ export const catalog: ChapterMeta[] = [
     patternNames: ['Rising Three Methods', 'Falling Three Methods'],
     sceneCount: 3,
   },
+  {
+    id: 'part3-ch18-gap-continuations',
+    partNumber: 3,
+    chapterNumber: 18,
+    patternNames: ['Separating Lines', 'Tasuki Gaps', 'Mat Hold'],
+    sceneCount: 3,
+  },
   // Part 4: Advanced Techniques
   {
     id: 'part4-ch13-western',
@@ -109,6 +144,27 @@ export const catalog: ChapterMeta[] = [
     chapterNumber: 13,
     patternNames: ['Combining Western Techniques'],
     sceneCount: 2,
+  },
+  {
+    id: 'part4-ch19-volume',
+    partNumber: 4,
+    chapterNumber: 19,
+    patternNames: ['Volume Confirmation'],
+    sceneCount: 3,
+  },
+  {
+    id: 'part4-ch20-context-comparisons',
+    partNumber: 4,
+    chapterNumber: 20,
+    patternNames: ['Same Shape, Different Context', 'Top vs Bottom Mirrors'],
+    sceneCount: 4,
+  },
+  {
+    id: 'part4-ch21-confluence-lab',
+    partNumber: 4,
+    chapterNumber: 21,
+    patternNames: ['Trendline', 'Moving Average', 'Gap', 'Structure Confluence'],
+    sceneCount: 4,
   },
 ]
 

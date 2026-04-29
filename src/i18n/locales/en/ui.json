@@ -14,7 +14,15 @@
     "backToHome": "Back to Home",
     "loading": "Loading...",
     "notFound": "Chapter not found.",
-    "notFoundHint": "Go back to the home page to find a chapter."
+    "notFoundHint": "Go back to the home page to find a chapter.",
+    "analysisGuide": "Reading Framework",
+    "templateTrend": "1. Trend",
+    "templateLocation": "2. Location",
+    "templateSignal": "3. Signal",
+    "templateConfirmation": "4. Confirmation",
+    "templateInvalidation": "5. Invalidation",
+    "commonConfusion": "Common Confusion",
+    "keyTakeaway": "Most Important Takeaway"
   },
   "cheatSheet": {
     "title": "Candlestick Cheat Sheet",
@@ -32,7 +40,13 @@
     "pathLabel": "Recommended Path",
     "pathTitle": "Learn the reading process before memorising shapes",
     "pathDescription": "Start with trend, location, and confirmation. Then learn body and shadow syntax. Only after that should you stack named reversal patterns.",
-    "pathStep": "Step {{number}}"
+    "pathStep": "Step {{number}}",
+    "recognitionPathLabel": "Recognition Track",
+    "recognitionPathTitle": "Learn to spot the shape families first",
+    "recognitionPathDescription": "Use this path when you still need pattern recognition reps. It moves from the simplest single-candle structures to the most common reversal groups.",
+    "analysisPathLabel": "Analysis Track",
+    "analysisPathTitle": "Learn to read context before naming patterns",
+    "analysisPathDescription": "Use this path when you want to think like a chart reader. It emphasises context, location, confirmation, continuation, and confluence."
   },
   "parts": {
     "1": "Part 1: Basic Candlestick Lines",

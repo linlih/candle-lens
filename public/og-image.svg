@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="40" x2="1080" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A" />
+      <stop offset="1" stop-color="#131722" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#2962FF" stop-opacity="0.32" />
+      <stop offset="1" stop-color="#26A69A" stop-opacity="0.08" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" rx="36" fill="url(#bg)" />
+  <rect x="44" y="44" width="1112" height="542" rx="28" stroke="rgba(255,255,255,0.08)" />
+  <circle cx="1020" cy="122" r="220" fill="url(#glow)" />
+
+  <g transform="translate(112 126)">
+    <rect x="0" y="0" width="164" height="164" rx="28" fill="#0B1220" />
+    <rect x="34" y="28" width="10" height="24" fill="#EF5350" />
+    <rect x="26" y="52" width="26" height="58" fill="#EF5350" />
+    <rect x="34" y="110" width="10" height="26" fill="#EF5350" />
+
+    <rect x="78" y="16" width="10" height="20" fill="#26A69A" />
+    <rect x="70" y="36" width="26" height="78" fill="#26A69A" />
+    <rect x="78" y="114" width="10" height="38" fill="#26A69A" />
+
+    <rect x="122" y="40" width="10" height="26" fill="#EF5350" />
+    <rect x="114" y="66" width="26" height="62" fill="#EF5350" />
+    <rect x="122" y="128" width="10" height="30" fill="#EF5350" />
+  </g>
+
+  <text x="320" y="220" fill="#F8FAFC" font-size="72" font-weight="700" font-family="Inter, Arial, sans-serif">
+    Candle Lens
+  </text>
+  <text x="320" y="286" fill="#94A3B8" font-size="28" font-weight="500" font-family="Inter, Arial, sans-serif">
+    Interactive lessons for Japanese candlestick analysis
+  </text>
+
+  <g transform="translate(320 344)">
+    <rect width="170" height="54" rx="27" fill="#1D2637" />
+    <text x="28" y="35" fill="#26A69A" font-size="22" font-weight="700" font-family="Inter, Arial, sans-serif">
+      Trend
+    </text>
+
+    <rect x="190" width="182" height="54" rx="27" fill="#1D2637" />
+    <text x="218" y="35" fill="#2962FF" font-size="22" font-weight="700" font-family="Inter, Arial, sans-serif">
+      Location
+    </text>
+
+    <rect x="392" width="214" height="54" rx="27" fill="#1D2637" />
+    <text x="420" y="35" fill="#F59E0B" font-size="22" font-weight="700" font-family="Inter, Arial, sans-serif">
+      Confirmation
+    </text>
+  </g>
+
+  <text x="320" y="472" fill="#E2E8F0" font-size="34" font-weight="600" font-family="Inter, Arial, sans-serif">
+    Learn the pattern. Read the context. Wait for the next candle.
+  </text>
+  <text x="320" y="528" fill="#64748B" font-size="24" font-weight="500" font-family="Inter, Arial, sans-serif">
+    candlestick chart learning • step-by-step lessons • real chart practice
+  </text>
+</svg>

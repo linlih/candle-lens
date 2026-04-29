@@ -14,7 +14,15 @@
     "backToHome": "返回首页",
     "loading": "加载中...",
     "notFound": "章节未找到。",
-    "notFoundHint": "返回首页查找其他章节。"
+    "notFoundHint": "返回首页查找其他章节。",
+    "analysisGuide": "阅读框架",
+    "templateTrend": "1. 趋势",
+    "templateLocation": "2. 位置",
+    "templateSignal": "3. 信号",
+    "templateConfirmation": "4. 确认",
+    "templateInvalidation": "5. 失效",
+    "commonConfusion": "常见混淆",
+    "keyTakeaway": "本章最重要判断句"
   },
   "cheatSheet": {
     "title": "蜡烛图速查表",
@@ -32,7 +40,13 @@
     "pathLabel": "推荐学习顺序",
     "pathTitle": "先学“怎么读图”，再记形态名字",
     "pathDescription": "先把趋势、位置、确认学明白，再掌握实体和影线语法，最后再往上叠加具体反转形态，学习效率会高得多。",
-    "pathStep": "第 {{number}} 步"
+    "pathStep": "第 {{number}} 步",
+    "recognitionPathLabel": "形态识别路线",
+    "recognitionPathTitle": "先把常见蜡烛结构认出来",
+    "recognitionPathDescription": "如果你现在还处在“看到图但叫不出名字”的阶段，先走这条路线。它会从单根结构一路过渡到最常见的反转家族。",
+    "analysisPathLabel": "实战分析路线",
+    "analysisPathTitle": "先学上下文，再学形态命名",
+    "analysisPathDescription": "如果你更想练“如何分析”，先走这条路线。它会优先训练趋势、位置、确认、持续和共振，而不是单纯背名字。"
   },
   "parts": {
     "1": "第一部分：基础蜡烛线",
