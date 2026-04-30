@@ -67,6 +67,10 @@
     "switchTo": {
       "red-up": "Switch candlestick colors to red up / green down",
       "green-up": "Switch candlestick colors to green up / red down"
+    },
+    "switchedTo": {
+      "red-up": "Switched to red up / green down",
+      "green-up": "Switched to green up / red down"
     }
   },
   "realChart": {

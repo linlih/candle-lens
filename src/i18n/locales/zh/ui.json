@@ -67,6 +67,10 @@
     "switchTo": {
       "red-up": "切换蜡烛图为红涨绿跌",
       "green-up": "切换蜡烛图为绿涨红跌"
+    },
+    "switchedTo": {
+      "red-up": "已切换为红涨绿跌",
+      "green-up": "已切换为绿涨红跌"
     }
   },
   "realChart": {
