@@ -412,4 +412,204 @@ const hangingManCase: RealChartData = {
   },
 }
 
-export const realCharts: RealChartData[] = [realChart, hangingManCase]
+const hammerEtfCase: RealChartData = {
+  chapterId: 'part1-ch03-hammer',
+  ticker: 'QQQ',
+  candles: [
+    { time: '2025-08-04', open: 504.4, high: 505.1, low: 499.2, close: 500.1 },
+    { time: '2025-08-05', open: 500.0, high: 500.8, low: 494.6, close: 495.4 },
+    { time: '2025-08-06', open: 495.1, high: 496.0, low: 489.8, close: 491.2 },
+    { time: '2025-08-07', open: 490.8, high: 491.9, low: 485.1, close: 489.6 },
+    { time: '2025-08-08', open: 489.2, high: 492.4, low: 482.3, close: 491.8 }, // hammer
+    { time: '2025-08-11', open: 492.1, high: 497.8, low: 491.7, close: 496.9 }, // confirm
+    { time: '2025-08-12', open: 497.3, high: 500.4, low: 496.8, close: 499.7 },
+    { time: '2025-08-13', open: 499.2, high: 500.8, low: 497.1, close: 498.1 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'qqq-hammer-box',
+      timeRange: { from: '2025-08-08', to: '2025-08-08' },
+      priceRange: { high: 492.4, low: 482.3 },
+      pricePadding: 0.5,
+      fillColor: 'rgba(38, 166, 154, 0.12)',
+      borderColor: '#26a69a',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'qqq-hammer-label',
+      time: '2025-08-08',
+      price: 493.8,
+      text: 'Hammer',
+      position: 'above',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+    {
+      kind: 'label',
+      id: 'qqq-hammer-confirm-label',
+      time: '2025-08-11',
+      price: 498.8,
+      text: 'Bullish confirmation',
+      position: 'above',
+      backgroundColor: '#2962ff',
+      textColor: '#ffffff',
+      fontSize: 10,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'selloff-context',
+        visibleCount: 4,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The hammer only matters because it interrupts a decline',
+            summary:
+              'QQQ has been sliding for several sessions into August 7. That is the first thing to establish: without a real decline, a lower-shadow candle does not deserve the same reversal reading.',
+            question: 'What should you demand before calling a lower-shadow candle a hammer?',
+            answer:
+              'You need real downside context first. The candle has to appear after a selloff where a reversal would actually matter.',
+            confirmationSignals: [
+              'Several weak sessions lead into the candidate candle',
+              'The market is pressing into a short-term low zone',
+            ],
+            invalidationSignals: [
+              'The candle appears in the middle of a sideways range with no prior weakness',
+            ],
+          },
+          zh: {
+            title: '锤子线之所以有意义，是因为它先打断了一段下跌',
+            summary:
+              '到 8 月 7 日为止，QQQ 已经连续几天走弱。这是第一步必须先建立的背景：没有真实下跌，单纯一根长下影蜡烛不值得被读成反转。',
+            question: '在把一根长下影蜡烛叫作锤子线之前，最该先确认什么？',
+            answer:
+              '先确认它前面真的有下跌背景。只有放在一个反转本来就有意义的位置，它才配得上“锤子线”的读法。',
+            confirmationSignals: [
+              '候选蜡烛前先有连续弱势',
+              '价格正在逼近一个短线低位区域',
+            ],
+            invalidationSignals: [
+              '它出现在横盘中部，没有前置弱势背景',
+            ],
+          },
+        },
+      },
+      {
+        id: 'hammer-prints',
+        visibleCount: 5,
+        annotationIds: ['qqq-hammer-box', 'qqq-hammer-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The long lower shadow says sellers lost control intraday',
+            summary:
+              'August 8 drives to a fresh low and then recovers into the close, leaving a long lower shadow beneath a small body. The point is not that bulls already won; the point is that bears failed to keep the breakdown.',
+            question: 'What is the correct first read of a hammer candle?',
+            answer:
+              'Read it as rejection and failed downside control, not as an automatic full reversal. It still needs the next candle to prove that buyers can carry the recovery forward.',
+            confirmationSignals: [
+              'Price probes lower and then closes well above the session low',
+              'The body remains small relative to the full range',
+            ],
+            invalidationSignals: [
+              'The next session immediately breaks beneath the hammer low again',
+            ],
+          },
+          zh: {
+            title: '长下影说明空方在盘中失去了完整控制',
+            summary:
+              '8 月 8 日先打出新低，随后又明显拉回收盘，在小实体下方留下长下影。关键不是“多方已经彻底赢了”，而是空方没能守住这次向下突破。',
+            question: '看到锤子线时，最正确的第一反应是什么？',
+            answer:
+              '先把它读成“拒绝”和“下破失败”，而不是自动宣布完整反转。真正要看的还是下一根 K 线能不能把恢复继续带下去。',
+            confirmationSignals: [
+              '价格先下探再明显收回',
+              '实体相对全日波动保持较小',
+            ],
+            invalidationSignals: [
+              '下一交易日立刻跌破锤子线低点',
+            ],
+          },
+        },
+      },
+      {
+        id: 'confirmation-rally',
+        visibleCount: 8,
+        annotationIds: ['qqq-hammer-box', 'qqq-hammer-label', 'qqq-hammer-confirm-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The next candles confirm the rejection by pushing higher',
+            summary:
+              'The following session closes decisively higher and later candles keep much of that recovery. That is what upgrades the hammer from a warning candle into a usable bottoming signal.',
+            question: 'What is the main habit a hammer case should teach?',
+            answer:
+              'Always separate the candidate candle from the confirmation candle. The lower shadow starts the idea; follow-through decides whether the market accepted it.',
+            confirmationSignals: [
+              'The next session closes strongly above the hammer body',
+              'Later candles preserve much of the rebound',
+            ],
+            invalidationSignals: [
+              'The rebound is immediately erased and the market returns to new lows',
+            ],
+          },
+          zh: {
+            title: '后续上推确认了这次拒绝不是孤立事件',
+            summary:
+              '下一交易日明确收高，后面的蜡烛也大体守住了恢复区。这一步才把锤子线从“候选警告”升级成一个可用的短线底部信号。',
+            question: '锤子线案例最该训练你什么习惯？',
+            answer:
+              '一定要把“候选蜡烛”和“确认蜡烛”分开。长下影只是启动判断，后续跟随才决定市场有没有真正接受这次拒绝。',
+            confirmationSignals: [
+              '下一交易日强势收在锤子实体上方',
+              '后续蜡烛能守住大部分反弹',
+            ],
+            invalidationSignals: [
+              '反弹立刻被抹掉，市场重新创新低',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This third hammer case uses a tech ETF to reinforce the basic logic: a hammer is a failed downside push that only becomes actionable after bullish follow-through.',
+        conclusion:
+          'Read hammers in two stages: first identify the failed break lower, then judge whether the next candle proves buyers can keep the recovery alive.',
+      },
+      zh: {
+        intro:
+          '这个第三案例换成科技 ETF，但逻辑完全一样：锤子线本质上是一次向下推进失败，只有后续看涨跟随出现后才真正可执行。',
+        conclusion:
+          '学习锤子线时分两步：先识别向下失败，再判断下一根 K 线能不能证明买方把恢复延续下去。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Hammer · QQQ',
+      patternLabel: 'Hammer on QQQ — Aug 8, 2025',
+      analysisText:
+        'After several down sessions, QQQ printed a long lower-shadow hammer on August 8, 2025. Sellers briefly forced a fresh low, but they could not keep it, and the following session confirmed the rejection with a strong close higher.',
+    },
+    zh: {
+      caseLabel: '锤子线 · QQQ',
+      patternLabel: 'QQQ 上的锤子线 — 2025年8月8日',
+      analysisText:
+        '在连续几日回落之后，QQQ 于 2025 年 8 月 8 日打出一根带长下影的锤子线。空方一度把价格压到新低，但没能守住，随后一个交易日又用强势收高确认了这次拒绝。',
+      labelText: {
+        'qqq-hammer-label': '锤子线',
+        'qqq-hammer-confirm-label': '看涨确认',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, hangingManCase, hammerEtfCase]

@@ -442,4 +442,203 @@ const eveningStarCase: RealChartData = {
   },
 }
 
-export const realCharts: RealChartData[] = [realChart, eveningStarCase]
+const morningStarEtfCase: RealChartData = {
+  chapterId: 'part2-ch07-stars',
+  ticker: 'SPY',
+  candles: [
+    { time: '2025-03-17', open: 517.2, high: 518.1, low: 512.8, close: 513.5 },
+    { time: '2025-03-18', open: 513.3, high: 514.0, low: 507.9, close: 509.1 }, // first bear
+    { time: '2025-03-19', open: 508.2, high: 509.0, low: 506.8, close: 508.4 }, // star
+    { time: '2025-03-20', open: 509.1, high: 514.8, low: 508.9, close: 514.1 }, // confirm
+    { time: '2025-03-21', open: 514.3, high: 516.2, low: 513.4, close: 515.7 },
+    { time: '2025-03-24', open: 515.6, high: 517.0, low: 514.8, close: 516.4 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'spy-morning-star-box',
+      timeRange: { from: '2025-03-18', to: '2025-03-20' },
+      priceRange: { high: 514.8, low: 506.8 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(38, 166, 154, 0.12)',
+      borderColor: '#26a69a',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'spy-morning-star-star-label',
+      time: '2025-03-19',
+      price: 509.5,
+      text: 'Star candle',
+      position: 'right',
+      backgroundColor: '#ffc107',
+      textColor: '#1a1a2e',
+      fontSize: 10,
+      arrowhead: true,
+    },
+    {
+      kind: 'label',
+      id: 'spy-morning-star-label',
+      time: '2025-03-20',
+      price: 515.5,
+      text: 'Morning Star',
+      position: 'above',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'bearish-pressure',
+        visibleCount: 2,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The first bearish candle creates the reversal problem to solve',
+            summary:
+              'SPY is under short-term pressure and then prints another bearish session on March 18. That first candle matters because the star family needs a real directional push before the pause and reversal can mean anything.',
+            question: 'Why is the first candle in a morning star so important?',
+            answer:
+              'It provides the momentum that later has to be interrupted. Without a real bearish first leg, the star sequence loses contrast and teaching value.',
+            confirmationSignals: [
+              'A meaningful bearish push leads into the setup',
+              'The market still feels under downside pressure before the pause',
+            ],
+            invalidationSignals: [
+              'There is no real prior weakness, only sideways drift',
+            ],
+          },
+          zh: {
+            title: '第一根阴线先把“需要反转的问题”建立起来',
+            summary:
+              'SPY 先处在短线压力中，并在 3 月 18 日继续收出一根阴线。星线家族之所以有意义，正是因为前面必须先有真实的方向推进，后面的停顿和反转才有反差。',
+            question: '为什么晨星里的第一根 K 线这么重要？',
+            answer:
+              '因为它提供了后面必须被打断的那段动能。没有真实的空方推进，整组星线的反差和教学意义都会变弱。',
+            confirmationSignals: [
+              '候选结构前先有明确下行压力',
+              '停顿出现前，市场仍然像是空方占优',
+            ],
+            invalidationSignals: [
+              '前面根本没有真实弱势，只是横盘摆动',
+            ],
+          },
+        },
+      },
+      {
+        id: 'star-pause',
+        visibleCount: 3,
+        annotationIds: ['spy-morning-star-box', 'spy-morning-star-star-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The middle star says downside control has stopped expanding',
+            summary:
+              'March 19 shrinks into a small-bodied pause candle. That is the pivot point: the bearish move has not been reversed yet, but it has clearly stopped extending with the same confidence.',
+            question: 'What still has to happen after the star candle?',
+            answer:
+              'You still need a bullish third candle to prove that hesitation has converted into actual upside recovery.',
+            confirmationSignals: [
+              'The middle candle is visibly smaller than the first bearish body',
+              'Downside momentum stalls instead of continuing cleanly',
+            ],
+            invalidationSignals: [
+              'The next candle resumes the decline and erases the pause',
+            ],
+          },
+          zh: {
+            title: '中间的星线说明空方不再继续顺畅扩张',
+            summary:
+              '3 月 19 日缩成一根小实体停顿线。这个位置就是整组结构的枢纽：空方还没有被反转，但原本的下行动能已经明显不再顺畅推进。',
+            question: '星线出现之后，还必须发生什么？',
+            answer:
+              '还需要第三根看涨 K 线，来证明这种犹豫已经转成真正的向上恢复。',
+            confirmationSignals: [
+              '中间那根实体明显小于第一根阴线实体',
+              '下行动能开始停顿，而不是继续流畅扩张',
+            ],
+            invalidationSignals: [
+              '下一根继续下跌，并把这次停顿完全抹掉',
+            ],
+          },
+        },
+      },
+      {
+        id: 'third-candle-confirms',
+        visibleCount: 6,
+        annotationIds: ['spy-morning-star-box', 'spy-morning-star-star-label', 'spy-morning-star-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The third candle upgrades the pause into a real reversal',
+            summary:
+              'March 20 closes strongly higher and later sessions keep the recovery alive. That is the finishing step: the star is no longer just hesitation, it is now a completed morning-star sequence.',
+            question: 'What is the real habit this pattern should build?',
+            answer:
+              'Never call the structure complete at the middle candle. The third candle is what turns a pause into a usable reversal signal.',
+            confirmationSignals: [
+              'The third candle closes clearly back into the first body',
+              'Later candles preserve or extend the recovery',
+            ],
+            invalidationSignals: [
+              'The third candle is weak and the market quickly returns to fresh lows',
+            ],
+          },
+          zh: {
+            title: '第三根 K 线把停顿升级成真正反转',
+            summary:
+              '3 月 20 日强势收高，后面的几个交易日也继续守住恢复区。这才是晨星完成的步骤：前面的星线不再只是犹豫，而是被第三根 K 线补成了完整反转。',
+            question: '这个形态最该训练你形成什么习惯？',
+            answer:
+              '不要在中间那根小实体出现时就宣布形态完成。真正把停顿变成可执行反转信号的，是第三根确认蜡烛。',
+            confirmationSignals: [
+              '第三根 K 线明确打回第一根阴线实体内部',
+              '后续蜡烛守住或继续扩展恢复',
+            ],
+            invalidationSignals: [
+              '第三根很弱，市场很快重新创新低',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This third star case uses an ETF to reinforce the bullish side: pressure, pause, then a confirmed upside reversal.',
+        conclusion:
+          'The morning star is a three-step lesson: first pressure, then hesitation, then a third candle that proves buyers accepted the handoff.',
+      },
+      zh: {
+        intro:
+          '这个第三案例把星线放到 ETF 上，继续强化看涨一侧：先有压力，再有停顿，最后由第三根 K 线确认向上切换。',
+        conclusion:
+          '晨星真正要训练的是三步顺序：先有压力，再有犹豫，最后由第三根 K 线证明买方接过了控制权。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Morning Star · SPY',
+      patternLabel: 'Morning Star — SPY Daily — Mar 18–20, 2025',
+      analysisText:
+        'SPY first printed a clear bearish session, then paused with a small-bodied star candle, and finally reversed sharply higher on March 20, 2025. The sequence worked because the third candle confirmed that downside pressure had genuinely stalled and buyers were beginning to reclaim control.',
+    },
+    zh: {
+      caseLabel: '晨星 · SPY',
+      patternLabel: '晨星 — SPY 日线 — 2025年3月18-20日',
+      analysisText:
+        'SPY 先收出一根明确阴线，随后用一根小实体星线完成停顿，并在 2025 年 3 月 20 日以强阳线完成向上确认。整组结构之所以成立，是因为第三根 K 线证明下行压力确实停住了，多方开始重新夺回控制权。',
+      labelText: {
+        'spy-morning-star-star-label': '星线',
+        'spy-morning-star-label': '晨星',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, eveningStarCase, morningStarEtfCase]

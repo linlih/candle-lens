@@ -392,4 +392,193 @@ const haramiCrossCase: RealChartData = {
   },
 }
 
-export const realCharts: RealChartData[] = [realChart, haramiCrossCase]
+const bearishHaramiCase: RealChartData = {
+  chapterId: 'part2-ch08-harami',
+  ticker: 'SPY',
+  candles: [
+    { time: '2025-07-07', open: 548.2, high: 550.1, low: 546.8, close: 549.6 },
+    { time: '2025-07-08', open: 550.2, high: 553.4, low: 549.9, close: 552.8 },
+    { time: '2025-07-09', open: 553.1, high: 556.7, low: 552.4, close: 556.1 },
+    { time: '2025-07-10', open: 556.4, high: 560.8, low: 555.9, close: 560.1 }, // large bull
+    { time: '2025-07-11', open: 558.8, high: 559.4, low: 557.1, close: 557.6 }, // small bear inside body
+    { time: '2025-07-14', open: 556.9, high: 557.5, low: 552.2, close: 553.1 },
+    { time: '2025-07-15', open: 552.6, high: 553.2, low: 549.4, close: 550.2 },
+    { time: '2025-07-16', open: 550.8, high: 551.6, low: 548.9, close: 549.5 },
+    { time: '2025-07-17', open: 549.4, high: 552.7, low: 548.8, close: 552.3 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'bearish-harami-box',
+      timeRange: { from: '2025-07-10', to: '2025-07-11' },
+      priceRange: { high: 560.8, low: 555.9 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(239, 83, 80, 0.10)',
+      borderColor: '#ef5350',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'bearish-harami-label',
+      time: '2025-07-11',
+      price: 561.8,
+      text: 'Bearish Harami',
+      position: 'above',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'extended-uptrend',
+        visibleCount: 4,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The first candle represents confident upside continuation',
+            summary:
+              'SPY has already been climbing and then prints another wide bullish candle on July 10. That large body matters because a bearish harami needs clear prior upside conviction before a smaller inside session can signal hesitation.',
+            question: 'What should make you suspicious after such a strong bullish day?',
+            answer:
+              'The next session should shrink dramatically and fail to continue the same upside control. That contrast is what starts the warning.',
+            confirmationSignals: [
+              'The trend has already extended into strength',
+              'The first candle closes with obvious bullish conviction',
+            ],
+            invalidationSignals: [
+              'The next session simply continues upward with another large body',
+            ],
+          },
+          zh: {
+            title: '先有强势推进，后面的孕线才有警告价值',
+            summary:
+              'SPY 前面已经在上涨，7 月 10 日又打出一根宽实体大阳线。正因为第一根体现了明确的上行动能，后面的“小实体内包”才会有犹豫和衰减的意义。',
+            question: '在这样一根强阳之后，什么变化最值得警惕？',
+            answer:
+              '下一交易日应该明显缩小，并且没能延续同样的上行控制。正是这种反差，让警告开始成立。',
+            confirmationSignals: [
+              '前面已经有一段明确上涨',
+              '第一根 K 线带着明显的多方推进信心收盘',
+            ],
+            invalidationSignals: [
+              '下一交易日继续放大上涨，没有出现停顿',
+            ],
+          },
+        },
+      },
+      {
+        id: 'inside-pause',
+        visibleCount: 5,
+        annotationIds: ['bearish-harami-box', 'bearish-harami-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The small inside candle says the advance has lost cleanliness',
+            summary:
+              'July 11 prints a small bearish body inside the prior bullish body. That does not prove a top yet, but it does say buyers are no longer extending the move as cleanly as before.',
+            question: 'Why is a bearish harami weaker than an engulfing top?',
+            answer:
+              'Because it signals contraction, not destruction. The trend has paused and weakened, but sellers have not yet fully overwhelmed the prior bullish candle.',
+            confirmationSignals: [
+              'The inside body is much smaller than the prior impulse candle',
+              'Price stops extending immediately after the strong up day',
+            ],
+            invalidationSignals: [
+              'The market immediately breaks to fresh highs after the inside body',
+            ],
+          },
+          zh: {
+            title: '内包小阴线说明上涨不再那么顺畅',
+            summary:
+              '7 月 11 日出现一根很小的阴线实体，并且完全落在前一根阳线实体内部。它还不能直接证明顶部成立，但已经说明买方不再像前一天那样干净利落地推进。',
+            question: '为什么看跌孕线通常弱于顶部吞没？',
+            answer:
+              '因为它表达的是收缩，不是摧毁。趋势先停顿、先减弱，但空方还没有彻底压倒前一根强阳。',
+            confirmationSignals: [
+              '内包实体明显小于前一根脉冲阳线',
+              '强势上冲之后，价格立刻停止扩张',
+            ],
+            invalidationSignals: [
+              '内包之后市场立刻突破新高',
+            ],
+          },
+        },
+      },
+      {
+        id: 'follow-through-lower',
+        visibleCount: 9,
+        annotationIds: ['bearish-harami-box', 'bearish-harami-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Later weakness turns the pause into a real warning',
+            summary:
+              'The next sessions lean lower rather than rebuilding the prior breakout. That follow-through is what turns the harami from a visual curiosity into an actionable warning that upside momentum has compressed.',
+            question: 'What is the main takeaway from this bearish harami example?',
+            answer:
+              'Do not expect the pattern to call the exact top tick. Use it to detect when bullish trend quality is no longer expanding and the market is becoming vulnerable to a pullback.',
+            confirmationSignals: [
+              'Later candles cannot restore the prior highs',
+              'Price starts slipping rather than exploding upward again',
+            ],
+            invalidationSignals: [
+              'Buyers quickly reclaim the whole pause and resume trend',
+            ],
+          },
+          zh: {
+            title: '后续走弱，让这次停顿升级成真实预警',
+            summary:
+              '后面几根蜡烛没有把前面的突破重新搭起来，反而逐步转弱。这种跟随才会把孕线从“视觉上的停顿”变成“动能收缩的实战预警”。',
+            question: '这个看跌孕线案例最值得记住什么？',
+            answer:
+              '不要指望它精确抓到最高点，而要把它当作“上涨推进质量开始变差”的早期提示，提醒你市场更容易进入回撤。',
+            confirmationSignals: [
+              '后续蜡烛无法重建前高',
+              '价格开始滑落，而不是继续上冲',
+            ],
+            invalidationSignals: [
+              '多方迅速收回整个停顿区并恢复上升趋势',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This third harami case shows the top-side version in an index ETF: a small inside body warns that upside momentum has stopped expanding cleanly.',
+        conclusion:
+          'Use bearish harami patterns to detect contraction after a strong rally, then judge whether later candles confirm the slowdown.',
+      },
+      zh: {
+        intro:
+          '这个第三案例把孕线放到指数 ETF 的顶部环境里：小实体内包提醒你，上涨动能已经不再继续顺畅扩张。',
+        conclusion:
+          '看跌孕线最适合用来识别强势上涨后的动能收缩，再观察后续蜡烛是否真正确认放缓。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Bearish Harami',
+      patternLabel: 'Bearish Harami on SPY — Jul 10–11, 2025',
+      analysisText:
+        'SPY rallied into July 10 with a broad bullish impulse candle, then printed a much smaller bearish body entirely inside that prior range on July 11. The pattern did not crash the market immediately, but it clearly warned that upside conviction had stopped expanding and the next sessions rotated lower.',
+    },
+    zh: {
+      caseLabel: '看跌孕线',
+      patternLabel: 'SPY 上的看跌孕线 — 2025年7月10-11日',
+      analysisText:
+        'SPY 在 7 月 10 日以一根宽实体大阳线延续上涨，随后在 7 月 11 日出现一根完全包在前一日实体内部的小阴线。这个形态并没有让市场立刻崩跌，但它清楚地提示：上涨推进的信心已经不再扩张，后续几个交易日价格也逐步转弱。',
+      labelText: {
+        'bearish-harami-label': '看跌孕线',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, haramiCrossCase, bearishHaramiCase]

@@ -382,4 +382,201 @@ const fallingThreeMethodsCase: RealChartData = {
   },
 }
 
-export const realCharts: RealChartData[] = [realChart, fallingThreeMethodsCase]
+const risingThreeMethodsEtfCase: RealChartData = {
+  chapterId: 'part3-ch12-three-methods',
+  ticker: 'SPY',
+  candles: [
+    { time: '2025-07-21', open: 551.2, high: 552.0, low: 548.4, close: 549.1 },
+    { time: '2025-07-22', open: 549.4, high: 555.8, low: 549.0, close: 555.2 }, // impulse bull
+    { time: '2025-07-23', open: 554.7, high: 555.1, low: 552.6, close: 553.4 },
+    { time: '2025-07-24', open: 553.1, high: 554.0, low: 551.8, close: 552.3 },
+    { time: '2025-07-25', open: 552.5, high: 553.6, low: 551.9, close: 553.0 },
+    { time: '2025-07-28', open: 553.4, high: 558.6, low: 553.0, close: 558.1 }, // continuation
+    { time: '2025-07-29', open: 558.0, high: 559.2, low: 556.8, close: 558.9 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'spy-first-bull-box',
+      timeRange: { from: '2025-07-22', to: '2025-07-22' },
+      priceRange: { high: 555.8, low: 549.0 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(38, 166, 154, 0.10)',
+      borderColor: '#26a69a',
+      borderWidth: 2,
+    },
+    {
+      kind: 'box',
+      id: 'spy-pullback-box',
+      timeRange: { from: '2025-07-23', to: '2025-07-25' },
+      priceRange: { high: 555.1, low: 551.8 },
+      pricePadding: 0.2,
+      fillColor: 'rgba(255, 193, 7, 0.10)',
+      borderColor: '#ffc107',
+      borderWidth: 1,
+    },
+    {
+      kind: 'label',
+      id: 'spy-rising-methods-label',
+      time: '2025-07-28',
+      price: 559.2,
+      text: 'Rising Three Methods',
+      position: 'above',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'impulse-first',
+        visibleCount: 2,
+        annotationIds: ['spy-first-bull-box'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The first bullish impulse gives the continuation pattern its frame',
+            summary:
+              'SPY first prints a strong bullish session on July 22. That wide candle matters because rising three methods only makes sense when the market already has a convincing directional impulse to pause inside.',
+            question: 'What should you establish before looking for a continuation pattern?',
+            answer:
+              'A real trend impulse first. Without that lead candle, later sideways candles do not have a dominant move to continue.',
+            confirmationSignals: [
+              'A strong bullish impulse appears before the pause',
+              'The market looks directional before it starts consolidating',
+            ],
+            invalidationSignals: [
+              'There is no real impulse, only random sideways movement',
+            ],
+          },
+          zh: {
+            title: '第一根强势脉冲，先给整组延续形态搭好框架',
+            summary:
+              'SPY 先在 7 月 22 日打出一根强势阳线。上升三法之所以成立，是因为市场先有一个很清楚的方向脉冲，后面的整理才有“暂停在谁内部”的意义。',
+            question: '在寻找延续形态之前，最该先建立什么？',
+            answer:
+              '先建立真实的趋势脉冲。没有这根领头蜡烛，后面的几根横向整理就没有明确的主导方向可延续。',
+            confirmationSignals: [
+              '停顿出现前先有明确的强阳脉冲',
+              '整理前，市场已经表现出方向性',
+            ],
+            invalidationSignals: [
+              '前面根本没有真实脉冲，只是随机横盘',
+            ],
+          },
+        },
+      },
+      {
+        id: 'controlled-pullback',
+        visibleCount: 5,
+        annotationIds: ['spy-first-bull-box', 'spy-pullback-box'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The small pullback stays controlled inside the impulse',
+            summary:
+              'The next three sessions drift lower and sideways, but they stay contained inside the larger bullish structure. That is the heart of the pattern: the pause is real, yet it never grows large enough to look like a reversal.',
+            question: 'Why is containment more important than counting candles mechanically?',
+            answer:
+              'Because real markets are messy. What matters is that the pullback remains small and subordinate to the main impulse, not that every candle looks perfectly textbook.',
+            confirmationSignals: [
+              'The pullback candles remain inside or near the range of the impulse bar',
+              'The retracement looks controlled rather than aggressive',
+            ],
+            invalidationSignals: [
+              'The pullback expands into a broad bearish reversal structure',
+            ],
+          },
+          zh: {
+            title: '中间的小回撤被干净地约束在脉冲内部',
+            summary:
+              '接下来三根 K 线略微回落、略微横向，但整体仍然被控制在前面那根强阳结构之内。这正是形态核心：整理是真整理，而不是已经长大成反转。',
+            question: '为什么“是否被约束住”比机械数根数更重要？',
+            answer:
+              '因为真实市场不会完全工整。真正关键的是回撤依然很小、依然从属于前面脉冲，而不是每根蜡烛都长得像教科书。',
+            confirmationSignals: [
+              '回撤蜡烛整体仍在前面脉冲范围附近',
+              '这段回撤看起来受控，而不是激进反转',
+            ],
+            invalidationSignals: [
+              '回撤逐渐扩展成更完整的看跌反转结构',
+            ],
+          },
+        },
+      },
+      {
+        id: 'continuation-break',
+        visibleCount: 7,
+        annotationIds: ['spy-first-bull-box', 'spy-pullback-box', 'spy-rising-methods-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The breakout candle proves the pause was temporary',
+            summary:
+              'July 28 breaks upward out of the small consolidation and resumes the original trend. That final bullish continuation candle is what converts the setup from “maybe just a pause” into a completed rising three methods pattern.',
+            question: 'What is the most practical takeaway from this continuation structure?',
+            answer:
+              'The edge comes from distinguishing a controlled pullback from a real reversal. The final breakout candle is the proof that the dominant trend has restarted.',
+            confirmationSignals: [
+              'The final bullish candle breaks out above the pullback cluster',
+              'Price resumes the original trend direction with authority',
+            ],
+            invalidationSignals: [
+              'The supposed breakout candle fails and falls back into the pullback',
+            ],
+          },
+          zh: {
+            title: '最后的突破阳线证明前面只是暂时停顿',
+            summary:
+              '7 月 28 日向上突破这段小整理，并重新启动原有趋势。正是这根最后的延续阳线，让前面的结构从“也许只是停顿”升级成完整的上升三法。',
+            question: '这个持续结构最实战的一点是什么？',
+            answer:
+              '真正的优势在于分辨“受控回撤”和“真反转”。最后那根突破阳线，就是主趋势重新启动的证据。',
+            confirmationSignals: [
+              '最后一根阳线突破中间整理簇',
+              '价格带着力度恢复原本上涨方向',
+            ],
+            invalidationSignals: [
+              '所谓突破阳线失败，并跌回整理内部',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This third three-methods case uses an ETF to reinforce the same continuation lesson: strong impulse first, controlled pause second, breakout third.',
+        conclusion:
+          'Rising three methods should train you to trust controlled pullbacks only after the breakout candle proves the trend has restarted.',
+      },
+      zh: {
+        intro:
+          '这个第三案例换成 ETF，但训练逻辑不变：先有强脉冲，再有受控停顿，最后由突破蜡烛重新启动趋势。',
+        conclusion:
+          '上升三法最该训练你的，是先认出“受控回撤”，再等待最后那根突破 K 线证明趋势真的重新启动。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Rising Three Methods · SPY',
+      patternLabel: 'Rising Three Methods — SPY Daily — Jul 22–28, 2025',
+      analysisText:
+        'SPY first surged with a strong bullish impulse on July 22, 2025, then spent several sessions drifting in a contained pullback rather than reversing. The July 28 breakout resumed the original advance and completed a clean rising three methods continuation structure.',
+    },
+    zh: {
+      caseLabel: '上升三法 · SPY',
+      patternLabel: '上升三法 — SPY 日线 — 2025年7月22-28日',
+      analysisText:
+        'SPY 先在 2025 年 7 月 22 日打出一根强势脉冲阳线，随后几个交易日只是进行受控整理，而没有演变成真正反转。7 月 28 日的向上突破重新接回原趋势，完成了一组干净的上升三法延续结构。',
+      labelText: {
+        'spy-rising-methods-label': '上升三法',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, fallingThreeMethodsCase, risingThreeMethodsEtfCase]

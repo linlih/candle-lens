@@ -460,4 +460,198 @@ const tweezersBottomCase: RealChartData = {
   },
 }
 
-export const realCharts: RealChartData[] = [realChart, tweezersBottomCase]
+const tweezersTopEtfCase: RealChartData = {
+  chapterId: 'part2-ch09-tweezers',
+  ticker: 'SPY',
+  candles: [
+    { time: '2025-06-16', open: 542.8, high: 545.4, low: 542.2, close: 545.1 },
+    { time: '2025-06-17', open: 545.2, high: 547.8, low: 544.8, close: 547.4 },
+    { time: '2025-06-18', open: 547.6, high: 548.6, low: 545.9, close: 546.8 }, // first high
+    { time: '2025-06-19', open: 546.9, high: 548.7, low: 542.6, close: 543.2 }, // second same high reject
+    { time: '2025-06-20', open: 542.8, high: 543.6, low: 539.4, close: 540.1 },
+    { time: '2025-06-23', open: 540.4, high: 541.9, low: 538.8, close: 539.6 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'spy-tweezers-top-box',
+      timeRange: { from: '2025-06-18', to: '2025-06-19' },
+      priceRange: { high: 548.7, low: 542.6 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(239, 83, 80, 0.12)',
+      borderColor: '#ef5350',
+      borderWidth: 2,
+    },
+    {
+      kind: 'hline',
+      id: 'spy-tweezers-top-line',
+      price: 548.7,
+      color: 'rgba(239, 83, 80, 0.8)',
+      width: 1,
+      dash: [4, 3],
+    },
+    {
+      kind: 'label',
+      id: 'spy-tweezers-top-label',
+      time: '2025-06-19',
+      price: 549.6,
+      text: 'Tweezers Top',
+      position: 'above',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'rally-into-level',
+        visibleCount: 3,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A shared high matters only after price has actually rallied into it',
+            summary:
+              'SPY first climbs into the 548 area before the repeated high appears. That context matters because tweezers are about a defended level, not about two candles that just happen to be visually similar.',
+            question: 'What should exist before a tweezers top can become meaningful?',
+            answer:
+              'A prior advance into a level that the market now has a reason to defend. Without that approach, the repeated high has little narrative value.',
+            confirmationSignals: [
+              'Price has clearly advanced into the level first',
+              'The repeated high forms near an obvious short-term ceiling',
+            ],
+            invalidationSignals: [
+              'The repeated highs appear randomly in the middle of noise',
+            ],
+          },
+          zh: {
+            title: '共享高点只有在先涨到它之前，才真正有意义',
+            summary:
+              'SPY 先一路反弹到 548 一带，随后才出现重复高点。这个背景很关键，因为镊子形态讲的是“共享价位被防守”，不是两根 K 线长得刚好相似。',
+            question: '一个镊子顶要成立，前面最该先有什么？',
+            answer:
+              '前面要先有一段推进，把价格带到一个本来就可能被防守的位置。没有这个接近过程，重复高点就没有足够故事性。',
+            confirmationSignals: [
+              '价格先明确推进到这个价位',
+              '重复高点出现在明显短线天花板附近',
+            ],
+            invalidationSignals: [
+              '所谓重复高点只是噪音中的偶然相似',
+            ],
+          },
+        },
+      },
+      {
+        id: 'same-high-rejected',
+        visibleCount: 4,
+        annotationIds: ['spy-tweezers-top-box', 'spy-tweezers-top-line', 'spy-tweezers-top-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'The second touch fails and turns the level into visible resistance',
+            summary:
+              'June 19 retests almost the exact same high as June 18 and then sells off strongly by the close. That second rejection is what turns the repeated price into a real tweezers-top message.',
+            question: 'Why is the second rejection more important than the first high itself?',
+            answer:
+              'Because the second touch proves the level is active. One high can be random; two rejections at the same ceiling show supply is actually waiting there.',
+            confirmationSignals: [
+              'The second session retests the same high zone',
+              'It fails there and closes notably weaker',
+            ],
+            invalidationSignals: [
+              'The second session touches the level and then closes strong above it',
+            ],
+          },
+          zh: {
+            title: '第二次上探失败，让这个高点真正变成了阻力',
+            summary:
+              '6 月 19 日再次上探几乎同样的高点，随后一路走弱收盘。正是这第二次被拒绝，才让这个重复价位升级成真正的镊子顶信息。',
+            question: '为什么第二次失败比第一次高点本身更重要？',
+            answer:
+              '因为第二次测试证明这个价位是“活着的”。一个高点可能只是随机，两次在同一屋顶被压回，才说明那里真的有供给在等。',
+            confirmationSignals: [
+              '第二交易日再次上探同一高点区域',
+              '在那里失败并明显收弱',
+            ],
+            invalidationSignals: [
+              '第二交易日虽然碰到该价位，但最后强势收在其上方',
+            ],
+          },
+        },
+      },
+      {
+        id: 'resistance-holds',
+        visibleCount: 6,
+        annotationIds: ['spy-tweezers-top-box', 'spy-tweezers-top-line', 'spy-tweezers-top-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Later weakness confirms that the ceiling really held',
+            summary:
+              'The next sessions stay beneath the shared high and continue leaning lower. That is the real validation: the market respects the ceiling it revealed.',
+            question: 'What is the structural takeaway from a good tweezers-top case?',
+            answer:
+              'Read it as repeated failure at a shared ceiling. The candles matter because they expose where supply keeps showing up, not because the label sounds exotic.',
+            confirmationSignals: [
+              'Later candles remain below the shared high',
+              'Weakness continues after the second rejection',
+            ],
+            invalidationSignals: [
+              'Price quickly breaks back through the shared high',
+            ],
+          },
+          zh: {
+            title: '后续继续待在高点下方，说明这个天花板确实有效',
+            summary:
+              '接下来几个交易日继续停留在这个共享高点下方，并且整体偏弱。这才是真正确认：市场尊重了它自己暴露出来的阻力天花板。',
+            question: '一个好的镊子顶，结构上最该带走什么？',
+            answer:
+              '把它读成“共享天花板上的重复失败”。蜡烛有价值，是因为它把供给持续出现的位置显露出来，而不是因为名字听起来特别。',
+            confirmationSignals: [
+              '后续蜡烛持续待在共享高点下方',
+              '第二次拒绝后市场继续偏弱',
+            ],
+            invalidationSignals: [
+              '价格很快重新突破这个共享高点',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This third tweezers case uses an index ETF to reinforce the core lesson: the pattern is really about a shared ceiling that gets rejected twice.',
+        conclusion:
+          'Tweezers Top becomes useful when you stop thinking in candle names and start thinking in repeated resistance behavior.',
+      },
+      zh: {
+        intro:
+          '这个第三案例换成指数 ETF，继续强化镊子形态最核心的本质：同一个天花板被连续拒绝两次。',
+        conclusion:
+          '镊子顶真正有用的时候，是你不再只记名字，而开始把它理解成“重复阻力行为”。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Tweezers Top · SPY',
+      patternLabel: 'Tweezers Top — SPY Daily — Jun 18–19, 2025',
+      analysisText:
+        'SPY rallied into the 548 area and then printed two sessions with nearly identical highs on June 18 and 19, 2025. The second touch failed badly by the close, and the following sessions stayed below that ceiling, turning the repeated high into a clean tweezers-top resistance signal.',
+    },
+    zh: {
+      caseLabel: '镊子顶 · SPY',
+      patternLabel: '镊子顶 — SPY 日线 — 2025年6月18-19日',
+      analysisText:
+        'SPY 先反弹到 548 一带，随后在 2025 年 6 月 18 日与 19 日打出两个几乎相同的高点。第二次上探在收盘时明显失败，而后续几个交易日也继续待在该天花板下方，使这个重复高点成为一个干净的镊子顶阻力信号。',
+      labelText: {
+        'spy-tweezers-top-label': '镊子顶',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, tweezersBottomCase, tweezersTopEtfCase]

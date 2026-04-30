@@ -359,4 +359,192 @@ const bullishEngulfingCase: RealChartData = {
   },
 }
 
-export const realCharts: RealChartData[] = [realChart, bullishEngulfingCase]
+const bearishEngulfingEtfCase: RealChartData = {
+  chapterId: 'part2-ch05-engulfing',
+  ticker: 'QQQ',
+  candles: [
+    { time: '2025-06-02', open: 463.1, high: 465.4, low: 462.8, close: 464.8 },
+    { time: '2025-06-03', open: 465.0, high: 468.6, low: 464.5, close: 468.1 },
+    { time: '2025-06-04', open: 468.4, high: 471.2, low: 467.9, close: 470.8 },
+    { time: '2025-06-05', open: 470.5, high: 472.1, low: 469.8, close: 471.6 }, // small bull
+    { time: '2025-06-06', open: 472.0, high: 472.4, low: 466.9, close: 467.1 }, // bear engulf
+    { time: '2025-06-09', open: 466.6, high: 467.4, low: 462.5, close: 463.3 },
+    { time: '2025-06-10', open: 463.7, high: 464.1, low: 460.8, close: 461.5 },
+    { time: '2025-06-11', open: 461.9, high: 464.8, low: 461.2, close: 464.3 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'qqq-bear-engulf-box',
+      timeRange: { from: '2025-06-05', to: '2025-06-06' },
+      priceRange: { high: 472.4, low: 466.9 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(239, 83, 80, 0.12)',
+      borderColor: '#ef5350',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'qqq-bear-engulf-label',
+      time: '2025-06-06',
+      price: 473.1,
+      text: 'Bearish Engulfing',
+      position: 'above',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'extended-push',
+        visibleCount: 4,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'An engulfing top matters because buyers were still pushing first',
+            summary:
+              'QQQ has already rallied for several sessions into June 5 and still prints a positive close. That is the setup you want: buyers look like they still have control before the next session abruptly overturns that confidence.',
+            question: 'Why does an engulfing reversal need a strong prior push?',
+            answer:
+              'Because the reversal only feels meaningful when it destroys a control state that had just looked healthy. Without that contrast, the pattern loses impact.',
+            confirmationSignals: [
+              'The market is still advancing into the setup',
+              'The first candle keeps the prior bullish bias alive',
+            ],
+            invalidationSignals: [
+              'The market was already rolling over before the engulfing day',
+            ],
+          },
+          zh: {
+            title: '顶部吞没之所以有意义，是因为前一刻多方还像是在推进',
+            summary:
+              '到 6 月 5 日，QQQ 已经连续几日上涨，而且当天依然是偏强收盘。理想的吞没前提就是这样：多方看起来还掌控着节奏，下一交易日才会显得格外具有“推翻”意味。',
+            question: '为什么吞没反转一定要有一个仍然健康的前置推进？',
+            answer:
+              '因为它的意义就在于摧毁一个原本看起来还不错的控制状态。没有这种反差，吞没的冲击力就会减弱。',
+            confirmationSignals: [
+              '形态前市场仍在推进',
+              '第一根 K 线继续维持原本的看涨偏向',
+            ],
+            invalidationSignals: [
+              '吞没之前市场其实已经自己在转弱',
+            ],
+          },
+        },
+      },
+      {
+        id: 'engulfing-break',
+        visibleCount: 5,
+        annotationIds: ['qqq-bear-engulf-box', 'qqq-bear-engulf-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'The second candle erases the prior body and flips control',
+            summary:
+              'June 6 opens slightly higher, then sells off and closes below the entire prior body. That is the core of the pattern: the market did not merely pause the rally, it reversed the previous session’s control within one day.',
+            question: 'What makes a bearish engulfing stronger than a simple red day after a rally?',
+            answer:
+              'The body takeover. Sellers do not just push price lower; they erase the prior bullish body and reclaim control in one session.',
+            confirmationSignals: [
+              'The bearish body fully covers the prior bullish body',
+              'The close lands near the lower end of the range',
+            ],
+            invalidationSignals: [
+              'The engulfing body is immediately recovered on the next candle',
+            ],
+          },
+          zh: {
+            title: '第二根 K 线完整吃掉前一根实体，控制权随之翻转',
+            summary:
+              '6 月 6 日先小幅高开，随后一路回落，并收在前一根阳线实体下方。这个形态的本质就是：市场不是简单暂停上涨，而是在一个交易日里把前一天的控制权彻底反过来。',
+            question: '为什么顶部吞没比上涨后的普通阴线更强？',
+            answer:
+              '因为它体现的是实体级别的接管。空方不是只把价格压低一点，而是直接把前一根阳线实体整个抹掉。',
+            confirmationSignals: [
+              '阴线实体完整覆盖前一根阳线实体',
+              '收盘落在当日区间下端附近',
+            ],
+            invalidationSignals: [
+              '下一根 K 线立刻把吞没阴线的实体收回',
+            ],
+          },
+        },
+      },
+      {
+        id: 'follow-through-lower',
+        visibleCount: 8,
+        annotationIds: ['qqq-bear-engulf-box', 'qqq-bear-engulf-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Later weakness proves the reversal was accepted',
+            summary:
+              'The following sessions continue lower before any meaningful bounce appears. That is the practical use of the pattern: the market accepts the new bearish control state instead of instantly undoing it.',
+            question: 'What is the real test after a bearish engulfing top appears?',
+            answer:
+              'Whether later candles respect the break in bullish control. If price keeps leaning lower, the engulfing day likely marked a real short-term regime shift.',
+            confirmationSignals: [
+              'Later candles continue to pressure lower',
+              'Buyers fail to reclaim the engulfing body quickly',
+            ],
+            invalidationSignals: [
+              'Price immediately closes back above the engulfing high',
+            ],
+          },
+          zh: {
+            title: '后续继续走弱，说明市场接受了新的空方控制',
+            summary:
+              '接下来的几个交易日继续走低，直到更后面才有像样反弹。这正是吞没的实战意义：市场接受了新的看空控制状态，而不是立刻把它抹掉。',
+            question: '顶部吞没出现后，真正要考验的是什么？',
+            answer:
+              '考验的是后续蜡烛会不会继续尊重这次多方控制权被打断。如果价格持续偏弱，这根吞没就很可能标记了短线结构切换。',
+            confirmationSignals: [
+              '后续蜡烛继续向下施压',
+              '多方没能迅速收回吞没阴线实体',
+            ],
+            invalidationSignals: [
+              '价格立刻重新收上吞没高点',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This extra engulfing case keeps the same logic on a tech ETF: a healthy rally gets overturned in one session and later candles respect that shift.',
+        conclusion:
+          'Treat bearish engulfing patterns as control flips. Their quality depends on both the body takeover and the later follow-through.',
+      },
+      zh: {
+        intro:
+          '这个额外吞没案例把同样逻辑放到科技 ETF 上：原本健康的上涨，在一个交易日里被完全推翻，后续蜡烛也继续尊重这次切换。',
+        conclusion:
+          '把顶部吞没理解成控制权翻转。它的质量既取决于实体接管本身，也取决于后续有没有继续跟随。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Bearish Engulfing · QQQ',
+      patternLabel: 'Bearish Engulfing — QQQ Daily — Jun 6, 2025',
+      analysisText:
+        'QQQ rallied into June 5, 2025 and still looked healthy, then reversed sharply the next day. The June 6 bearish candle fully engulfed the prior bullish body, and the following sessions kept leaning lower, making the pattern a clear short-term control flip.',
+    },
+    zh: {
+      caseLabel: '看跌吞没 · QQQ',
+      patternLabel: '看跌吞没 — QQQ 日线 — 2025年6月6日',
+      analysisText:
+        'QQQ 在 2025 年 6 月 5 日之前仍然保持着健康上涨节奏，但次日突然明显反转。6 月 6 日的阴线实体完整吞没了前一日阳线实体，后续几个交易日也继续偏弱，使这次形态成为一次清晰的短线控制权翻转。',
+      labelText: {
+        'qqq-bear-engulf-label': '看跌吞没',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, bullishEngulfingCase, bearishEngulfingEtfCase]

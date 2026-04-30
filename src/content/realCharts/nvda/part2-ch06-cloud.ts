@@ -464,4 +464,197 @@ const darkCloudCase: RealChartData = {
   },
 }
 
-export const realCharts: RealChartData[] = [realChart, darkCloudCase]
+const piercingEtfCase: RealChartData = {
+  chapterId: 'part2-ch06-cloud',
+  ticker: 'QQQ',
+  candles: [
+    { time: '2025-04-07', open: 467.6, high: 468.2, low: 462.1, close: 463.0 },
+    { time: '2025-04-08', open: 462.7, high: 463.4, low: 457.8, close: 458.5 }, // first bear
+    { time: '2025-04-09', open: 456.9, high: 463.8, low: 456.4, close: 462.2 }, // piercing
+    { time: '2025-04-10', open: 462.8, high: 466.0, low: 462.1, close: 465.4 },
+    { time: '2025-04-11', open: 465.1, high: 466.7, low: 463.9, close: 466.2 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'qqq-piercing-box',
+      timeRange: { from: '2025-04-08', to: '2025-04-09' },
+      priceRange: { high: 463.4, low: 456.4 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(38, 166, 154, 0.12)',
+      borderColor: '#26a69a',
+      borderWidth: 2,
+    },
+    {
+      kind: 'hline',
+      id: 'qqq-piercing-midpoint',
+      price: 460.6,
+      color: 'rgba(255, 193, 7, 0.8)',
+      width: 1,
+      dash: [5, 3],
+    },
+    {
+      kind: 'label',
+      id: 'qqq-piercing-label',
+      time: '2025-04-09',
+      price: 464.4,
+      text: 'Piercing Pattern',
+      position: 'above',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'selloff-context',
+        visibleCount: 2,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The first bearish candle sets the tone for a reversal test',
+            summary:
+              'QQQ is already soft and then prints another bearish session on April 8. That first candle matters because the piercing pattern needs real downside pressure before a deep bullish recovery can mean anything.',
+            question: 'What should you be looking for after a forceful bearish day like this?',
+            answer:
+              'You want the next session to recover a meaningful share of the bearish body, not just bounce a little. The depth of the rebound is the point.',
+            confirmationSignals: [
+              'The first candle extends existing weakness',
+              'The next session has room to reclaim a meaningful portion of the body',
+            ],
+            invalidationSignals: [
+              'The market simply drifts sideways with no real reclaim',
+            ],
+          },
+          zh: {
+            title: '先有强阴，后面的反转测试才有意义',
+            summary:
+              'QQQ 本来就偏弱，4 月 8 日又收出一根阴线。刺透形态之所以值得看，是因为前面必须先有真实下行压力，后面的深度回收才有分析价值。',
+            question: '在这样一根强阴之后，最该观察什么？',
+            answer:
+              '要看下一交易日能不能收回前一根阴线实体中很有分量的一部分，而不是只小幅反弹一点。回收深度才是关键。',
+            confirmationSignals: [
+              '第一根 K 线继续扩展原有弱势',
+              '下一交易日有机会收回前一根实体的较大部分',
+            ],
+            invalidationSignals: [
+              '市场只是横着晃，没有真正回收实体',
+            ],
+          },
+        },
+      },
+      {
+        id: 'midpoint-reclaim',
+        visibleCount: 3,
+        annotationIds: ['qqq-piercing-box', 'qqq-piercing-midpoint', 'qqq-piercing-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The bullish close pierces deep enough into the prior body',
+            summary:
+              'April 9 opens lower but buyers reverse the tone and close back above the midpoint of April 8’s bearish body. That midpoint reclaim is what separates a true piercing pattern from a weak bounce.',
+            question: 'Why is the midpoint line so important here?',
+            answer:
+              'Because it shows buyers recovered a meaningful amount of the prior day’s downside control. Without that depth, the bounce may not represent a real shift in momentum.',
+            confirmationSignals: [
+              'The second candle closes above the midpoint of the first body',
+              'The session ends far stronger than it began',
+            ],
+            invalidationSignals: [
+              'The bullish candle stays beneath the midpoint despite rebounding intraday',
+            ],
+          },
+          zh: {
+            title: '只有收回中点以上，才算真正刺透',
+            summary:
+              '4 月 9 日先低开，但买方随后完全扭转当日气氛，并把收盘拉回到 4 月 8 日阴线实体中点之上。正是这个中点回收，让它从普通反弹升级成刺透形态。',
+            question: '为什么中点线在这里如此重要？',
+            answer:
+              '因为它说明买方收回了前一日下跌控制权里真正有分量的一部分。没有这种深度，很多时候只是弱反弹，不算真正节奏切换。',
+            confirmationSignals: [
+              '第二根 K 线收在第一根实体中点上方',
+              '这一交易日收盘时明显比开盘强得多',
+            ],
+            invalidationSignals: [
+              '虽然反弹，但收盘仍然没能站回中点之上',
+            ],
+          },
+        },
+      },
+      {
+        id: 'follow-through-higher',
+        visibleCount: 5,
+        annotationIds: ['qqq-piercing-box', 'qqq-piercing-midpoint', 'qqq-piercing-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'Later strength validates that the reclaim was real',
+            summary:
+              'The next sessions continue higher instead of instantly giving the recovery back. That is what confirms the piercing pattern: the deep body reclaim was accepted by the market.',
+            question: 'What practical lesson should you retain from this pattern?',
+            answer:
+              'Use the pattern to detect when sellers lose clean control, then check whether later candles preserve the reclaimed ground. The follow-through matters as much as the candle itself.',
+            confirmationSignals: [
+              'Later candles hold and extend above the midpoint reclaim',
+              'The market no longer behaves like a one-way decline',
+            ],
+            invalidationSignals: [
+              'Price quickly falls back through the reclaimed midpoint',
+            ],
+          },
+          zh: {
+            title: '后续继续走高，说明这次深度回收被市场接受了',
+            summary:
+              '后面两个交易日继续偏强，而不是立刻把恢复区跌回去。这才是刺透真正成立的地方：前一日实体的深度回收，得到了市场认可。',
+            question: '这个结构最实战的一点是什么？',
+            answer:
+              '先用它识别空方失去干净控制，再观察后续蜡烛是否守住收回来的区域。跟随表现和形态本身一样重要。',
+            confirmationSignals: [
+              '后续蜡烛守住并继续扩展中点回收区',
+              '市场不再表现成单边下跌',
+            ],
+            invalidationSignals: [
+              '价格很快重新跌回中点之下',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This third cloud-family case keeps the focus on midpoint logic, but moves to a tech ETF so you can practice the same read outside a single stock.',
+        conclusion:
+          'A piercing pattern becomes useful when the rebound reclaims the midpoint and later candles prove that reclaim was not temporary.',
+      },
+      zh: {
+        intro:
+          '这个第三案例继续训练云层家族最核心的“中点逻辑”，只是把场景换到科技 ETF 上，让你练习跨市场迁移。',
+        conclusion:
+          '刺透形态真正有用的时候，是它先收回中点，再由后续蜡烛证明这次回收不是临时反弹。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Piercing Pattern · QQQ',
+      patternLabel: 'Piercing Pattern — QQQ Daily — Apr 9, 2025',
+      analysisText:
+        'QQQ first extended lower on April 8, 2025, then reversed sharply the next day. The April 9 bullish candle reclaimed more than half of the prior bearish body, making it a clean piercing pattern, and the following sessions confirmed that buyers had genuinely interrupted the decline.',
+    },
+    zh: {
+      caseLabel: '刺透形态 · QQQ',
+      patternLabel: '刺透形态 — QQQ 日线 — 2025年4月9日',
+      analysisText:
+        'QQQ 先在 2025 年 4 月 8 日继续走弱，随后在次日明显反转。4 月 9 日的阳线收回了前一日阴线实体一半以上的空间，构成了干净的刺透形态，而后续几个交易日也确认买方确实打断了原有跌势。',
+      labelText: {
+        'qqq-piercing-label': '刺透形态',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, darkCloudCase, piercingEtfCase]

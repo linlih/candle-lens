@@ -393,4 +393,207 @@ const fallingWindowCase: RealChartData = {
   },
 }
 
-export const realCharts: RealChartData[] = [realChart, fallingWindowCase]
+const risingWindowEtfCase: RealChartData = {
+  chapterId: 'part3-ch11-windows',
+  ticker: 'SPY',
+  candles: [
+    { time: '2025-05-05', open: 508.2, high: 509.4, low: 503.8, close: 505.1 },
+    { time: '2025-05-06', open: 504.9, high: 506.2, low: 500.6, close: 501.4 },
+    { time: '2025-05-07', open: 501.8, high: 504.6, low: 499.9, close: 503.8 },
+    { time: '2025-05-08', open: 504.1, high: 507.8, low: 503.7, close: 507.2 }, // pre-gap close
+    { time: '2025-05-09', open: 511.6, high: 514.3, low: 510.9, close: 513.8 }, // rising window
+    { time: '2025-05-12', open: 513.2, high: 514.1, low: 511.8, close: 512.4 },
+    { time: '2025-05-13', open: 512.1, high: 515.6, low: 511.6, close: 515.1 },
+    { time: '2025-05-14', open: 515.5, high: 517.2, low: 514.2, close: 516.4 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'etf-gap-zone',
+      timeRange: { from: '2025-05-08', to: '2025-05-09' },
+      priceRange: { high: 510.9, low: 507.8 },
+      fillColor: 'rgba(38, 166, 154, 0.18)',
+      borderColor: '#26a69a',
+      borderWidth: 1,
+    },
+    {
+      kind: 'hline',
+      id: 'etf-gap-top',
+      price: 510.9,
+      color: 'rgba(38, 166, 154, 0.8)',
+      width: 1,
+      dash: [4, 3],
+    },
+    {
+      kind: 'hline',
+      id: 'etf-gap-bottom',
+      price: 507.8,
+      color: 'rgba(38, 166, 154, 0.8)',
+      width: 1,
+      dash: [4, 3],
+    },
+    {
+      kind: 'label',
+      id: 'etf-window-label',
+      time: '2025-05-09',
+      price: 515.0,
+      text: 'Rising Window',
+      position: 'above',
+      backgroundColor: '#26a69a',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'recovery-context',
+        visibleCount: 4,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The market is trying to recover, but it still needs urgency',
+            summary:
+              'By May 8, SPY has stopped dropping and is beginning to recover. That is constructive, but the bigger question is whether buyers can accelerate enough to leave the old range behind.',
+            question: 'What kind of next session would best confirm that recovery is becoming more urgent?',
+            answer:
+              'A session that opens above the prior range and keeps that separation would show that buyers are willing to reprice the market higher immediately.',
+            confirmationSignals: [
+              'The rebound already exists before the gap',
+              'The next session shows clear separation from the prior range',
+            ],
+            invalidationSignals: [
+              'Price remains stuck inside the prior range with no urgency',
+            ],
+          },
+          zh: {
+            title: '市场已经在恢复，但还缺“急迫性确认”',
+            summary:
+              '到 5 月 8 日，SPY 已经先止跌并开始恢复。这当然是积极信号，但更大的问题在于：买方能不能进一步加速，把旧区间真正甩在身后。',
+            question: '什么样的下一交易日最能确认这次恢复正在加速？',
+            answer:
+              '最好是直接开在前一日区间之上，并且把这种分离保持住，说明买方愿意立刻把市场重新定价到更高位置。',
+            confirmationSignals: [
+              '缺口出现前，反弹已经先存在',
+              '下一交易日与前一日区间明显分离',
+            ],
+            invalidationSignals: [
+              '价格继续困在旧区间内部，没有急迫性',
+            ],
+          },
+        },
+      },
+      {
+        id: 'window-appears',
+        visibleCount: 5,
+        annotationIds: ['etf-gap-zone', 'etf-gap-top', 'etf-gap-bottom', 'etf-window-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'The gap shows demand was willing to skip the old range',
+            summary:
+              'May 9 opens above May 8’s high and never trades back into that prior range. That clean window matters because it shows demand strong enough to leave untraded space behind.',
+            question: 'What makes this more informative than an ordinary bullish follow-through candle?',
+            answer:
+              'The market did not just rise; it refused to transact inside the old zone. That empty space is evidence of imbalance, not just slow improvement.',
+            confirmationSignals: [
+              'No overlap remains between the two sessions',
+              'The close stays firmly above the new gap zone',
+            ],
+            invalidationSignals: [
+              'The window is filled immediately and the close falls back into the old range',
+            ],
+          },
+          zh: {
+            title: '这个缺口说明买方愿意直接跳过旧区间追价',
+            summary:
+              '5 月 9 日直接开在 5 月 8 日高点上方，而且全天都没有重新回到前一日区间。这种干净窗口的重要性在于：需求强到愿意把旧成交区整个甩开。',
+            question: '为什么这比普通跟随阳线更有信息量？',
+            answer:
+              '因为市场不只是上涨，而是拒绝在旧区间内继续成交。那块空白本身就是失衡证据，而不是慢慢改善。',
+            confirmationSignals: [
+              '两根蜡烛之间完全没有重叠',
+              '收盘稳稳站在新缺口区域上方',
+            ],
+            invalidationSignals: [
+              '窗口立刻被回补，收盘重新掉回旧区间',
+            ],
+          },
+        },
+      },
+      {
+        id: 'gap-held',
+        visibleCount: 8,
+        annotationIds: ['etf-gap-zone', 'etf-gap-top', 'etf-gap-bottom', 'etf-window-label'],
+        bias: 'bullish',
+        locale: {
+          en: {
+            title: 'Later candles keep respecting the window as support',
+            summary:
+              'The next sessions hover above the gap instead of closing it. That confirms the practical use of the window: once it appears, it becomes a support area the market should continue respecting.',
+            question: 'What is the real test after a rising window appears?',
+            answer:
+              'Whether later candles can stay above or around the gap area without decisively filling it. If they can, the bullish read remains healthy.',
+            confirmationSignals: [
+              'Later sessions hold above the lower edge of the window',
+              'The gap area becomes a floor during consolidation',
+            ],
+            invalidationSignals: [
+              'Price cleanly falls through the entire gap zone',
+            ],
+          },
+          zh: {
+            title: '后续蜡烛继续把窗口当成支撑',
+            summary:
+              '接下来几个交易日都停留在缺口上方，而不是把它完全补掉。这正是窗口最实战的用法：一旦出现，它就会变成后续应该被尊重的支撑带。',
+            question: '上升窗口出现后，真正要考验的是什么？',
+            answer:
+              '看后续蜡烛能否继续待在这块缺口附近或其上方，而不是彻底把它补完。只要能守住，原本的看涨读法就依然健康。',
+            confirmationSignals: [
+              '后续交易日守住窗口下沿上方',
+              '缺口区域在整理时充当地板',
+            ],
+            invalidationSignals: [
+              '价格干净跌穿整个缺口区域',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This third window case uses an index ETF to reinforce the same logic: a rising window is both evidence of urgency and a later support reference.',
+        conclusion:
+          'When studying windows, do not stop at the gap itself. The real lesson is whether later candles defend the empty space.',
+      },
+      zh: {
+        intro:
+          '这个第三案例换成指数 ETF，但训练逻辑不变：上升窗口既是需求急迫性的证据，也是后续的重要支撑参考。',
+        conclusion:
+          '学习窗口形态时，不要只停留在“看到了缺口”；真正的功课是观察后续蜡烛有没有守住这块空白区域。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Rising Window (ETF)',
+      patternLabel: 'SPY Rising Window — May 9, 2025',
+      analysisText:
+        'SPY first stabilized, then accelerated on May 9 with a clean rising window above the prior session. The gap showed urgent demand rather than gradual improvement, and later sessions respected that empty zone as support instead of quickly filling it.',
+    },
+    zh: {
+      caseLabel: '上升窗口（ETF）',
+      patternLabel: 'SPY 上升窗口 — 2025年5月9日',
+      analysisText:
+        'SPY 在先企稳之后，于 2025 年 5 月 9 日用一个干净的上升窗口完成加速。这个缺口说明市场不是慢慢变强，而是买方带着急迫性重新定价，后续几个交易日也继续把这块空白区当成支撑。',
+      labelText: {
+        'etf-window-label': '上升窗口',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, fallingWindowCase, risingWindowEtfCase]
