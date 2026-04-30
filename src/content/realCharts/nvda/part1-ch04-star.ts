@@ -402,4 +402,192 @@ const invertedHammerCase: RealChartData = {
   },
 }
 
-export const realCharts: RealChartData[] = [realChart, invertedHammerCase]
+const shootingStarEtfCase: RealChartData = {
+  chapterId: 'part1-ch04-star',
+  ticker: 'QQQ',
+  candles: [
+    { time: '2025-08-25', open: 503.2, high: 505.1, low: 502.9, close: 504.8 },
+    { time: '2025-08-26', open: 505.0, high: 507.7, low: 504.5, close: 507.2 },
+    { time: '2025-08-27', open: 507.6, high: 510.9, low: 507.2, close: 510.1 },
+    { time: '2025-08-28', open: 510.4, high: 512.8, low: 509.9, close: 511.6 },
+    { time: '2025-08-29', open: 511.9, high: 516.7, low: 511.2, close: 512.4 },
+    { time: '2025-09-02', open: 511.8, high: 512.5, low: 507.3, close: 508.2 },
+    { time: '2025-09-03', open: 508.5, high: 509.2, low: 504.6, close: 505.4 },
+    { time: '2025-09-04', open: 505.7, high: 506.8, low: 503.9, close: 504.8 },
+  ],
+  annotations: [
+    {
+      kind: 'box',
+      id: 'qqq-star-box',
+      timeRange: { from: '2025-08-29', to: '2025-08-29' },
+      priceRange: { high: 516.7, low: 511.2 },
+      pricePadding: 0.4,
+      fillColor: 'rgba(239, 83, 80, 0.14)',
+      borderColor: '#ef5350',
+      borderWidth: 2,
+    },
+    {
+      kind: 'label',
+      id: 'qqq-star-label',
+      time: '2025-08-29',
+      price: 517.7,
+      text: 'Shooting Star',
+      position: 'above',
+      backgroundColor: '#ef5350',
+      textColor: '#ffffff',
+      fontSize: 11,
+      arrowhead: true,
+    },
+  ],
+  lesson: {
+    steps: [
+      {
+        id: 'uptrend-context',
+        visibleCount: 4,
+        annotationIds: [],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'A star at the top needs a real advance first',
+            summary:
+              'QQQ is already pushing higher for several sessions into August 28. That advance matters because a top-side star should interrupt bullish extension, not appear in the middle of random movement.',
+            question: 'What makes an upper-shadow candle worth watching after a rally?',
+            answer:
+              'The fact that buyers were still extending price higher beforehand. The star becomes meaningful only when it interrupts fresh upside conviction.',
+            confirmationSignals: [
+              'The chart has already advanced into the signal day',
+              'Buyers still look in control before the rejection appears',
+            ],
+            invalidationSignals: [
+              'There is no real prior rally, only sideways noise',
+            ],
+          },
+          zh: {
+            title: '顶部星线一定要先建立在真实上涨之后',
+            summary:
+              '到 8 月 28 日之前，QQQ 已经连续多日上推。这个背景很关键，因为顶部星线的意义在于打断多方延伸，而不是出现在杂乱横盘里。',
+            question: '上涨之后，一根长上影蜡烛为什么值得警惕？',
+            answer:
+              '因为前一刻买方还在继续把价格往上推。只有打断这种新鲜的上冲信心，星线才真正有分析意义。',
+            confirmationSignals: [
+              '信号日之前先有明确上涨推进',
+              '拒绝出现前，多方看起来仍然占优',
+            ],
+            invalidationSignals: [
+              '前面没有真实上涨，只是横盘噪音',
+            ],
+          },
+        },
+      },
+      {
+        id: 'rejection-forms',
+        visibleCount: 5,
+        annotationIds: ['qqq-star-box', 'qqq-star-label'],
+        bias: 'wait',
+        locale: {
+          en: {
+            title: 'The long upper shadow marks failed breakout extension',
+            summary:
+              'August 29 trades to a fresh high intraday, but sellers push price back near the open by the close. The candle warns that the attempted breakout could not hold higher prices.',
+            question: 'What still has to happen before this becomes a bearish read?',
+            answer:
+              'Later candles need to fail at rebuilding the high and start closing weaker. The star warns first; follow-through decides whether the warning matters.',
+            confirmationSignals: [
+              'Price reaches a fresh high and still closes back down',
+              'The body stays small while the upper shadow expands',
+            ],
+            invalidationSignals: [
+              'The next session immediately recaptures and closes above the high',
+            ],
+          },
+          zh: {
+            title: '长上影标记的是向上突破延伸失败',
+            summary:
+              '8 月 29 日盘中打出新高，但空方最终把价格压回接近开盘位置。它的意义在于：市场尝试突破，却没能守住更高价。',
+            question: '要把它升级成偏空判断，还差什么？',
+            answer:
+              '后续蜡烛必须无法重建高点，并开始持续收弱。星线先负责预警，后续跟随才决定预警是否成立。',
+            confirmationSignals: [
+              '价格盘中新高后仍被明显压回',
+              '实体保持偏小，而上影线明显扩张',
+            ],
+            invalidationSignals: [
+              '下一交易日立刻重新突破并收在高点之上',
+            ],
+          },
+        },
+      },
+      {
+        id: 'follow-through-lower',
+        visibleCount: 8,
+        annotationIds: ['qqq-star-box', 'qqq-star-label'],
+        bias: 'bearish',
+        locale: {
+          en: {
+            title: 'Later weakness turns the warning into a usable top-side signal',
+            summary:
+              'The next sessions fail to rebuild the breakout and instead keep fading lower. That is the real lesson: a shooting star matters when later candles accept the rejection.',
+            question: 'What habit should this pattern build?',
+            answer:
+              'Treat the star as failed extension plus later weakness, not as a one-day visual shortcut. The real edge comes from linking rejection to follow-through.',
+            confirmationSignals: [
+              'The market cannot retake the rejection high',
+              'Later closes drift lower after the signal',
+            ],
+            invalidationSignals: [
+              'Price quickly breaks back above the rejected high',
+            ],
+          },
+          zh: {
+            title: '后续走弱，才让这次顶部预警变成实用信号',
+            summary:
+              '接下来几根蜡烛都没能把突破重新搭回来，反而继续往下回落。真正的教学点就在这里：流星线只有在后续市场接受这次拒绝时，才值得重视。',
+            question: '这个形态最该训练你什么习惯？',
+            answer:
+              '把流星线理解成“上冲失败 + 后续走弱”，而不是单日图形捷径。真正优势来自把拒绝和跟随后果连起来看。',
+            confirmationSignals: [
+              '市场无法重新站上被拒绝高点',
+              '信号后几日收盘持续偏弱',
+            ],
+            invalidationSignals: [
+              '价格很快重新突破被拒绝高点',
+            ],
+          },
+        },
+      },
+    ],
+    locale: {
+      en: {
+        intro:
+          'This third single-star case uses a tech ETF to reinforce the bearish side: a long upper shadow matters only when the breakout attempt actually fails afterward.',
+        conclusion:
+          'A shooting star becomes useful when you connect failed extension with later weakness instead of treating the candle by itself as the whole signal.',
+      },
+      zh: {
+        intro:
+          '这个第三个单根星线案例换成了科技 ETF，继续强化看跌一侧：长上影只有在后续突破尝试真的失败时，才值得重视。',
+        conclusion:
+          '流星线真正有用，是你把“上冲失败”和“后续走弱”连起来看，而不是把单根 K 线本身当作全部答案。',
+      },
+    },
+  },
+  locale: {
+    en: {
+      caseLabel: 'Shooting Star · QQQ',
+      patternLabel: 'Shooting Star — QQQ Daily — Aug 29, 2025',
+      analysisText:
+        'After several strong sessions, QQQ tried to extend to a fresh high on August 29, 2025 but failed to keep that strength into the close. The long upper shadow warned that breakout demand was being rejected, and later sessions confirmed the failed extension by drifting lower.',
+    },
+    zh: {
+      caseLabel: '流星线 · QQQ',
+      patternLabel: '流星线 — QQQ 日线 — 2025年8月29日',
+      analysisText:
+        '在连续多日走强之后，QQQ 于 2025 年 8 月 29 日尝试继续冲出新高，但没能把盘中强势保持到收盘。长上影线先发出了突破需求被拒绝的警告，后面的几个交易日继续回落，确认了这次上冲失败。',
+      labelText: {
+        'qqq-star-label': '流星线',
+      },
+    },
+  },
+}
+
+export const realCharts: RealChartData[] = [realChart, invertedHammerCase, shootingStarEtfCase]

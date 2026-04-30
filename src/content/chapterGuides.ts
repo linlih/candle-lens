@@ -654,4 +654,32 @@ export const chapterGuides: Record<string, ChapterGuide> = {
       takeaway: '当别的市场结构先让位置变得重要时，蜡烛图的可信度才会显著提升。',
     },
   },
+  'part4-ch22-failed-signals': {
+    en: {
+      trend: 'Failure only matters relative to the original trend idea that the pattern was supposed to interrupt or continue.',
+      location: 'The same key levels still matter here: signal lows, signal highs, body midpoints, and window edges.',
+      signal: 'The signal is no longer the candidate pattern itself, but the market’s refusal to confirm or defend it.',
+      confirmation: 'A failed pattern confirms itself when price quickly violates the level that should have held if the story were valid.',
+      invalidation: 'If price reclaims the failed level immediately and holds it again, the failure read weakens.',
+      whyNotMemorize: 'This chapter is the antidote to blind pattern worship. Even a textbook shape becomes low quality when the market refuses to validate it.',
+      confusion: {
+        pattern: 'Failed setup vs ordinary noise',
+        reason: 'A true failure breaks the exact level the original signal depended on. Noise just wobbles without violating the decision point cleanly.',
+      },
+      takeaway: 'When confirmation fails or the key level breaks, the failed pattern becomes new information.',
+    },
+    zh: {
+      trend: '失败信号的意义，仍然必须回到它原本想要打断或延续的那段趋势里理解。',
+      location: '这里关键的仍然是那些原本就该守住的价位：信号低点、信号高点、实体中点和窗口边缘。',
+      signal: '真正的信号不再是候选形态本身，而是市场拒绝去确认或防守它。',
+      confirmation: '一个失败形态，会在价格很快破坏那个本该守住的关键位时，自我确认。',
+      invalidation: '如果价格立刻重新收回这个失败位并重新站稳，失败读法就会减弱。',
+      whyNotMemorize: '这一章本质上是在对抗“形态崇拜”：就算外形再标准，只要市场不愿意验证，它就是低质量信号。',
+      confusion: {
+        pattern: '真实失败 vs 普通噪音',
+        reason: '真正的失败会直接破坏原信号赖以成立的那个核心价位；噪音只是晃动，却不会干净打穿决策点。',
+      },
+      takeaway: '一旦确认缺失，或关键位被破坏，失败形态本身就会变成新的市场信息。',
+    },
+  },
 }

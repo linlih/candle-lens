@@ -166,6 +166,13 @@ export const catalog: ChapterMeta[] = [
     patternNames: ['Trendline', 'Moving Average', 'Gap', 'Structure Confluence'],
     sceneCount: 4,
   },
+  {
+    id: 'part4-ch22-failed-signals',
+    partNumber: 4,
+    chapterNumber: 22,
+    patternNames: ['Failed Hammer', 'Failed Star', 'Failed Window'],
+    sceneCount: 3,
+  },
 ]
 
 export const partLabels: Record<1 | 2 | 3 | 4, { en: string; zh: string }> = {

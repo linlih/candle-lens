@@ -26,4 +26,5 @@ export const chapterLoaders: Record<string, ChapterLoader> = {
   'part4-ch19-volume': () => import('./chapters/part4-ch19-volume/index'),
   'part4-ch20-context-comparisons': () => import('./chapters/part4-ch20-context-comparisons/index'),
   'part4-ch21-confluence-lab': () => import('./chapters/part4-ch21-confluence-lab/index'),
+  'part4-ch22-failed-signals': () => import('./chapters/part4-ch22-failed-signals/index'),
 }

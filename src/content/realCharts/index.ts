@@ -15,4 +15,5 @@ export const realChartLoaders: Record<string, RealChartLoader> = {
   'part3-ch11-windows':       () => import('./nvda/part3-ch11-windows'),
   'part3-ch12-three-methods': () => import('./nvda/part3-ch12-three-methods'),
   'part4-ch13-western':       () => import('./nvda/part4-ch13-western'),
+  'part4-ch22-failed-signals': () => import('./nvda/part4-ch22-failed-signals'),
 }
