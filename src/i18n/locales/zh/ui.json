@@ -58,6 +58,17 @@
     "light": "亮色",
     "dark": "暗色"
   },
+  "chartColors": {
+    "label": "蜡烛图",
+    "current": {
+      "red-up": "红涨绿跌",
+      "green-up": "绿涨红跌"
+    },
+    "switchTo": {
+      "red-up": "切换蜡烛图为红涨绿跌",
+      "green-up": "切换蜡烛图为绿涨红跌"
+    }
+  },
   "realChart": {
     "sectionTitle": "真实图表分析",
     "tickerLabel": "市场代码",

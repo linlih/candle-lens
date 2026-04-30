@@ -17,6 +17,8 @@ import { useAppStore } from '@/store/appStore'
 import { darkTheme, lightTheme, type ChartTheme } from '@/types/chart'
 import { AnnotationLayer } from '@/annotations/AnnotationLayer'
 import { useTranslation } from 'react-i18next'
+import { useLocale } from '@/hooks/useLocale'
+import { resolveCandleColors } from '@/lib/candlestickColors'
 
 interface Props {
   candles: CandleBar[]
@@ -44,7 +46,12 @@ function themeToOptions(theme: ChartTheme): DeepPartial<ChartOptions> {
 
 export default function CandleChart({ candles, annotations }: Props) {
   const appTheme = useAppStore((s) => s.theme)
-  const chartTheme = appTheme === 'dark' ? darkTheme : lightTheme
+  const candleColorMode = useAppStore((s) => s.candleColorMode)
+  const { locale } = useLocale()
+  const chartTheme = {
+    ...(appTheme === 'dark' ? darkTheme : lightTheme),
+    ...resolveCandleColors(candleColorMode, locale),
+  } satisfies ChartTheme
   const containerRef = useRef<HTMLDivElement>(null)
   const { t } = useTranslation('patterns')
 

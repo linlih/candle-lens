@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import CandleColorToggle from '@/components/ui/CandleColorToggle'
 import LanguageToggle from '@/components/ui/LanguageToggle'
 import ThemeToggle from '@/components/ui/ThemeToggle'
 
@@ -48,6 +49,7 @@ export default function TopBar({ showSidebarToggle, sidebarOpen, onToggleSidebar
 
       <div className="flex items-center gap-2">
         <LanguageToggle />
+        <CandleColorToggle />
         <ThemeToggle />
       </div>
     </header>

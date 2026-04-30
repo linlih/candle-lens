@@ -58,6 +58,17 @@
     "light": "Light",
     "dark": "Dark"
   },
+  "chartColors": {
+    "label": "Candles",
+    "current": {
+      "red-up": "Red up / Green down",
+      "green-up": "Green up / Red down"
+    },
+    "switchTo": {
+      "red-up": "Switch candlestick colors to red up / green down",
+      "green-up": "Switch candlestick colors to green up / red down"
+    }
+  },
   "realChart": {
     "sectionTitle": "Real Chart Analysis",
     "tickerLabel": "Market Ticker",

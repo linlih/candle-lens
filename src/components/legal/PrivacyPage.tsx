@@ -18,7 +18,7 @@ const content = {
       },
       {
         heading: 'Local Storage',
-        body: 'Your theme preference (light/dark), selected language, and completed chapter progress are stored in your browser\'s localStorage. This data stays on your device and is never transmitted to our servers.',
+        body: 'Your theme preference (light/dark), candlestick color preference, selected language, and completed chapter progress are stored in your browser\'s localStorage. This data stays on your device and is never transmitted to our servers.',
       },
       {
         heading: 'Third-Party Services',
@@ -52,7 +52,7 @@ const content = {
       },
       {
         heading: '本地存储',
-        body: '您的主题偏好（亮色/暗色）、所选语言以及章节完成进度会存储在浏览器的 localStorage 中。这些数据保留在您的设备上，不会传输到我们的服务器。',
+        body: '您的主题偏好（亮色/暗色）、蜡烛图配色偏好、所选语言以及章节完成进度会存储在浏览器的 localStorage 中。这些数据保留在您的设备上，不会传输到我们的服务器。',
       },
       {
         heading: '第三方服务',
