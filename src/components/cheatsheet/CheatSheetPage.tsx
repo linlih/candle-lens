@@ -6,6 +6,7 @@ import { useLocale } from '@/hooks/useLocale'
 import { PatternCard } from './PatternCard'
 import { useCheatSheetData } from './useCheatSheetData'
 import { usePageTitle } from '@/hooks/usePageTitle'
+import { trackEvent } from '@/lib/analytics'
 
 type FilterSignal = Signal | 'all'
 
@@ -105,7 +106,12 @@ export function CheatSheetPage() {
           {filterButtons.map(btn => (
             <button
               key={btn.key}
-              onClick={() => setFilter(btn.key)}
+              onClick={() => {
+                setFilter(btn.key)
+                trackEvent('cheat_sheet_filter_changed', {
+                  filter: btn.key,
+                })
+              }}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors border ${
                 filter === btn.key
                   ? 'bg-[#2962ff] border-[#2962ff] text-white'

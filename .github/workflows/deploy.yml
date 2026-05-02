@@ -22,6 +22,7 @@ jobs:
       VITE_SITE_URL: https://candle-lens.lightpixels.tech/
       VITE_GITHUB_PROJECT_HOST: linlih.github.io
       VITE_GITHUB_PROJECT_PATH: /candle-lens
+      VITE_GA_MEASUREMENT_ID: ${{ vars.VITE_GA_MEASUREMENT_ID }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

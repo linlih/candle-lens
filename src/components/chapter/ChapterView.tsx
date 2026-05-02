@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams, Navigate, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useChapterContent } from '@/hooks/useChapterContent'
@@ -11,6 +11,7 @@ import PatternBadge from './PatternBadge'
 import RealChartSection from '@/components/realChart/RealChartSection'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { chapterGuides } from '@/content/chapterGuides'
+import { trackEvent } from '@/lib/analytics'
 
 export default function ChapterView() {
   const { chapterId } = useParams<{ chapterId: string }>()
@@ -19,6 +20,7 @@ export default function ChapterView() {
   const { locale } = useLocale()
   const { t } = useTranslation()
   const [sceneIndex, setSceneIndex] = useState(0)
+  const trackedCompletionsRef = useRef(new Set<string>())
 
   const chapterTitle = content?.locale[locale]?.title
   usePageTitle(chapterTitle)
@@ -28,6 +30,13 @@ export default function ChapterView() {
   useEffect(() => {
     if (content && sceneIndex === content.scenes.length - 1) {
       markComplete(content.id)
+      if (!trackedCompletionsRef.current.has(content.id)) {
+        trackedCompletionsRef.current.add(content.id)
+        trackEvent('chapter_completed', {
+          chapter_id: content.id,
+          scene_count: content.scenes.length,
+        })
+      }
     }
   }, [content, sceneIndex, markComplete])
 

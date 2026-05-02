@@ -5,6 +5,7 @@ import { useLocale } from '@/hooks/useLocale'
 import { useRealChartData } from './useRealChartData'
 import type { AnnotationDef } from '@/types/annotation'
 import type { RealChartBias } from '@/types/realChart'
+import { trackEvent } from '@/lib/analytics'
 
 interface Props {
   chapterId: string
@@ -319,6 +320,14 @@ export default function RealChartSection({ chapterId }: Props) {
                     <button
                       onClick={() => {
                         if (!responseKey || !selectedBias) return
+                        trackEvent('real_chart_practice_submitted', {
+                          chapter_id: chapterId,
+                          case_index: caseIndex,
+                          step_id: currentStep.id,
+                          selected_bias: selectedBias,
+                          expected_bias: currentStep.bias,
+                          correct: selectedBias === currentStep.bias,
+                        })
                         setPracticeResponses((responses) => ({
                           ...responses,
                           [responseKey]: {
@@ -387,6 +396,12 @@ export default function RealChartSection({ chapterId }: Props) {
                     <button
                       onClick={() => {
                         if (!responseKey || !selectedComparison) return
+                        trackEvent('real_chart_comparison_submitted', {
+                          chapter_id: chapterId,
+                          case_index: caseIndex,
+                          step_id: currentStep.id,
+                          correct: selectedComparison === stepLocale.comparisonAnswer,
+                        })
                         setPracticeResponses((responses) => ({
                           ...responses,
                           [responseKey]: {
@@ -611,6 +626,11 @@ export default function RealChartSection({ chapterId }: Props) {
                 <button
                   onClick={() => {
                     if (!checkpointState.selectedOption) return
+                    trackEvent('real_chart_checkpoint_submitted', {
+                      chapter_id: chapterId,
+                      case_index: caseIndex,
+                      correct: checkpointState.selectedOption === lessonLocale.checkpointAnswer,
+                    })
                     setCheckpointResponses((responses) => ({
                       ...responses,
                       [checkpointKey]: {

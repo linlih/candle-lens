@@ -6,6 +6,7 @@ declare global {
 }
 
 const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined
+type AnalyticsParams = Record<string, string | number | boolean | null | undefined>
 
 export function initAnalytics() {
   if (!GA_ID) return
@@ -30,4 +31,9 @@ export function trackPageview(path: string) {
     page_path: path,
     page_location: window.location.href,
   })
+}
+
+export function trackEvent(name: string, params: AnalyticsParams = {}) {
+  if (!GA_ID || typeof window.gtag !== 'function') return
+  window.gtag('event', name, params)
 }

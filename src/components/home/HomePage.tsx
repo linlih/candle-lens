@@ -5,6 +5,7 @@ import ChapterCard from './ChapterCard'
 import type { ChapterMeta } from '@/types/content'
 import { useLocale } from '@/hooks/useLocale'
 import { usePageTitle } from '@/hooks/usePageTitle'
+import { trackEvent } from '@/lib/analytics'
 
 const learningPath = [
   'part1-ch00-analysis',
@@ -76,12 +77,19 @@ export default function HomePage() {
         <div className="flex items-center justify-center gap-3 flex-wrap">
           <Link
             to={`/chapter/${firstChapter.id}`}
+            onClick={() => trackEvent('start_learning_clicked', {
+              entry: 'home_hero',
+              chapter_id: firstChapter.id,
+            })}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#2962ff] hover:bg-[#1a4fcc] text-white font-semibold text-sm transition-colors"
           >
             {t('home.startLearning')} →
           </Link>
           <Link
             to="/cheat-sheet"
+            onClick={() => trackEvent('cheat_sheet_opened', {
+              entry: 'home_hero',
+            })}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-300 dark:border-[#363a45] text-gray-700 dark:text-[#d1d4dc] hover:bg-gray-100 dark:hover:bg-[#2a2e39] font-semibold text-sm transition-colors"
           >
             📋 {t('nav.cheatSheet')}
@@ -128,6 +136,11 @@ export default function HomePage() {
             <Link
               key={chapter.id}
               to={`/chapter/${chapter.id}`}
+              onClick={() => trackEvent('learning_path_clicked', {
+                entry: 'recommended_path',
+                chapter_id: chapter.id,
+                step_number: index + 1,
+              })}
               className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4 hover:border-[#2962ff]/50 transition-colors"
             >
               <p className="text-[11px] font-semibold uppercase tracking-wide text-[#2962ff] mb-1">
@@ -160,6 +173,10 @@ export default function HomePage() {
               <Link
                 key={chapter.id}
                 to={`/chapter/${chapter.id}`}
+                onClick={() => trackEvent('learning_path_clicked', {
+                  entry: 'recognition_path',
+                  chapter_id: chapter.id,
+                })}
                 className="px-3 py-1.5 rounded-full text-xs font-medium border border-[#26a69a]/30 text-[#1d8f85] dark:text-[#55cfc2] bg-[#26a69a]/8 hover:border-[#26a69a]/50"
               >
                 {chapter.patternNames[0]}
@@ -183,6 +200,10 @@ export default function HomePage() {
               <Link
                 key={chapter.id}
                 to={`/chapter/${chapter.id}`}
+                onClick={() => trackEvent('learning_path_clicked', {
+                  entry: 'analysis_path',
+                  chapter_id: chapter.id,
+                })}
                 className="px-3 py-1.5 rounded-full text-xs font-medium border border-[#ef5350]/30 text-[#d14a47] dark:text-[#ff8b88] bg-[#ef5350]/8 hover:border-[#ef5350]/50"
               >
                 {chapter.patternNames[0]}
