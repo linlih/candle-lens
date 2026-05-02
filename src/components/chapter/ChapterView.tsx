@@ -106,7 +106,7 @@ export default function ChapterView() {
         <p className="text-xs font-medium text-gray-500 dark:text-[#787b86] lg:text-sm">{sceneTitle}</p>
       </div>
       {/* Chart */}
-      <div className="h-[320px] min-[1360px]:h-[420px] min-[1540px]:h-[460px]">
+      <div className="h-[320px] min-[1360px]:h-[360px] min-[1540px]:h-[380px]">
         <CandleChart
           candles={currentScene.candles}
           annotations={currentScene.annotations}
@@ -236,7 +236,7 @@ export default function ChapterView() {
         </article>
 
         {isDesktopLayout && (
-          <aside className="sticky top-6 min-w-0">
+          <aside className="sticky top-6 min-w-0 max-w-[620px]">
             <div className="space-y-3">
               {chartBlock}
               <p className="px-1 text-xs leading-relaxed text-gray-400 dark:text-[#787b86]">

@@ -25,6 +25,10 @@ interface Props {
   annotations: AnnotationDef[]
 }
 
+const targetBarSpacing = 22
+const minSidePaddingBars = 2
+const maxVisibleRangeMultiplier = 4
+
 function themeToOptions(theme: ChartTheme): DeepPartial<ChartOptions> {
   return {
     layout: {
@@ -39,7 +43,13 @@ function themeToOptions(theme: ChartTheme): DeepPartial<ChartOptions> {
       vertLine: { color: theme.crosshairColor },
       horzLine: { color: theme.crosshairColor },
     },
-    timeScale: { borderColor: theme.gridColor, timeVisible: true },
+    timeScale: {
+      borderColor: theme.gridColor,
+      timeVisible: true,
+      barSpacing: targetBarSpacing,
+      minBarSpacing: 4,
+      maxBarSpacing: 26,
+    },
     rightPriceScale: { borderColor: theme.gridColor },
   }
 }
@@ -103,7 +113,13 @@ export default function CandleChart({ candles, annotations }: Props) {
     applyCandles(series, chart, candlesRef.current)
     applyAnnotations(layer, markersPlugin, annotationsRef.current, candlesRef.current, tRef.current)
 
+    const resizeObserver = new ResizeObserver(() => {
+      applyChartViewport(chart, candlesRef.current.length)
+    })
+    resizeObserver.observe(container)
+
     return () => {
+      resizeObserver.disconnect()
       layer.destroy()
       try { markersPlugin.detach() } catch { /* ignore */ }
       chart.remove()
@@ -167,6 +183,33 @@ function applyCandles(
     })),
   )
   chart.timeScale().fitContent()
+  applyChartViewport(chart, candles.length)
+}
+
+function applyChartViewport(chart: IChartApi, candleCount: number) {
+  if (candleCount <= 0) return
+
+  const width = chart.timeScale().width()
+  if (!width) {
+    chart.timeScale().fitContent()
+    return
+  }
+
+  const targetVisibleBars = Math.ceil(width / targetBarSpacing)
+  const minVisibleBars = candleCount + minSidePaddingBars * 2
+  const maxVisibleBars = Math.max(
+    minVisibleBars,
+    Math.ceil(candleCount * maxVisibleRangeMultiplier),
+  )
+  const visibleBars = Math.max(minVisibleBars, Math.min(targetVisibleBars, maxVisibleBars))
+  const extraBars = Math.max(minSidePaddingBars * 2, visibleBars - candleCount)
+  const leftPadding = extraBars * 0.45
+  const rightPadding = extraBars - leftPadding
+
+  chart.timeScale().setVisibleLogicalRange({
+    from: -leftPadding,
+    to: candleCount - 1 + rightPadding,
+  })
 }
 
 function applyAnnotations(
