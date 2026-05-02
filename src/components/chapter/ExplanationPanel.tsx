@@ -32,18 +32,18 @@ function Block({ block, chartBlock }: { block: ExplanationBlock; chartBlock?: Re
 
     case 'paragraph':
       return (
-        <p className="text-gray-700 dark:text-[#d1d4dc] leading-relaxed text-sm">
+        <p className="text-sm leading-relaxed text-gray-700 dark:text-[#d1d4dc] lg:text-[15px] lg:leading-7">
           {block.text}
         </p>
       )
 
     case 'heading':
       return block.level === 2 ? (
-        <h2 className="text-gray-900 dark:text-[#d1d4dc] font-semibold text-base mt-2">
+        <h2 className="mt-3 text-base font-semibold text-gray-900 dark:text-[#d1d4dc] lg:mt-4 lg:text-lg">
           {block.text}
         </h2>
       ) : (
-        <h3 className="text-gray-900 dark:text-[#d1d4dc] font-medium text-sm mt-1">
+        <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-[#d1d4dc] lg:text-base">
           {block.text}
         </h3>
       )
@@ -51,9 +51,9 @@ function Block({ block, chartBlock }: { block: ExplanationBlock; chartBlock?: Re
     case 'callout': {
       const style = calloutStyles[block.variant]
       return (
-        <div className={`flex gap-3 p-3 rounded-r-md border-l-4 ${style.border} ${style.bg}`}>
+        <div className={`flex gap-3 rounded-r-md border-l-4 p-3 lg:p-4 ${style.border} ${style.bg}`}>
           <span className="text-base shrink-0">{style.icon}</span>
-          <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">{block.text}</p>
+          <p className="text-sm leading-relaxed text-gray-700 dark:text-[#d1d4dc] lg:text-[15px] lg:leading-7">{block.text}</p>
         </div>
       )
     }
@@ -62,9 +62,9 @@ function Block({ block, chartBlock }: { block: ExplanationBlock; chartBlock?: Re
       return (
         <ul className="space-y-1.5">
           {block.points.map((pt, i) => (
-            <li key={i} className="flex gap-2 text-sm text-gray-700 dark:text-[#d1d4dc]">
+            <li key={i} className="flex gap-2 text-sm text-gray-700 dark:text-[#d1d4dc] lg:text-[15px]">
               <span className="text-[#26a69a] shrink-0 mt-0.5">›</span>
-              <span className="leading-relaxed">{pt}</span>
+              <span className="leading-relaxed lg:leading-7">{pt}</span>
             </li>
           ))}
         </ul>
@@ -72,14 +72,14 @@ function Block({ block, chartBlock }: { block: ExplanationBlock; chartBlock?: Re
 
     case 'comparison':
       return (
-        <div className="grid grid-cols-2 gap-3">
-          <div className="p-3 rounded-md bg-[#26a69a]/10 border border-[#26a69a]/30">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="rounded-md border border-[#26a69a]/30 bg-[#26a69a]/10 p-3 lg:p-4">
             <p className="text-xs font-semibold text-[#26a69a] mb-1.5">Bullish</p>
-            <p className="text-xs text-gray-700 dark:text-[#d1d4dc] leading-relaxed">{block.bullish}</p>
+            <p className="text-xs leading-relaxed text-gray-700 dark:text-[#d1d4dc] lg:text-sm">{block.bullish}</p>
           </div>
-          <div className="p-3 rounded-md bg-[#ef5350]/10 border border-[#ef5350]/30">
+          <div className="rounded-md border border-[#ef5350]/30 bg-[#ef5350]/10 p-3 lg:p-4">
             <p className="text-xs font-semibold text-[#ef5350] mb-1.5">Bearish</p>
-            <p className="text-xs text-gray-700 dark:text-[#d1d4dc] leading-relaxed">{block.bearish}</p>
+            <p className="text-xs leading-relaxed text-gray-700 dark:text-[#d1d4dc] lg:text-sm">{block.bearish}</p>
           </div>
         </div>
       )
@@ -88,7 +88,7 @@ function Block({ block, chartBlock }: { block: ExplanationBlock; chartBlock?: Re
 
 export default function ExplanationPanel({ blocks, chartBlock }: Props) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 lg:space-y-5">
       {blocks.map((block, i) => (
         <Block key={i} block={block} chartBlock={chartBlock} />
       ))}

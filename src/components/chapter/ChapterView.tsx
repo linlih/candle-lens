@@ -13,6 +13,8 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 import { chapterGuides } from '@/content/chapterGuides'
 import { trackEvent } from '@/lib/analytics'
 
+const desktopReadingWidth = 1080
+
 export default function ChapterView() {
   const { chapterId } = useParams<{ chapterId: string }>()
   const { content, loading, error } = useChapterContent(chapterId ?? '')
@@ -20,12 +22,34 @@ export default function ChapterView() {
   const { locale } = useLocale()
   const { t } = useTranslation()
   const [sceneIndex, setSceneIndex] = useState(0)
+  const [isDesktopLayout, setIsDesktopLayout] = useState(false)
+  const layoutRef = useRef<HTMLDivElement>(null)
   const trackedCompletionsRef = useRef(new Set<string>())
 
   const chapterTitle = content?.locale[locale]?.title
   usePageTitle(chapterTitle)
 
   useEffect(() => { setSceneIndex(0) }, [chapterId])
+
+  useEffect(() => {
+    const element = layoutRef.current
+    if (!element) return
+
+    const updateLayout = () => {
+      setIsDesktopLayout(element.getBoundingClientRect().width >= desktopReadingWidth)
+    }
+
+    updateLayout()
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const observer = new ResizeObserver(updateLayout)
+      observer.observe(element)
+      return () => observer.disconnect()
+    }
+
+    window.addEventListener('resize', updateLayout)
+    return () => window.removeEventListener('resize', updateLayout)
+  }, [])
 
   useEffect(() => {
     if (content && sceneIndex === content.scenes.length - 1) {
@@ -76,13 +100,13 @@ export default function ChapterView() {
   const chapterGuide = chapterGuides[content.id]?.[locale]
 
   const chartBlock = (
-    <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-[#363a45] my-2">
+    <div className="my-2 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-[#363a45] dark:bg-[#131722] lg:my-0">
       {/* Scene title bar */}
-      <div className="px-4 py-2 bg-gray-50 dark:bg-[#131722] border-b border-gray-200 dark:border-[#363a45]">
-        <p className="text-xs font-medium text-gray-500 dark:text-[#787b86]">{sceneTitle}</p>
+      <div className="border-b border-gray-200 bg-gray-50 px-4 py-2 dark:border-[#363a45] dark:bg-[#1e222d]">
+        <p className="text-xs font-medium text-gray-500 dark:text-[#787b86] lg:text-sm">{sceneTitle}</p>
       </div>
       {/* Chart */}
-      <div style={{ height: '320px' }}>
+      <div className="h-[320px] min-[1360px]:h-[420px] min-[1540px]:h-[460px]">
         <CandleChart
           candles={currentScene.candles}
           annotations={currentScene.annotations}
@@ -100,107 +124,133 @@ export default function ChapterView() {
   )
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6">
-      {/* Chapter header */}
-      <div className="mb-6">
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          {content.patternNames.map((name) => (
-            <PatternBadge key={name} name={name} />
-          ))}
-        </div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-[#d1d4dc] leading-snug mb-1">
-          {localeContent.title}
-        </h1>
-        <p className="text-sm text-gray-500 dark:text-[#787b86]">{localeContent.subtitle}</p>
-      </div>
-
-      {/* Explanation blocks with inline chart */}
-      <ExplanationPanel
-        blocks={localeContent.explanation}
-        chartBlock={chartBlock}
-      />
-
-      {chapterGuide && (
-        <div className="mt-8 rounded-2xl border border-gray-200 dark:border-[#363a45] bg-gray-50 dark:bg-[#1e222d] p-5 space-y-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#2962ff] mb-1">
-              {t('chapter.analysisGuide')}
-            </p>
-            <p className="text-sm text-gray-600 dark:text-[#9598a1] leading-relaxed">
-              {chapterGuide.whyNotMemorize}
+    <div ref={layoutRef} className="mx-auto w-full max-w-[1440px] px-4 py-6 lg:px-8 lg:py-8">
+      <div
+        className={[
+          'grid gap-8',
+          isDesktopLayout
+            ? 'grid-cols-[minmax(0,640px)_minmax(360px,1fr)] items-start min-[1540px]:grid-cols-[minmax(0,720px)_minmax(480px,1fr)]'
+            : '',
+        ].join(' ')}
+      >
+        <article className="min-w-0 lg:pb-4">
+          {/* Chapter header */}
+          <div className="mb-6 lg:mb-8">
+            <div className="mb-3 flex flex-wrap gap-1.5">
+              {content.patternNames.map((name) => (
+                <PatternBadge key={name} name={name} />
+              ))}
+            </div>
+            <h1 className="mb-2 text-2xl font-bold leading-snug text-gray-900 dark:text-[#d1d4dc] lg:text-3xl">
+              {localeContent.title}
+            </h1>
+            <p className="text-sm leading-6 text-gray-500 dark:text-[#787b86] lg:text-base">
+              {localeContent.subtitle}
             </p>
           </div>
 
-          <div className="grid gap-3 md:grid-cols-2">
-            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
-                {t('chapter.templateTrend')}
-              </p>
-              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
-                {chapterGuide.trend}
-              </p>
-            </div>
-            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
-                {t('chapter.templateLocation')}
-              </p>
-              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
-                {chapterGuide.location}
-              </p>
-            </div>
-            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
-                {t('chapter.templateSignal')}
-              </p>
-              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
-                {chapterGuide.signal}
-              </p>
-            </div>
-            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
-                {t('chapter.templateConfirmation')}
-              </p>
-              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
-                {chapterGuide.confirmation}
-              </p>
-            </div>
-            <div className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4 md:col-span-2">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86] mb-1">
-                {t('chapter.templateInvalidation')}
-              </p>
-              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
-                {chapterGuide.invalidation}
-              </p>
-            </div>
-          </div>
+          {/* Explanation blocks with inline chart on smaller screens */}
+          <ExplanationPanel
+            blocks={localeContent.explanation}
+            chartBlock={isDesktopLayout ? null : chartBlock}
+          />
 
-          {chapterGuide.confusion && (
-            <div className="rounded-xl border border-[#f5a623]/20 bg-[#f5a623]/8 p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-[#c58618] dark:text-[#f5c76b] mb-1">
-                {t('chapter.commonConfusion')}
-              </p>
-              <p className="text-sm font-semibold text-gray-900 dark:text-[#d1d4dc] mb-1">
-                {chapterGuide.confusion.pattern}
-              </p>
-              <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
-                {chapterGuide.confusion.reason}
-              </p>
+          {chapterGuide && (
+            <div className="mt-8 space-y-4 rounded-xl border border-gray-200 bg-gray-50 p-5 dark:border-[#363a45] dark:bg-[#1e222d] lg:mt-10">
+              <div>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[#2962ff]">
+                  {t('chapter.analysisGuide')}
+                </p>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-[#9598a1] lg:text-[15px] lg:leading-7">
+                  {chapterGuide.whyNotMemorize}
+                </p>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2">
+                <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-[#363a45] dark:bg-[#131722]">
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86]">
+                    {t('chapter.templateTrend')}
+                  </p>
+                  <p className="text-sm leading-relaxed text-gray-700 dark:text-[#d1d4dc]">
+                    {chapterGuide.trend}
+                  </p>
+                </div>
+                <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-[#363a45] dark:bg-[#131722]">
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86]">
+                    {t('chapter.templateLocation')}
+                  </p>
+                  <p className="text-sm leading-relaxed text-gray-700 dark:text-[#d1d4dc]">
+                    {chapterGuide.location}
+                  </p>
+                </div>
+                <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-[#363a45] dark:bg-[#131722]">
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86]">
+                    {t('chapter.templateSignal')}
+                  </p>
+                  <p className="text-sm leading-relaxed text-gray-700 dark:text-[#d1d4dc]">
+                    {chapterGuide.signal}
+                  </p>
+                </div>
+                <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-[#363a45] dark:bg-[#131722]">
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86]">
+                    {t('chapter.templateConfirmation')}
+                  </p>
+                  <p className="text-sm leading-relaxed text-gray-700 dark:text-[#d1d4dc]">
+                    {chapterGuide.confirmation}
+                  </p>
+                </div>
+                <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-[#363a45] dark:bg-[#131722] md:col-span-2">
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-[#787b86]">
+                    {t('chapter.templateInvalidation')}
+                  </p>
+                  <p className="text-sm leading-relaxed text-gray-700 dark:text-[#d1d4dc]">
+                    {chapterGuide.invalidation}
+                  </p>
+                </div>
+              </div>
+
+              {chapterGuide.confusion && (
+                <div className="rounded-lg border border-[#f5a623]/20 bg-[#f5a623]/8 p-4">
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-[#c58618] dark:text-[#f5c76b]">
+                    {t('chapter.commonConfusion')}
+                  </p>
+                  <p className="mb-1 text-sm font-semibold text-gray-900 dark:text-[#d1d4dc]">
+                    {chapterGuide.confusion.pattern}
+                  </p>
+                  <p className="text-sm leading-relaxed text-gray-700 dark:text-[#d1d4dc]">
+                    {chapterGuide.confusion.reason}
+                  </p>
+                </div>
+              )}
+
+              <div className="rounded-lg border border-[#26a69a]/20 bg-[#26a69a]/8 p-4">
+                <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-[#26a69a]">
+                  {t('chapter.keyTakeaway')}
+                </p>
+                <p className="text-sm font-medium leading-relaxed text-gray-800 dark:text-[#d1d4dc]">
+                  {chapterGuide.takeaway}
+                </p>
+              </div>
             </div>
           )}
+        </article>
 
-          <div className="rounded-xl border border-[#26a69a]/20 bg-[#26a69a]/8 p-4">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-[#26a69a] mb-1">
-              {t('chapter.keyTakeaway')}
-            </p>
-            <p className="text-sm text-gray-800 dark:text-[#d1d4dc] leading-relaxed font-medium">
-              {chapterGuide.takeaway}
-            </p>
-          </div>
-        </div>
-      )}
+        {isDesktopLayout && (
+          <aside className="sticky top-6 min-w-0">
+            <div className="space-y-3">
+              {chartBlock}
+              <p className="px-1 text-xs leading-relaxed text-gray-400 dark:text-[#787b86]">
+                {content.patternNames.join(' / ')}
+              </p>
+            </div>
+          </aside>
+        )}
+      </div>
 
       {/* Real-world candlestick analysis (NVDA) */}
-      <RealChartSection chapterId={content.id} />
+      <div className="mt-10 lg:mt-12 lg:max-w-[1180px] xl:max-w-[1240px]">
+        <RealChartSection chapterId={content.id} />
+      </div>
     </div>
   )
 }
