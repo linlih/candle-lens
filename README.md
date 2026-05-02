@@ -8,8 +8,9 @@ An interactive web application for learning Japanese candlestick chart technique
 
 ## Features
 
-- **Chapter-by-chapter learning** — 13 chapters covering candlestick basics through advanced multi-candle patterns
+- **Chapter-by-chapter learning** — 24 chapters covering candlestick basics, reversal/continuation structures, context, confluence, volume, and failed signals
 - **Interactive annotated charts** — Live TradingView Lightweight Charts with highlighted patterns and progressive scene walkthroughs
+- **Real-chart practice** — Historical market examples with step-by-step judgment prompts and checkpoints
 - **Bilingual support** — Full English and Chinese (简体中文) UI and content
 - **Progress tracking** — Chapters marked complete as you finish them
 - **Responsive design** — Works on desktop and mobile
@@ -40,6 +41,9 @@ npm run typecheck
 
 # Run tests
 npm run test
+
+# Sync the public sitemap after catalog changes
+npm run sync:sitemap
 
 # Production build
 npm run build
@@ -76,10 +80,10 @@ Chapters are organized into four parts:
 
 | Part | Chapters | Topics |
 |---|---|---|
-| Part 1 | 1–4 | Introduction, Doji, Hammer & Hanging Man, Stars |
-| Part 2 | 5–10 | Engulfing, Dark Cloud Cover, Evening/Morning Stars, Harami, Tweezers, Three-candle patterns |
-| Part 3 | 11–12 | Windows (gaps), Three Methods |
-| Part 4 | 13 | Western technical analysis integration |
+| Part 1 | Foundations, 1–4 | Analysis framework, candle syntax, introduction, Doji, Hammer & Hanging Man, Stars |
+| Part 2 | 5–10, 14–17 | Engulfing, Dark Cloud Cover, Evening/Morning Stars, Harami, Tweezers, three-candle patterns, special reversals, line reversals, neck/breakaway structures, advanced reversal structures |
+| Part 3 | 11–12, 18 | Windows (gaps), Three Methods, gap continuation structures |
+| Part 4 | 13, 19–22 | Western technical analysis integration, volume confirmation, context comparisons, confluence lab, failed signals |
 
 ### Adding a Chapter
 
@@ -94,7 +98,7 @@ Each chapter lives in `src/content/chapters/{id}/` with five files:
   index.ts        # Re-exports everything
 ```
 
-Register the chapter in `src/content/catalog.ts` and `src/content/index.ts`.
+Register the chapter in `src/content/catalog.ts` and `src/content/index.ts`, then run `npm run sync:sitemap`.
 
 ## Manual Verification Checklist
 
@@ -104,6 +108,7 @@ Before release or deployment, verify:
 - Toggle language on the home page, chapter page, cheat sheet, and legal pages and confirm copy stays consistent
 - Toggle theme and confirm charts plus layout colors update correctly
 - Open a chapter on mobile width and confirm the sidebar opens, closes, and dismisses via backdrop
+- Open built route files such as `/cheat-sheet/` and `/chapter/part1-ch02-doji/` and confirm they load with HTTP 200 on the target host
 - Run `npm run typecheck`
 - Run `npm run test`
 - Run `npm run build`
@@ -124,8 +129,9 @@ Before release or deployment, verify:
 
 ## 功能特点
 
-- **逐章学习** — 共 13 章，从蜡烛图基础到高级多根蜡烛形态
+- **逐章学习** — 共 24 章，覆盖蜡烛图基础、反转/持续结构、上下文、共振、成交量与失败信号
 - **交互式注释图表** — 基于 TradingView Lightweight Charts 的实时图表，带有形态高亮和逐步场景讲解
+- **真实图表练习** — 结合历史市场案例，提供分步判断题与 checkpoint
 - **双语支持** — 完整的英文与中文（简体）界面和内容
 - **学习进度追踪** — 完成章节后自动标记
 - **响应式设计** — 支持桌面端与移动端
@@ -154,6 +160,12 @@ npm run dev
 # 类型检查
 npm run typecheck
 
+# 运行测试
+npm run test
+
+# catalog 变更后同步 sitemap
+npm run sync:sitemap
+
 # 生产环境构建
 npm run build
 ```
@@ -164,10 +176,10 @@ npm run build
 
 | 部分 | 章节 | 主题 |
 |---|---|---|
-| 第一部分 | 1–4 | 简介、十字星、锤子线与上吊线、星线 |
-| 第二部分 | 5–10 | 吞没形态、乌云盖顶、黄昏星/晨星、孕线、镊子顶底、三根蜡烛形态 |
-| 第三部分 | 11–12 | 窗口（缺口）、三法 |
-| 第四部分 | 13 | 与西方技术分析的结合 |
+| 第一部分 | 基础章、1–4 | 分析框架、K 线语法、简介、十字星、锤子线与上吊线、星线 |
+| 第二部分 | 5–10、14–17 | 吞没形态、乌云盖顶、黄昏星/晨星、孕线、镊子顶底、三根蜡烛形态、特殊反转、线形反转、颈线/脱离结构、高级反转结构 |
+| 第三部分 | 11–12、18 | 窗口（缺口）、三法、缺口持续结构 |
+| 第四部分 | 13、19–22 | 与西方技术分析结合、成交量确认、上下文对比、共振实验、失败信号 |
 
 ### 新增章节
 
@@ -182,7 +194,7 @@ npm run build
   index.ts        # 统一导出
 ```
 
-在 `src/content/catalog.ts` 和 `src/content/index.ts` 中注册新章节即可。
+在 `src/content/catalog.ts` 和 `src/content/index.ts` 中注册新章节，然后运行 `npm run sync:sitemap`。
 
 ## 许可证
 
