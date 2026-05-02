@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "postbuild": "node -e \"require('node:fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
+    "postbuild": "node scripts/create-static-routes.mjs",
     "preview": "vite preview",
+    "sync:sitemap": "node scripts/generate-sitemap.mjs",
     "typecheck": "tsc --noEmit",
     "test": "rm -rf .test-build && tsc -p tsconfig.test.json && node --test .test-build/tests/**/*.test.js"
   },

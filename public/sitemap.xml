@@ -6,82 +6,137 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/cheat-sheet</loc>
+    <loc>https://candle-lens.lightpixels.tech/cheat-sheet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part1-ch01-intro</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part1-ch00-analysis/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part1-ch02-doji</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part1-ch00-syntax/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part1-ch03-hammer</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part1-ch01-intro/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part1-ch04-star</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part1-ch02-doji/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch05-engulfing</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part1-ch03-hammer/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch06-cloud</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part1-ch04-star/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch07-stars</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch05-engulfing/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch08-harami</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch06-cloud/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch09-tweezers</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch07-stars/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch10-three</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch08-harami/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part3-ch11-windows</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch09-tweezers/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part3-ch12-three-methods</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch10-three/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/chapter/part4-ch13-western</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch14-special-reversals/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/privacy</loc>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch15-line-reversals/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch16-neck-and-breakaway/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part2-ch17-advanced-structures/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part3-ch11-windows/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part3-ch12-three-methods/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part3-ch18-gap-continuations/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part4-ch13-western/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part4-ch19-volume/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part4-ch20-context-comparisons/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part4-ch21-confluence-lab/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/chapter/part4-ch22-failed-signals/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candle-lens.lightpixels.tech/privacy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://candle-lens.lightpixels.tech/terms</loc>
+    <loc>https://candle-lens.lightpixels.tech/terms/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
