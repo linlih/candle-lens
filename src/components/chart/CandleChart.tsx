@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, type RefObject } from 'react'
 import {
   createChart,
   CandlestickSeries,
@@ -10,6 +10,7 @@ import {
   type Time,
   type DeepPartial,
   type ChartOptions,
+  type AutoscaleInfoProvider,
 } from 'lightweight-charts'
 import type { CandleBar } from '@/types/content'
 import type { AnnotationDef } from '@/types/annotation'
@@ -19,15 +20,21 @@ import { AnnotationLayer } from '@/annotations/AnnotationLayer'
 import { useTranslation } from 'react-i18next'
 import { useLocale } from '@/hooks/useLocale'
 import { resolveCandleColors } from '@/lib/candlestickColors'
+import {
+  calculateAnnotationPriceRange,
+  calculateChartVisibleLogicalRange,
+  chartViewportDefaults,
+} from '@/lib/chartViewport'
 
 interface Props {
   candles: CandleBar[]
   annotations: AnnotationDef[]
 }
 
-const targetBarSpacing = 30
-const minSidePaddingBars = 2
-const maxVisibleRangeMultiplier = 4
+const annotationAutoscaleMargins = {
+  above: 34,
+  below: 28,
+}
 
 function themeToOptions(theme: ChartTheme): DeepPartial<ChartOptions> {
   return {
@@ -46,11 +53,44 @@ function themeToOptions(theme: ChartTheme): DeepPartial<ChartOptions> {
     timeScale: {
       borderColor: theme.gridColor,
       timeVisible: true,
-      barSpacing: targetBarSpacing,
+      barSpacing: chartViewportDefaults.targetBarSpacing,
       minBarSpacing: 4,
       maxBarSpacing: 48,
     },
-    rightPriceScale: { borderColor: theme.gridColor },
+    rightPriceScale: {
+      borderColor: theme.gridColor,
+      scaleMargins: {
+        top: 0.24,
+        bottom: 0.18,
+      },
+    },
+  }
+}
+
+const createAutoscaleInfoProvider = (
+  candlesRef: RefObject<CandleBar[]>,
+  annotationsRef: RefObject<AnnotationDef[]>,
+): AutoscaleInfoProvider => (baseImplementation) => {
+  const base = baseImplementation()
+  if (!base?.priceRange) return base
+
+  const annotationRange = calculateAnnotationPriceRange(
+    candlesRef.current,
+    annotationsRef.current,
+  )
+  const priceRange = annotationRange
+    ? {
+      minValue: Math.min(base.priceRange.minValue, annotationRange.minValue),
+      maxValue: Math.max(base.priceRange.maxValue, annotationRange.maxValue),
+    }
+    : base.priceRange
+
+  return {
+    priceRange,
+    margins: {
+      above: Math.max(base.margins?.above ?? 0, annotationAutoscaleMargins.above),
+      below: Math.max(base.margins?.below ?? 0, annotationAutoscaleMargins.below),
+    },
   }
 }
 
@@ -99,6 +139,7 @@ export default function CandleChart({ candles, annotations }: Props) {
       borderDownColor: chartThemeRef.current.bearColor,
       wickUpColor: chartThemeRef.current.wickBullColor,
       wickDownColor: chartThemeRef.current.wickBearColor,
+      autoscaleInfoProvider: createAutoscaleInfoProvider(candlesRef, annotationsRef),
     })
 
     const markersPlugin = createSeriesMarkers<Time>(series, [])
@@ -110,11 +151,16 @@ export default function CandleChart({ candles, annotations }: Props) {
     layerRef.current = layer
 
     // Set initial data
-    applyCandles(series, chart, candlesRef.current)
-    applyAnnotations(layer, markersPlugin, annotationsRef.current, candlesRef.current, tRef.current)
+    const initialAnnotations = resolveAnnotations(annotationsRef.current, tRef.current)
+    applyCandles(series, chart, candlesRef.current, initialAnnotations)
+    applyAnnotations(layer, markersPlugin, initialAnnotations, candlesRef.current)
 
     const resizeObserver = new ResizeObserver(() => {
-      applyChartViewport(chart, candlesRef.current.length)
+      applyChartViewport(
+        chart,
+        candlesRef.current,
+        resolveAnnotations(annotationsRef.current, tRef.current),
+      )
     })
     resizeObserver.observe(container)
 
@@ -139,8 +185,9 @@ export default function CandleChart({ candles, annotations }: Props) {
     const markersPlugin = markersPluginRef.current
     if (!chart || !series || !layer || !markersPlugin) return
 
-    applyCandles(series, chart, candles)
-    applyAnnotations(layer, markersPlugin, annotations, candles, t)
+    const resolvedAnnotations = resolveAnnotations(annotations, t)
+    applyCandles(series, chart, candles, resolvedAnnotations)
+    applyAnnotations(layer, markersPlugin, resolvedAnnotations, candles)
   }, [candles, annotations, t])
 
   // ── Update effect: sync theme ─────────────────────────────────────────────
@@ -171,6 +218,7 @@ function applyCandles(
   series: ISeriesApi<'Candlestick'>,
   chart: IChartApi,
   candles: CandleBar[],
+  annotations: AnnotationDef[],
 ) {
   if (!candles.length) return
   series.setData(
@@ -183,32 +231,34 @@ function applyCandles(
     })),
   )
   chart.timeScale().fitContent()
-  applyChartViewport(chart, candles.length)
+  applyChartViewport(chart, candles, annotations)
 }
 
-function applyChartViewport(chart: IChartApi, candleCount: number) {
-  if (candleCount <= 0) return
-
+function applyChartViewport(
+  chart: IChartApi,
+  candles: CandleBar[],
+  annotations: AnnotationDef[],
+) {
   const width = chart.timeScale().width()
   if (!width) {
     chart.timeScale().fitContent()
     return
   }
 
-  const targetVisibleBars = Math.ceil(width / targetBarSpacing)
-  const minVisibleBars = candleCount + minSidePaddingBars * 2
-  const maxVisibleBars = Math.max(
-    minVisibleBars,
-    Math.ceil(candleCount * maxVisibleRangeMultiplier),
-  )
-  const visibleBars = Math.max(minVisibleBars, Math.min(targetVisibleBars, maxVisibleBars))
-  const extraBars = Math.max(minSidePaddingBars * 2, visibleBars - candleCount)
-  const leftPadding = extraBars / 2
-  const rightPadding = extraBars - leftPadding
+  const range = calculateChartVisibleLogicalRange(candles, annotations, width)
+  if (!range) return
 
-  chart.timeScale().setVisibleLogicalRange({
-    from: -leftPadding,
-    to: candleCount - 1 + rightPadding,
+  chart.timeScale().setVisibleLogicalRange(range)
+}
+
+function resolveAnnotations(
+  annotations: AnnotationDef[],
+  t: (key: string) => string,
+): AnnotationDef[] {
+  return annotations.map((def) => {
+    if (def.kind === 'label' && def.textKey) return { ...def, text: t(def.textKey) }
+    if (def.kind === 'arrow' && def.labelKey) return { ...def, label: t(def.labelKey) }
+    return def
   })
 }
 
@@ -217,17 +267,10 @@ function applyAnnotations(
   markersPlugin: ISeriesMarkersPluginApi<Time>,
   annotations: AnnotationDef[],
   candles: CandleBar[],
-  t: (key: string) => string,
 ) {
-  const resolved = annotations.map((def) => {
-    if (def.kind === 'label' && def.textKey) return { ...def, text: t(def.textKey) }
-    if (def.kind === 'arrow' && def.labelKey) return { ...def, label: t(def.labelKey) }
-    return def
-  })
+  layer.setAnnotations(annotations.filter((d) => d.kind !== 'arrow'), candles)
 
-  layer.setAnnotations(resolved.filter((d) => d.kind !== 'arrow'), candles)
-
-  const markers: SeriesMarker<Time>[] = resolved
+  const markers: SeriesMarker<Time>[] = annotations
     .filter((d) => d.kind === 'arrow')
     .map((d) => {
       if (d.kind !== 'arrow') return null as never
