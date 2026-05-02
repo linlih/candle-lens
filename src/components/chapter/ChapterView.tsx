@@ -13,7 +13,7 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 import { chapterGuides } from '@/content/chapterGuides'
 import { trackEvent } from '@/lib/analytics'
 
-const desktopReadingWidth = 1080
+const desktopReadingWidth = 1160
 
 export default function ChapterView() {
   const { chapterId } = useParams<{ chapterId: string }>()
@@ -98,15 +98,18 @@ export default function ChapterView() {
   const currentScene = content.scenes[sceneIndex]
   const sceneTitle = localeContent.sceneTitles[currentScene.titleKey] ?? currentScene.titleKey
   const chapterGuide = chapterGuides[content.id]?.[locale]
+  const chartHeightClass = isDesktopLayout
+    ? 'h-[440px] xl:h-[500px] min-[1540px]:h-[540px]'
+    : 'h-[320px] sm:h-[360px]'
 
   const chartBlock = (
-    <div className="my-2 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-[#363a45] dark:bg-[#131722] lg:my-0">
+    <div className="my-2 w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-[#363a45] dark:bg-[#131722] lg:my-0">
       {/* Scene title bar */}
       <div className="border-b border-gray-200 bg-gray-50 px-4 py-2 dark:border-[#363a45] dark:bg-[#1e222d]">
         <p className="text-xs font-medium text-gray-500 dark:text-[#787b86] lg:text-sm">{sceneTitle}</p>
       </div>
       {/* Chart */}
-      <div className="h-[320px] min-[1360px]:h-[360px] min-[1540px]:h-[380px]">
+      <div className={chartHeightClass}>
         <CandleChart
           candles={currentScene.candles}
           annotations={currentScene.annotations}
@@ -124,12 +127,12 @@ export default function ChapterView() {
   )
 
   return (
-    <div ref={layoutRef} className="mx-auto w-full max-w-[1440px] px-4 py-6 lg:px-8 lg:py-8">
+    <div ref={layoutRef} className="mx-auto w-full max-w-[1580px] px-4 py-6 lg:px-8 lg:py-8">
       <div
         className={[
-          'grid gap-8',
+          'grid gap-8 xl:gap-10',
           isDesktopLayout
-            ? 'grid-cols-[minmax(0,640px)_minmax(360px,1fr)] items-start min-[1540px]:grid-cols-[minmax(0,720px)_minmax(480px,1fr)]'
+            ? 'grid-cols-[minmax(0,520px)_minmax(540px,1fr)] items-start min-[1540px]:grid-cols-[minmax(0,600px)_minmax(680px,1fr)]'
             : '',
         ].join(' ')}
       >
@@ -236,7 +239,7 @@ export default function ChapterView() {
         </article>
 
         {isDesktopLayout && (
-          <aside className="sticky top-6 min-w-0 max-w-[620px]">
+          <aside className="sticky top-6 min-w-0 w-full max-w-[860px] justify-self-center">
             <div className="space-y-3">
               {chartBlock}
               <p className="px-1 text-xs leading-relaxed text-gray-400 dark:text-[#787b86]">

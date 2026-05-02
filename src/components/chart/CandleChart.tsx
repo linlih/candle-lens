@@ -25,7 +25,7 @@ interface Props {
   annotations: AnnotationDef[]
 }
 
-const targetBarSpacing = 22
+const targetBarSpacing = 30
 const minSidePaddingBars = 2
 const maxVisibleRangeMultiplier = 4
 
@@ -48,7 +48,7 @@ function themeToOptions(theme: ChartTheme): DeepPartial<ChartOptions> {
       timeVisible: true,
       barSpacing: targetBarSpacing,
       minBarSpacing: 4,
-      maxBarSpacing: 26,
+      maxBarSpacing: 48,
     },
     rightPriceScale: { borderColor: theme.gridColor },
   }
@@ -203,7 +203,7 @@ function applyChartViewport(chart: IChartApi, candleCount: number) {
   )
   const visibleBars = Math.max(minVisibleBars, Math.min(targetVisibleBars, maxVisibleBars))
   const extraBars = Math.max(minSidePaddingBars * 2, visibleBars - candleCount)
-  const leftPadding = extraBars * 0.45
+  const leftPadding = extraBars / 2
   const rightPadding = extraBars - leftPadding
 
   chart.timeScale().setVisibleLogicalRange({
