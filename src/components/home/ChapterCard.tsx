@@ -19,7 +19,7 @@ export default function ChapterCard({ chapter }: Props) {
   return (
     <Link
       to={`/chapter/${chapter.id}`}
-      className="group flex flex-col p-4 rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#1e222d] hover:border-[#2962ff] hover:bg-gray-50 dark:hover:bg-[#2a2e39] transition-all duration-150"
+      className="group flex flex-col rounded-lg border border-gray-200 bg-white p-4 transition-all duration-150 hover:border-[#2962ff] hover:bg-gray-50 dark:border-[#363a45] dark:bg-[#1e222d] dark:hover:bg-[#2a2e39]"
     >
       <div className="flex items-start justify-between mb-3">
         <span className="text-xs text-gray-500 dark:text-[#787b86] font-medium">{partLabel}</span>

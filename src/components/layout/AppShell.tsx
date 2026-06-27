@@ -13,7 +13,7 @@ export default function AppShell() {
   const isChapterPage = location.pathname.startsWith('/chapter/')
   useAnalytics()
 
-  const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768)
+  const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 1440)
 
   useEffect(() => {
     if (window.innerWidth < 768) setSidebarOpen(false)
@@ -68,7 +68,7 @@ export default function AppShell() {
             <Link to="/privacy" className="hover:text-gray-600 dark:hover:text-[#d1d4dc] transition-colors">
               {t('footer.privacy')}
             </Link>
-            <span>·</span>
+            <span aria-hidden="true" className="h-1 w-1 rounded-full bg-gray-300 dark:bg-[#4c525e]" />
             <Link to="/terms" className="hover:text-gray-600 dark:hover:text-[#d1d4dc] transition-colors">
               {t('footer.terms')}
             </Link>

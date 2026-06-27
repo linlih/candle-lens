@@ -62,9 +62,9 @@ export default function HomePage() {
   usePageTitle()
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10">
+    <div className="mx-auto max-w-6xl px-5 py-8 sm:px-6 lg:py-10">
       {/* Hero */}
-      <div className="mb-10 text-center">
+      <div className="mb-8 text-center">
         <div className="flex justify-center mb-4">
           <img src={faviconUrl} alt="logo" className="w-16 h-16" />
         </div>
@@ -119,7 +119,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <section className="mb-10 rounded-2xl border border-[#2962ff]/20 bg-[#2962ff]/6 p-5">
+      <section className="mb-8 rounded-lg border border-[#2962ff]/20 bg-[#2962ff]/6 p-5">
         <div className="flex flex-col gap-2 mb-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-[#2962ff]">
             {t('home.pathLabel')}
@@ -141,7 +141,7 @@ export default function HomePage() {
                 chapter_id: chapter.id,
                 step_number: index + 1,
               })}
-              className="rounded-xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-4 hover:border-[#2962ff]/50 transition-colors"
+              className="rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:border-[#2962ff]/50 dark:border-[#363a45] dark:bg-[#131722]"
             >
               <p className="text-[11px] font-semibold uppercase tracking-wide text-[#2962ff] mb-1">
                 {t('home.pathStep', { number: index + 1 })}
@@ -157,8 +157,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mb-10 grid gap-4 lg:grid-cols-2">
-        <div className="rounded-2xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-5">
+      <section className="mb-8 grid gap-4 lg:grid-cols-2">
+        <div className="rounded-lg border border-gray-200 bg-white p-5 dark:border-[#363a45] dark:bg-[#131722]">
           <p className="text-xs font-semibold uppercase tracking-wide text-[#26a69a] mb-1">
             {t('home.recognitionPathLabel')}
           </p>
@@ -185,7 +185,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#131722] p-5">
+        <div className="rounded-lg border border-gray-200 bg-white p-5 dark:border-[#363a45] dark:bg-[#131722]">
           <p className="text-xs font-semibold uppercase tracking-wide text-[#ef5350] mb-1">
             {t('home.analysisPathLabel')}
           </p>

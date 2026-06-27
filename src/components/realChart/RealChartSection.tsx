@@ -182,7 +182,7 @@ export default function RealChartSection({ chapterId }: Props) {
           <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400 dark:text-[#787b86] mb-2">
             {t('realChart.caseLabel')}
           </p>
-          <div className="flex flex-wrap gap-2">
+          <div className="inline-flex max-w-full flex-wrap gap-1 rounded-lg border border-gray-200 bg-gray-100 p-1 dark:border-[#363a45] dark:bg-[#131722]">
             {data.map((chart, index) => {
               const label = chart.locale[locale].caseLabel ?? chart.locale[locale].patternLabel
               const isActive = index === caseIndex
@@ -190,11 +190,12 @@ export default function RealChartSection({ chapterId }: Props) {
                 <button
                   key={`${chart.chapterId}-${index}`}
                   onClick={() => setCaseIndex(index)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                  className={`rounded-md px-3 py-1.5 text-xs font-semibold transition-colors ${
                     isActive
-                      ? 'bg-[#2962ff] text-white border-[#2962ff]'
-                      : 'bg-white dark:bg-[#131722] text-gray-600 dark:text-[#9598a1] border-gray-200 dark:border-[#363a45] hover:border-[#2962ff] hover:text-[#2962ff]'
+                      ? 'bg-white text-[#2962ff] shadow-sm dark:bg-[#2a2e39] dark:text-[#7aa2ff]'
+                      : 'text-gray-500 hover:text-gray-900 dark:text-[#787b86] dark:hover:text-[#d1d4dc]'
                   }`}
+                  aria-pressed={isActive}
                 >
                   {label}
                 </button>
@@ -205,14 +206,14 @@ export default function RealChartSection({ chapterId }: Props) {
       )}
 
       {/* Chart */}
-      <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-[#363a45] mb-3">
+      <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-[#363a45] mb-3">
         <div style={{ height: '320px' }}>
           <CandleChart candles={visibleCandles} annotations={annotations} />
         </div>
       </div>
 
       {lesson && lessonLocale && currentStep && stepLocale && (
-        <div className="mb-4 rounded-xl border border-gray-200 dark:border-[#363a45] bg-gray-50 dark:bg-[#1e222d] p-4 space-y-4">
+        <div className="mb-4 rounded-lg border border-gray-200 dark:border-[#363a45] bg-gray-50 dark:bg-[#1e222d] p-4 space-y-4">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-xs uppercase tracking-wide text-gray-400 dark:text-[#787b86] mb-1">
@@ -222,7 +223,7 @@ export default function RealChartSection({ chapterId }: Props) {
                 {lessonLocale.intro}
               </p>
             </div>
-            <span className={`px-2 py-1 rounded-full text-[11px] font-semibold whitespace-nowrap ${biasStyles[currentStep.bias]}`}>
+            <span className={`px-2.5 py-1 rounded-full text-[11px] font-semibold whitespace-nowrap ${biasStyles[currentStep.bias]}`}>
               {t(`realChart.bias.${currentStep.bias}`)}
             </span>
           </div>
@@ -258,7 +259,7 @@ export default function RealChartSection({ chapterId }: Props) {
           </div>
 
           {nextStepLocked && (
-            <p className="text-xs text-[#2962ff]">
+            <p className="rounded-md bg-[#2962ff]/8 px-3 py-2 text-xs text-[#2962ff] dark:bg-[#2962ff]/12 dark:text-[#7aa2ff]">
               {t('realChart.submitToContinue')}
             </p>
           )}
@@ -286,11 +287,14 @@ export default function RealChartSection({ chapterId }: Props) {
                   <p className="text-sm text-gray-700 dark:text-[#d1d4dc] leading-relaxed">
                     {stepLocale.practicePrompt ?? t('realChart.practicePrompt')}
                   </p>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                     {(Object.keys(practiceChoices) as RealChartBias[]).map((bias) => {
                       const label = practiceChoices[bias]
                       if (!label) return null
                       const isSelected = selectedBias === bias
+                      const isSubmitted = submittedBias !== null
+                      const isCorrect = isSubmitted && bias === currentStep.bias
+                      const isWrongPick = isSubmitted && isSelected && bias !== currentStep.bias
                       return (
                         <button
                           key={bias}
@@ -305,18 +309,28 @@ export default function RealChartSection({ chapterId }: Props) {
                               },
                             }))
                           }}
-                          className={`px-3 py-2 rounded-lg text-sm border transition-colors text-left ${
-                            isSelected
-                              ? 'border-[#2962ff] bg-[#2962ff]/10 text-[#2962ff]'
-                              : 'border-gray-200 dark:border-[#363a45] text-gray-700 dark:text-[#d1d4dc] hover:border-[#2962ff]/50'
+                          disabled={submittedBias !== null}
+                          className={`min-h-11 rounded-lg border px-3 py-2 text-left text-sm transition-colors disabled:cursor-default ${
+                            isCorrect
+                              ? 'border-[#26a69a] bg-[#26a69a]/10 text-[#1d8f85] dark:text-[#55cfc2]'
+                              : isWrongPick
+                                ? 'border-[#ef5350] bg-[#ef5350]/10 text-[#ef5350]'
+                                : isSelected
+                                  ? 'border-[#2962ff] bg-[#2962ff]/10 text-[#2962ff]'
+                                  : 'border-gray-200 text-gray-700 hover:border-[#2962ff]/50 dark:border-[#363a45] dark:text-[#d1d4dc]'
                           }`}
+                          aria-pressed={isSelected}
                         >
-                          {label}
+                          <span className="flex items-center justify-between gap-2">
+                            <span>{label}</span>
+                            {isCorrect && <span aria-hidden="true">✓</span>}
+                            {isWrongPick && <span aria-hidden="true">×</span>}
+                          </span>
                         </button>
                       )
                     })}
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <button
                       onClick={() => {
                         if (!responseKey || !selectedBias) return
@@ -342,12 +356,17 @@ export default function RealChartSection({ chapterId }: Props) {
                     >
                       {t('realChart.submitAnswer')}
                     </button>
-                    {submittedBias !== null && (
-                      <span className={`text-xs font-medium ${solvedCorrectly ? 'text-[#26a69a]' : 'text-[#ef5350]'}`}>
-                        {solvedCorrectly ? t('realChart.correctAnswer') : t('realChart.revealAnswer')}
-                      </span>
-                    )}
                   </div>
+                  {submittedBias !== null && (
+                    <div className={`rounded-lg border px-3 py-2 text-sm ${
+                      solvedCorrectly
+                        ? 'border-[#26a69a]/30 bg-[#26a69a]/10 text-[#1d8f85] dark:text-[#55cfc2]'
+                        : 'border-[#ef5350]/30 bg-[#ef5350]/10 text-[#ef5350]'
+                    }`}
+                    >
+                      {solvedCorrectly ? t('realChart.correctAnswer') : t('realChart.revealAnswer')}
+                    </div>
+                  )}
                 </div>
               )}
               {hasComparison && (

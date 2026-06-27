@@ -41,12 +41,16 @@ export default function CandleColorToggle() {
     <div className="relative">
       <button
         onClick={handleToggle}
-        className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-gray-100 hover:bg-gray-200 dark:bg-[#2a2e39] dark:hover:bg-[#363a45] text-gray-700 dark:text-[#d1d4dc] border border-gray-200 dark:border-[#363a45]"
+        className="flex h-9 items-center gap-2 rounded-md border border-gray-200 bg-gray-100 px-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:border-[#363a45] dark:bg-[#2a2e39] dark:text-[#d1d4dc] dark:hover:bg-[#363a45] sm:px-3"
         title={t(`chartColors.switchTo.${nextMode}`)}
         aria-label={t(`chartColors.switchTo.${nextMode}`)}
       >
-        <span className="text-xs">🕯️</span>
-        <span>{t('chartColors.label')}</span>
+        <span className="flex h-4 w-4 items-end justify-center gap-0.5" aria-hidden="true">
+          <span className={`h-3 w-1 rounded-sm ${resolvedMode === 'red-up' ? 'bg-[#ef5350]' : 'bg-[#26a69a]'}`} />
+          <span className={`h-4 w-1 rounded-sm ${resolvedMode === 'red-up' ? 'bg-[#26a69a]' : 'bg-[#ef5350]'}`} />
+          <span className={`h-2.5 w-1 rounded-sm ${resolvedMode === 'red-up' ? 'bg-[#ef5350]' : 'bg-[#26a69a]'}`} />
+        </span>
+        <span className="hidden min-[420px]:inline">{t('chartColors.label')}</span>
         <span className="hidden sm:inline text-xs text-gray-500 dark:text-[#9598a1]">
           {t(`chartColors.current.${resolvedMode}`)}
         </span>

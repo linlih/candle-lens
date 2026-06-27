@@ -13,7 +13,7 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 import { chapterGuides } from '@/content/chapterGuides'
 import { trackEvent } from '@/lib/analytics'
 
-const desktopReadingWidth = 1160
+const desktopReadingWidth = 1280
 
 export default function ChapterView() {
   const { chapterId } = useParams<{ chapterId: string }>()
@@ -99,16 +99,17 @@ export default function ChapterView() {
   const sceneTitle = localeContent.sceneTitles[currentScene.titleKey] ?? currentScene.titleKey
   const chapterGuide = chapterGuides[content.id]?.[locale]
   const chartHeightClass = isDesktopLayout
-    ? 'h-[440px] xl:h-[500px] min-[1540px]:h-[540px]'
+    ? 'h-[430px] xl:h-[500px] min-[1540px]:h-[540px]'
     : 'h-[320px] sm:h-[360px]'
 
   const chartBlock = (
-    <div className="my-2 w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-[#363a45] dark:bg-[#131722] lg:my-0">
-      {/* Scene title bar */}
-      <div className="border-b border-gray-200 bg-gray-50 px-4 py-2 dark:border-[#363a45] dark:bg-[#1e222d]">
-        <p className="text-xs font-medium text-gray-500 dark:text-[#787b86] lg:text-sm">{sceneTitle}</p>
+    <div className="my-2 w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-[#363a45] dark:bg-[#131722] lg:my-0">
+      <div className="flex items-center justify-between gap-3 border-b border-gray-200 bg-gray-50 px-4 py-2 dark:border-[#363a45] dark:bg-[#1e222d]">
+        <p className="min-w-0 truncate text-xs font-semibold text-gray-700 dark:text-[#d1d4dc] lg:text-sm">{sceneTitle}</p>
+        <span className="shrink-0 rounded-full bg-[#2962ff]/10 px-2 py-0.5 text-[11px] font-semibold text-[#2962ff] dark:bg-[#2962ff]/20 dark:text-[#7aa2ff]">
+          {t('chapter.scene')} {sceneIndex + 1}/{content.scenes.length}
+        </span>
       </div>
-      {/* Chart */}
       <div className={chartHeightClass}>
         <CandleChart
           candles={currentScene.candles}
@@ -122,6 +123,7 @@ export default function ChapterView() {
         sceneTitle={sceneTitle}
         onPrev={() => setSceneIndex((i) => Math.max(0, i - 1))}
         onNext={() => setSceneIndex((i) => Math.min(content.scenes.length - 1, i + 1))}
+        onJump={setSceneIndex}
       />
     </div>
   )
@@ -132,7 +134,7 @@ export default function ChapterView() {
         className={[
           'grid gap-8 xl:gap-10',
           isDesktopLayout
-            ? 'grid-cols-[minmax(0,520px)_minmax(540px,1fr)] items-start min-[1540px]:grid-cols-[minmax(0,600px)_minmax(680px,1fr)]'
+            ? 'grid-cols-[minmax(0,560px)_minmax(560px,1fr)] items-start min-[1540px]:grid-cols-[minmax(0,620px)_minmax(680px,1fr)]'
             : '',
         ].join(' ')}
       >

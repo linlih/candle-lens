@@ -6,10 +6,11 @@ export default function LanguageToggle() {
   return (
     <button
       onClick={() => setLocale(locale === 'en' ? 'zh' : 'en')}
-      className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm font-medium transition-colors bg-gray-100 hover:bg-gray-200 dark:bg-[#2a2e39] dark:hover:bg-[#363a45] text-gray-700 dark:text-[#d1d4dc] border border-gray-200 dark:border-[#363a45]"
-      title={locale === 'en' ? 'Switch to Chinese' : '切换到英文'}
+      className="flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-gray-100 px-2 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-200 dark:border-[#363a45] dark:bg-[#2a2e39] dark:text-[#d1d4dc] dark:hover:bg-[#363a45] sm:min-w-11 sm:px-3"
+      title={locale === 'en' ? 'Switch to Chinese' : 'Switch to English'}
+      aria-label={locale === 'en' ? 'Switch to Chinese' : 'Switch to English'}
     >
-      {locale === 'en' ? '中文' : 'EN'}
+      {locale === 'en' ? '中' : 'EN'}
     </button>
   )
 }

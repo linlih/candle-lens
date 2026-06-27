@@ -15,13 +15,13 @@ export default function TopBar({ showSidebarToggle, sidebarOpen, onToggleSidebar
   const faviconUrl = `${import.meta.env.BASE_URL}favicon.svg`
 
   return (
-    <header className="h-14 flex items-center justify-between px-4 border-b border-gray-200 dark:border-[#363a45] bg-white dark:bg-[#1e222d] shrink-0 z-10 gap-2">
+    <header className="h-14 flex items-center justify-between gap-2 border-b border-gray-200 bg-white px-3 dark:border-[#363a45] dark:bg-[#1e222d] sm:px-4 shrink-0 z-10">
       <div className="flex items-center gap-2">
         {/* Sidebar toggle button — shown only on chapter pages */}
         {showSidebarToggle && (
           <button
             onClick={onToggleSidebar}
-            className="flex items-center justify-center w-8 h-8 rounded-md transition-colors bg-gray-100 hover:bg-gray-200 dark:bg-[#2a2e39] dark:hover:bg-[#363a45] text-gray-700 dark:text-[#d1d4dc] border border-gray-200 dark:border-[#363a45]"
+            className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-200 bg-gray-100 text-gray-700 transition-colors hover:bg-gray-200 dark:border-[#363a45] dark:bg-[#2a2e39] dark:text-[#d1d4dc] dark:hover:bg-[#363a45]"
             title={sidebarOpen ? 'Hide chapters' : 'Show chapters'}
             aria-label="Toggle sidebar"
           >
@@ -47,7 +47,7 @@ export default function TopBar({ showSidebarToggle, sidebarOpen, onToggleSidebar
         </Link>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5 sm:gap-2">
         <LanguageToggle />
         <CandleColorToggle />
         <ThemeToggle />
